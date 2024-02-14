@@ -1,0 +1,119 @@
+<style>
+    body{
+        font-family: futura;
+        image-rendering: pixelated;
+    }
+    pre{font-family: futura;}
+    @font-face {
+        font-family: futura;
+        src: url("./futura.ttf");
+    }
+    hr{
+      
+      width: 96%;
+      border: none;
+      border-bottom: 4px dashed #aaa;
+    }
+    #content{
+      background-color: peachpuff;
+    }
+    #rockWall{
+      margin: 3vh 10vw;
+      min-width: 400px;
+    }
+    .menuItem{
+      background-color: orange;
+      margin: 1vw;
+      padding: 2vw;
+    }
+    .button{
+      cursor: pointer;
+    }
+    .rock{
+      width: calc(23% - 2px);
+      margin: 1%;
+      border: 1px solid rgb(182, 182, 182);
+      float: left;
+      border-radius: 4px;
+      text-align: center;
+      background-color: white;
+      padding: 1vw;
+      box-sizing: border-box;
+    }
+    .rock img{
+      width: 100%;
+    }
+    .v1{
+      border: 4px dashed #aaa;
+      margin: 1vw auto;
+      width: max-content;
+      text-align: center;
+      padding: 1vw;
+    }
+    h1, h2{
+      text-align: center;
+    }
+</style>
+<div id="portal">
+    <div style="display:flex">
+        <div id="menu" style="flex:1">
+          <h1>
+            ROCK<br>
+            FOUNDATION
+          </h1>
+          <div class="menuItem button" onclick="">
+            Home
+          </div>
+          <div class="menuItem button" onclick="">
+            Twitter
+          </div>
+          <div class="menuItem button" onclick="">
+            Discord
+          </div>
+          <div class="menuItem button" onclick="">
+            Learn More
+          </div>
+        </div>
+        <div id="content" style="flex:4">
+            <h1>
+              NODEROCKS
+            </h1>
+            <h2>
+              STAKE ROCKS
+            </h2>
+            <div id="rockWall">
+
+            </div>
+            <hr>
+            <div class="button v1" onclick="displayRocks()">Load Rocks</div>
+        </div>
+    </div>
+    <!-- <div class="ascii"></div> -->
+</div>
+<script src="rocks.js"></script>
+<script>
+  function selectRock(e){
+      e.style=`filter: invert(${(Math.random())});`
+  }
+  let loadIndex=0
+  function displayRocks(){
+        let maxLoad = loadIndex+10
+        let r=""
+        for(loadIndex;loadIndex<=maxLoad;loadIndex++){
+          /* html */
+            r+=`
+                <div class="rock" onclick="selectRock(this)">
+                  <img src="https://api.hiro.so/ordinals/v1/inscriptions/${rocks[loadIndex].id}/content">
+                  <div class="">
+                    <h2>
+                      noderocks<br>
+                      ${rocks[loadIndex].meta.name}
+                      </h2>
+                  </div>
+                </div>
+            `
+        }
+        document.getElementById("rockWall").innerHTML+=r
+    }
+  displayRocks();
+</script>
