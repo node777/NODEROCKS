@@ -1,0 +1,160 @@
+/* nav bar */
+.show_nav {
+    top: 0% !important;
+    left: 0% !important;
+    opacity: 1 !important;
+    z-index: 77 !important;
+}
+
+.cross_btn {
+    padding-bottom: 34px;
+}
+
+.overlay::-webkit-scrollbar {
+    display: none;
+}
+
+.show_nav {
+    top: 0% !important;
+    left: 0% !important;
+    opacity: 1 !important;
+    z-index: 77 !important;
+}
+
+
+.price_btn,
+.traits_btn,
+.buy_btn,
+.address_search_btn {
+    padding: 10px 20px;
+    border: 1px solid #f46a0f;
+}
+
+.nav_btn {
+    padding: 10px 20px;
+    border: 1px solid #f46a0f;
+    line-height: 21px !important;
+}
+
+.nav_btn:hover,
+.traits_btn:hover {
+    background: #f46a0f !important;
+    color: white !important;
+}
+
+.nav_links:hover {
+    color: #f46a0f !important;
+}
+
+.nav_links {
+    font-size: 18px;
+}
+
+.nav_links_parent {
+    border-bottom: 1px solid #808080;
+}
+
+.nav_logo {
+    width: 34px !important;
+    height: 34px !important;
+    padding: 2px 0;
+}
+
+.nav_links_main_parent {
+    padding-top: 0px;
+}
+
+.bitcoin_green_arrow {
+    margin-right: 2px;
+}
+
+.grey_r_border {
+    border-right: 2px solid #111110;
+}
+
+.grey_l_border {
+    border-left: 2px solid #111110;
+}
+
+.grey_t_border {
+    border-top: 2px solid #111110;
+}
+
+.grey_b_border {
+    border-bottom: 2px solid #111110;
+}
+
+.status_block {
+    padding: 3px 0;
+}
+
+.nav_parent {
+    min-height: 100%;
+}
+
+.menu_btn:hover {
+    color: #f46a0f !important;
+}
+
+@media (max-width: 767.98px) {
+    .overlay {
+        margin-top: 60px;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.70) !important;
+        width: 100%;
+        height: calc(100vh - 60px);
+        top: 0%;
+        left: -100%;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-transition: 0.3s all linear !important;
+        -o-transition: 0.3s all linear !important;
+        transition: 0.3s all linear !important;
+        z-index: 9999 !important;
+        backdrop-filter: blur(34px) !important;
+    }
+
+    .nav_btn,
+    .price_btn,
+    .traits_btn,
+    .buy_btn,
+    .address_search_btn {
+        padding: 2px 15px 5px;
+        font-size: 14px;
+    }
+
+    .bg_black {
+        background: #000;
+    }
+}
+
+@media (min-width:992px) {
+    .status_block {
+        padding: 12px 0;
+    }
+
+}
+
+@media (max-width: 374.98px) {
+    .status_block {
+        padding: 4px 0 !important;
+    }
+
+    .nav_btn {
+        padding: 4px 10px 6px;
+    }
+
+    .menu_btn_parent {
+        gap: 12px !important;
+    }
+
+    .overlay {
+        margin-top: 68px;
+        height: calc(100vh - 68px);
+    }
+
+    .sat_block {
+        padding: 10px !important;
+    }
+}

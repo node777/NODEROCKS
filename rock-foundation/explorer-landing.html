@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>node-rocks</title>
+    <link rel="shortcut icon" href="./assets/images/svg/fav-icon.svg" type="fav-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/global.css" />
+    <link rel="stylesheet" href="./assets/css/nav.css" />
+</head>
+
+<body>
+    <div class="lg_vh_100 max_w_1920 mx-auto">
+        <div class="sticky-top bg_secondary">
+            <div class="bg-black">
+                <div class="d-none d-md-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2 status_block w-75 justify-content-center px-3">
+                        <img src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon" />
+                        <p class="mb-0 fw-bold fs_lg text-white">69,420</p>
+                        <div class="d-flex align-items-center">
+                            <svg class="bitcoin_green_arrow" width="11" height="10" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1.34194 9.91394L0.585938 9.15794L8.21794 1.52594L1.57594 1.07594L2.56594 0.0859375L9.98194 0.499937L10.4139 7.91594L9.42394 8.90594L8.97394 2.28194L1.34194 9.91394Z"
+                                    fill="#48A838" />
+                            </svg>
+                            <p class="mb-0 fw-bold fs_md text_success">69%</p>
+                        </div>
+                    </div>
+                    <div
+                        class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
+                        <p class="mb-0 fw-bold fs_md text-white">16 sat/vB</p>
+                        <p class="mb-0 fw-bold fs_md text_warning">$1.15</p>
+                    </div>
+                    <div
+                        class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center px-3">
+                        <p class="mb-0 fw-bold fs_md text-white">17 sat/vB</p>
+                        <p class="mb-0 fw-bold fs_md text_warning">$1.22</p>
+                    </div>
+                    <div
+                        class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
+                        <p class="mb-0 fw-bold fs_md text-white">18 sat/vB</p>
+                        <p class="mb-0 fw-bold fs_md text_warning">$1.29</p>
+                    </div>
+                    <div
+                        class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-100 justify-content-center px-3">
+                        <p class="mb-0 fw-bold fs_md text-white text-nowrap">
+                            Next Block 840,000
+                        </p>
+                        <p class="mb-0 fw-bold text_md text_warning text-nowrap">
+                            ~10 minutes
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="py_13 py-sm-3 bg-black mt-md-1">
+                <nav>
+                    <div class="mx-3 px-1 mx-sm-4">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <a class="position-relative" href="/">
+                                <img class="d-none d-lg-block" src="./assets/images/svg/nav-logo.svg" alt="nav-logo" />
+                                <img class="d-block d-lg-none nav_logo" src="./assets/images/svg/page-logo.svg"
+                                    alt="page-logo" />
+                            </a>
+                            <div class="d-flex align-items-center">
+                                <ul class="list-unstyled d-md-flex align-items-center mb-0 d-none">
+                                    <li class="me-3">
+                                        <a class="nav_links transition_03 fs_md text_warning fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                                            href="/explorer-landing.html">Portolio</a>
+                                    </li>
+                                    <li class="mx-4">
+                                        <a class="nav_links transition_03 fs_md text_secondary_emphasis fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                                            href="/explorer.html">Explorer</a>
+                                    </li>
+                                    <li class="ms-3 me-4">
+                                        <a class="nav_links transition_03 fs_md text_secondary_emphasis fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                                            href="/staking.html">Staking</a>
+                                    </li>
+                                    <li class="ms-3">
+                                        <a class="nav_links transition_03 fs_md text_secondary_emphasis fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                                            href="/">Experiences</a>
+                                    </li>
+                                </ul>
+                                <button
+                                    class="nav_btn transition_03 text_warning bg-transparent fw-bold ms-4 d-none d-lg-block">
+                                    Connect
+                                </button>
+                            </div>
+                            <div class="d-flex align-items-center gap-4 d-lg-none menu_btn_parent">
+                                <div onclick="Togleside()"
+                                    class="text_secondary_emphasis fs_lg cursor-pointer menu_btn d-md-none transition_03"
+                                    id="toggle_btn">
+                                    Menu
+                                </div>
+                                <button class="nav_btn transition_03 text_warning bg-transparent fw-bold">
+                                    Connect
+                                </button>
+                            </div>
+                            <div class="overlay position-fixed d-flex d-md-none flex-column justify-content-center align-items-center w-100 overflow-y-scroll"
+                                id="overlay">
+                                <div class="nav_parent w-100 d-flex flex-column justify-content-between">
+                                    <div class="w-100">
+                                        <div
+                                            class="d-flex align-items-center gap-2 py-3 justify-content-center px-3 grey_t_border w-100 bg_black">
+                                            <img src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon" />
+                                            <p class="mb-0 fw-bold text_lg text-white">69,420</p>
+                                            <div class="d-flex align-items-center">
+                                                <svg class="bitcoin_green_arrow" width="11" height="10"
+                                                    viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1.34194 9.91394L0.585938 9.15794L8.21794 1.52594L1.57594 1.07594L2.56594 0.0859375L9.98194 0.499937L10.4139 7.91594L9.42394 8.90594L8.97394 2.28194L1.34194 9.91394Z"
+                                                        fill="#48A838" />
+                                                </svg>
+                                                <p class="mb-0 fw-bold text_md text_success">69%</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-1 w-100 grey_t_border grey_b_border bg_black">
+                                            <div
+                                                class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center grey_r_border grey_l_border px-4 w-100 sat_block">
+                                                <p class="mb-0 fw-bold text_lg text-white">
+                                                    16 sat/vB
+                                                </p>
+                                                <p class="mb-0 fw-bold text_md text_warning">$1.15</p>
+                                            </div>
+                                            <div
+                                                class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center px-4 w-100 sat_block">
+                                                <p class="mb-0 fw-bold text_lg text-white">
+                                                    17 sat/vB
+                                                </p>
+                                                <p class="mb-0 fw-bold text_md text_warning">$1.22</p>
+                                            </div>
+                                            <div
+                                                class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center grey_l_border px-3 w-100 sat_block">
+                                                <p class="mb-0 fw-bold text_lg text-white">
+                                                    18 sat/vB
+                                                </p>
+                                                <p class="mb-0 fw-bold text_md text_warning">$1.29</p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="d-flex align-items-center justify-content-center gap-lg-2 py-3 w-100 text-center px-3 grey_b_border bg_black">
+                                            <p class="mb-0 fw-bold text_md text-white text-nowrap">
+                                                Next Block 840,000
+                                            </p>
+                                            <p class="mb-0 fw-bold text_md text_warning text-nowrap ms-1">
+                                                ~10 minutes
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <ul class="list-unstyled mb-0 text-center w-100 nav_links_main_parent">
+                                        <li class="nav_links_parent mx-4 py-5" onclick="hideNav()">
+                                            <a class="nav_links font-lg fw-bold text_warning text-decoration-none position-relative transition_03"
+                                                href="/explorer-landing.html">Portolio</a>
+                                        </li>
+                                        <li class="nav_links_parent mx-4 py-5" onclick="hideNav()">
+                                            <a class="nav_links font-lg fw-bold text-white text-decoration-none position-relative transition_03"
+                                                href="/explorer.html">Explorer</a>
+                                        </li>
+                                        <li class="nav_links_parent mx-4 py-5" onclick="hideNav()">
+                                            <a class="nav_links font-lg fw-bold text-white text-decoration-none position-relative transition_03"
+                                                href="/staking.html">Staking</a>
+                                        </li>
+                                        <li class="nav_links_parent border-0 py-5" onclick="hideNav()">
+                                            <a class="nav_links font-lg fw-bold text-white text-decoration-none position-relative transition_03"
+                                                href="/">Experiences</a>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex justify-content-center">
+                                        <button class="cross_btn border-0 bg-transparent" onclick="hideNav()">
+                                            <svg onclick="hideNav()" class="d-xl-none d-block" width="15" height="15"
+                                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="15" y="0.000488281" width="2.99996" height="3"
+                                                    transform="rotate(90 15 0.000488281)" fill="#D9D9D9" />
+                                                <rect x="12" y="3.00098" width="2.99996" height="3"
+                                                    transform="rotate(90 12 3.00098)" fill="#D9D9D9" />
+                                                <rect x="12" y="9.00049" width="2.99996" height="3"
+                                                    transform="rotate(90 12 9.00049)" fill="#D9D9D9" />
+                                                <rect x="15" y="12.0005" width="2.99996" height="3"
+                                                    transform="rotate(90 15 12.0005)" fill="#D9D9D9" />
+                                                <rect x="9" y="6.00098" width="2.99996" height="3"
+                                                    transform="rotate(90 9 6.00098)" fill="#D9D9D9" />
+                                                <rect y="15" width="2.99996" height="3" transform="rotate(-90 0 15)"
+                                                    fill="#D9D9D9" />
+                                                <rect x="3" y="11.9995" width="2.99996" height="3"
+                                                    transform="rotate(-90 3 11.9995)" fill="#D9D9D9" />
+                                                <rect x="3" y="6" width="2.99996" height="3" transform="rotate(-90 3 6)"
+                                                    fill="#D9D9D9" />
+                                                <rect y="3" width="2.99996" height="3" transform="rotate(-90 0 3)"
+                                                    fill="#D9D9D9" />
+                                                <rect x="6" y="8.99951" width="2.99996" height="3"
+                                                    transform="rotate(-90 6 8.99951)" fill="#D9D9D9" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <section>
+            <div>
+                <div class="d-flex align-items-center justify-content-center mt-3 pb-2 mx-2 px-1">
+                    <div class="d-flex bg-black justify-content-center max_w_lg_100 w-100 py-2">
+                        <div class="d-flex justify-content-between w-100 align-items-center">
+                            <div class="text_warning px-xl-4 mx-lg-2 fs_md mb-0 w-100">
+                                <div class="d-flex align-items-center justify-content-center w-100">
+                                    <h3
+                                        class="text-white py-2 fw-bold fs_lg pe-lg-4 pe-xl-5 ps-xl-5 ps-3 mb-0 text-nowrap d-none d-lg-block">
+                                        NodeRocks Explorer
+                                    </h3>
+                                    <div class="d-flex justify-content-center max_w_lg_100 bg_secondary mx-2">
+                                        <div
+                                            class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between w-100 align-items-center ps-xl-4">
+                                            <span class="text_secondary_emphasis px-xl-5 mx-lg-5 py-2 py-sm-0 text-center px-3 px-sm-0
+                                                    py-lg-2 fs_md mb-0 mx-auto" href="#">Search by
+                                                ID / Block / Inscription # / Address</span>
+                                            <div class="ms-xl-3 w-100 w_sm_auto">
+                                                <button
+                                                    class="address_search_btn text-white fs_md fw-bold transition_03 w-100 w_sm_auto">
+                                                    Search
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="d-flex align-items-center gap_2 mx-2 px-1">
+                        <div class="bg-black owners_card w-100">
+                            <p
+                                class="fs_lg fw-bold text-white text-center mb-0 d-flex flex-column flex-md-row justify-content-center">
+                                Owners<span class="text_warning mt-2 mt-md-0 ms-md-3">2,600</span>
+                            </p>
+                        </div>
+                        <div class="bg-black owners_card w-100">
+                            <p
+                                class="fs_lg fw-bold text-white text-center mb-0 d-flex flex-column flex-md-row justify-content-center">
+                                Supply<span class="text_warning mt-2 mt-md-0 ms-md-3">9,999</span>
+                            </p>
+                        </div>
+                        <div class="bg-black owners_card w-100">
+                            <p
+                                class="fs_lg fw-bold text-white text-center mb-0 d-flex flex-column align-items-center flex-md-row justify-content-center">
+                                <span>
+                                    Floor Price
+                                </span>
+                                <span class="text_warning mt-2 mt-md-0 d-flex align-items-center"><img
+                                        class="ms-md-3 me-sm-2 bitcoin_warning_icon"
+                                        src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon">.0015</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-md-row align-items-center mt-2 gap_2 mx-2 px-1">
+                    <div
+                        class="bg-black magic_card w-100 d-flex flex-column flex-sm-row align-items-center justify-content-center gap-2 gap-sm-3 gap-xl-4 px-3">
+                        <p class="fs_lg text-white mb-0 text-nowrap">Magic Eden</p>
+                        <div class="d-flex align-items-center gap-3 gap-xl-4">
+                            <p class="fs_md fw-bold text-white text-center mb-0 d-flex flex-row justify-content-center">
+                                Volume: <span class="text_warning ms-1"> ($69,420)</span>
+                            </p>
+                            <p class="fs_md fw-bold text-white text-center mb-0 d-flex flex-row justify-content-center">
+                                Listed: <span class="text_warning ms-1"> ($69,420)</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-black magic_card w-100 d-flex flex-column flex-sm-row align-items-center justify-content-center gap-2 gap-sm-3 gap-xl-4 px-3">
+                        <p class="fs_lg text-white mb-0">Other</p>
+                        <div class="d-flex align-items-center gap-3 gap-xl-4">
+                            <p class="fs_md fw-bold text-white text-center mb-0 d-flex flex-row justify-content-center">
+                                Volume: <span class="text_warning ms-1"> ($69,420)</span>
+                            </p>
+                            <p class="fs_md fw-bold text-white text-center mb-0 d-flex flex-row justify-content-center">
+                                Listed: <span class="text_warning ms-1"> ($69,420)</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="ps-2 px-sm-2 ms-1 mx-sm-1 mt-4 mt-lg-5">
+                <h3 class="fs_lg fw-bold text-white text-center mb-3 pb-1">Featured Listings</h3>
+                <div class="overflow-x-auto pb-2 pb-lg-3">
+                    <div class="featured_cards_parent">
+                        <div class="d-flex gap-3">
+                            <div
+                                class="d-flex flex-column flex-md-row align-items-center bg-black py-3 gap-4 featured_card justify-content-center">
+                                <div class="featured_card_img_parent">
+                                    <img class="w-100 h-100" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                        alt="demo" />
+                                </div>
+                                <div>
+                                    <h3 class="fs_xl text-white fw-bold d-flex align-items-center mb-0">
+                                        7252<span class="fs_md text_warning ms-4 ps-md-3">#47261791</span>
+                                    </h3>
+                                    <div class="my-4">
+                                        <div class="d-flex align-items-centers gap-2 gap-md-3">
+                                            <button
+                                                class="fs_md fw-bold text_warning  featured_btns transition_03 bg-transparent px-4">
+                                                Cliff
+                                            </button>
+                                            <button
+                                                class="fs_md fw-bold text_warning  featured_btns transition_03 bg-transparent px-4">
+                                                Stoned
+                                            </button>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button
+                                                class="fs_md fw-bold text_warning  featured_btns transition_03 bg-transparent px-4">
+                                                Blunt
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <button
+                                            class="d-flex align-items-center bg-transparent price_btn text-white fs_md fw-bold border-end-0">
+                                            <img src="./assets/images/svg/white-bitcoin-icon.svg"
+                                                alt="white-bitcoin-icon">
+                                            <span class="ms-2 ps-1">.0015</span>
+                                        </button>
+                                        <button class="buy_btn transition_03 text-white fs_md fw-bold">
+                                            BUY NOW
+                                        </button>
+                                    </div>
+                                    <p class="d-flex align-items-center text-white fs_sm fw-normal gap-3 mb-0">
+                                        <img src="./assets/images/svg/me-icon.svg" alt="me-icon">
+                                        <span>2 minutes ago </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex flex-column flex-md-row align-items-center bg-black py-3 gap-4 featured_card justify-content-center">
+                                <div class="featured_card_img_parent">
+                                    <img class="w-100 h-100" src="./assets/images/png/featured-listings-img-2.png"
+                                        alt="demo" />
+                                </div>
+                                <div>
+                                    <h3 class="fs_xl text-white fw-bold d-flex align-items-center mb-0">
+                                        7252<span class="fs_md text_warning ms-4 ps-md-3">#47261791</span>
+                                    </h3>
+                                    <div class="my-4">
+                                        <div class="d-flex align-items-centers gap-2 gap-md-3">
+                                            <button
+                                                class="fs_md fw-bold text_warning  featured_btns transition_03 bg-transparent px-4">
+                                                Cliff
+                                            </button>
+                                            <button
+                                                class="fs_md fw-bold text_warning  featured_btns transition_03 bg-transparent px-4">
+                                                Stoned
+                                            </button>
+                                        </div>
+                                        <div class="mt-2 d-flex align-items-center gap-2 gap-md-3">
+                                            <button
+                                                class="fs_md fw-bold text_warning  featured_btns transition_03 bg-transparent px-4">
+                                                Cliff
+                                            </button>
+                                            <button
+                                                class="fs_md fw-bold text_warning  featured_btns transition_03 bg-transparent px-4">
+                                                Stoned
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <button
+                                            class="d-flex align-items-center bg-transparent price_btn text-white fs_md fw-bold border-end-0">
+                                            <img src="./assets/images/svg/white-bitcoin-icon.svg"
+                                                alt="white-bitcoin-icon">
+                                            <span class="ms-2 ps-1">.0015</span>
+                                        </button>
+                                        <button class="buy_btn transition_03 text-white fs_md fw-bold">
+                                            BUY NOW
+                                        </button>
+                                    </div>
+                                    <p class="d-flex align-items-center text-white fs_sm fw-normal gap-3 mb-0">
+                                        <img src="./assets/images/svg/me-icon.svg" alt="me-icon">
+                                        <span>2 minutes ago </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex flex-column flex-md-row align-items-center bg-black py-3 gap-4 featured_card justify-content-center me-3 me-sm-0">
+                                <div class="featured_card_img_parent">
+                                    <img class="w-100 h-100" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                        alt="demo" />
+                                </div>
+                                <div>
+                                    <h3 class="fs_xl text-white fw-bold d-flex align-items-center mb-0">
+                                        7252<span class="fs_md text_warning ms-4 ps-md-3">#47261791</span>
+                                    </h3>
+                                    <div class="my-4">
+                                        <div class="d-flex align-items-centers gap-2 gap-md-3">
+                                            <button
+                                                class="fs_md fw-bold text_warning  featured_btns transition_03 bg-transparent px-4">
+                                                Cliff
+                                            </button>
+                                            <button
+                                                class="fs_md fw-bold text_warning  featured_btns transition_03 bg-transparent px-4">
+                                                Stoned
+                                            </button>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button
+                                                class="fs_md fw-bold text_warning  featured_btns transition_03 bg-transparent px-4">
+                                                Blunt
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <button
+                                            class="d-flex align-items-center bg-transparent price_btn text-white fs_md fw-bold border-end-0">
+                                            <img src="./assets/images/svg/white-bitcoin-icon.svg"
+                                                alt="white-bitcoin-icon">
+                                            <span class="ms-2 ps-1">.0015</span>
+                                        </button>
+                                        <button class="buy_btn transition_03 text-white fs_md fw-bold">
+                                            BUY NOW
+                                        </button>
+                                    </div>
+                                    <p class="d-flex align-items-center text-white fs_sm fw-normal gap-3 mb-0">
+                                        <img src="./assets/images/svg/me-icon.svg" alt="me-icon">
+                                        <span>2 minutes ago </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="my-4 my-lg-5 pb-lg-3">
+            <div class="px-2 mx-1">
+                <h3 class="fs_lg fw-bold text-white text-center mb-3 pb-1">Trait Floors</h3>
+                <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between gap_2">
+                    <div class="w-100 d-flex  align-items-center gap_2">
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                1. Cliff
+                                (Body)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                2. Demon
+                                (Body)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex  align-items-center gap_2">
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                3. Crown
+                                (Hat)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                4.
+                                Laserz
+                                (Eyes)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between gap_2 my-2">
+                    <div class="w-100 d-flex  align-items-center gap_2">
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                5. Cliff
+                                (Body)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                6. Demon
+                                (Body)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex  align-items-center gap_2">
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                7. Crown
+                                (Hat)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                8.
+                                Laserz
+                                (Eyes)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between gap_2 pb-2">
+                    <div class="w-100 d-flex  align-items-center gap_2">
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                9. Cliff
+                                (Body)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                10.
+                                Demon
+                                (Body)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex  align-items-center gap_2">
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                11.
+                                Crown (Hat)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                        <div class="bg-black py-3 w-100 trait_card">
+                            <p
+                                class="fs_md fw-bold text-white text-center mb-0 d-flex flex-column flex-sm-row justify-content-center">
+                                12.
+                                Laserz
+                                (Eyes)<span class="text_warning mt-2 mt-sm-0 ms-sm-3">2,600</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button class="traits_btn transition_03 text_warning bg-transparent fw-bold mt-4 d-none d-lg-block">
+                        More Traits
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row mx-2 px-1">
+                <div class="col-2 d-none d-xl-block bg-black px-2 ">
+                    <p class="ps-2 py-3 my-1 fw-bold fs_sm leading_16 text-white">
+                        Filters
+                    </p>
+                    <div class="overflow-y-scroll explorer_filters">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item mt-4">
+                                <h2 class="text-white fs_sm fw-bold mb-2 p">Satributes (6)</h2>
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button
+                                        class="accordion-button bg_secondary w-100 ps-3 pe-4 py-2 border-0 text_secondary_emphasis fw-bold fs_sm fs_12"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                        Select...
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                    aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body p-0 mt-2">
+                                        <ul class="w-100 mb-0 list-unstyled h-100 w-100">
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Action</a>
+                                            </li>
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Another action</a>
+                                            </li>
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Something else here</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item my-3">
+                                <h2 class="text-white fs_sm fw-bold mb-2">Body (20)</h2>
+                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                    <button
+                                        class="accordion-button bg_secondary w-100 ps-2 pe-4 py-2 border-0 text_secondary_emphasis fw-bold collapsed fs_sm fs_12"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseTwo">
+                                        Select...
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+                                    aria-labelledby="panelsStayOpen-headingTwo">
+                                    <div class="accordion-body p-0 mt-2">
+                                        <ul class="w-100 mb-0 list-unstyled h-100 w-100">
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Action</a>
+                                            </li>
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Another action</a>
+                                            </li>
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Something else here</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="text-white fs_sm fw-bold mb-2">Eyes (26)</h2>
+                                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                    <button
+                                        class="accordion-button fs_sm fs_12 bg_secondary w-100 ps-2 pe-4 py-2 border-0 text_secondary_emphasis fw-bold collapsed"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseThree">
+                                        Select...
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="panelsStayOpen-headingThree">
+                                    <div class="accordion-body p-0 mt-2">
+                                        <ul class="w-100 mb-0 list-unstyled h-100 w-100">
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Action</a>
+                                            </li>
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Another action</a>
+                                            </li>
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Something else here</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item my-3">
+                                <h2 class="text-white fs_sm fw-bold mb-2">Hat (41)</h2>
+                                <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                                    <button
+                                        class="accordion-button fs_sm fs_12 bg_secondary w-100 ps-2 pe-4 py-2 border-0 text_secondary_emphasis fw-bold collapsed"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseFour">
+                                        Select...
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
+                                    aria-labelledby="panelsStayOpen-headingFour">
+                                    <div class="accordion-body p-0 mt-2">
+                                        <ul class="w-100 mb-0 list-unstyled h-100 w-100">
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Action</a>
+                                            </li>
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Another action</a>
+                                            </li>
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Something else here</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item ">
+                                <h2 class="text-white fs_sm fw-bold mb-2">Mouth (2)</h2>
+                                <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                                    <button
+                                        class="accordion-button fs_sm fs_12 bg_secondary w-100 ps-2 pe-4 py-2 border-0 text_secondary_emphasis fw-bold collapsed"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseFive">
+                                        Select...
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse"
+                                    aria-labelledby="panelsStayOpen-headingFive">
+                                    <div class="accordion-body p-0 mt-2">
+                                        <ul class="w-100 mb-0 list-unstyled h-100 w-100">
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Action</a>
+                                            </li>
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Another action</a>
+                                            </li>
+                                            <li>
+                                                <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                                                    href="#">Something else here</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-10 px-0 overflow-x-auto pb-0">
+                    <div class="explorer_activity">
+                        <div class="nav nav-tabs d-flex justify-content-between row mx-sm-0 mx-xl-3">
+                            <div class="nav-item col-4 px-0">
+                                <a class="nav-link active fw-bold fs_lg  py-2 d-flex justify-content-center align-items-center activity_tab"
+                                    href="#firsttab" data-bs-toggle="tab">All Activity</a>
+                            </div>
+                            <div class="nav-item col-4 px-1">
+                                <a class="nav-link  py-2 fw-bold fs_lg d-flex justify-content-center align-items-center activity_tab"
+                                    href="#secondtab" data-bs-toggle="tab">Listings</a>
+                            </div>
+                            <div class="nav-item col-4 px-0">
+                                <a class="nav-link  py-2 fw-bold fs_lg d-flex justify-content-center align-items-center activity_tab"
+                                    href="#thirdtab" data-bs-toggle="tab">Sales</a>
+                            </div>
+                        </div>
+                        <div class="tab-content overflow-y-scroll vh-100 pt-3 mt-2xl-3 mt-lg-0 ms-xl-3">
+                            <!-- first tab data -->
+                            <div class="tab-pane show active" id="firsttab">
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-bottom-0 border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-bottom-0 border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- second tab data  -->
+                            <div class="tab-pane" id="secondtab">
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0 border-bottom-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0 border-bottom-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0 border-bottom-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0 border-bottom-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0 border-bottom-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="tab_buy_box d-flex align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white mb-0 fs_lg fw-bold py-1 d-flex align-items-center">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg"
+                                                    alt="bitcoin" />0.0015
+                                            </h4>
+                                            <button class="fs_md fw-bold border-end-0 border-bottom-0">BUY NOW</button>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 3rd second tab data  -->
+                            <div class="tab-pane" id="thirdtab">
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2 bg-black py-3 px-4 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <img height="80" width="80" src="./assets/images/png/rarest-sidebar-image-1.png"
+                                            alt="cards image" />
+                                        <div>
+                                            <h3 class="text-white mb-0 fw-bold fs_xl">7252</h3>
+                                            <p class="text_warning mb-0 fw-bold fs_md">#47261791</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <button class="landing_common_button fs_md">Cliff</button>
+                                        <button class="landing_common_button fs_md">Stoned</button>
+                                        <button class="landing_common_button fs_md">Blunt</button>
+                                        <button class="landing_common_button fs_md">Trait 4</button>
+                                    </div>
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div
+                                            class="d-flex w_190 align-items-center flex-column justify-content-between">
+                                            <h4 class="text-white d-flex align-items-center mb-0 fs_lg fw-bold">
+                                                <img src="./assets/images/svg/bitcoin-tab-icon.svg" alt="bitcoin" />
+                                                0.0015
+                                            </h4>
+                                            <p class="text_warning fs_md mb-0">($69,420)</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="./assets/images/svg/sales-pink-icon.svg" alt="pink icon" />
+                                            <p class="text-white mb-0 fs_sm">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mb-5 mt-4 pt-2">
+                    <button class="traits_btn transition_03 text_warning bg-transparent fw-bold fs_md">
+                        Load More Activity
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script src="./assets/js/nav.js"></script>
+</body>
+
+</html>

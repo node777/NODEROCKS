@@ -1,0 +1,2803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>node-rocks</title>
+  <link rel="shortcut icon" href="./assets/images/svg/fav-icon.svg" type="fav-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/global.css" />
+  <link rel="stylesheet" href="./assets/css/nav.css" />
+</head>
+
+<body>
+  <div class="lg_vh_100 max_w_1920 mx-auto">
+    <div class="sticky-top bg_secondary">
+      <div class="bg-black">
+        <div class="d-none d-md-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-2 status_block w-75 justify-content-center px-3">
+            <img src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon" />
+            <p class="mb-0 fw-bold fs_lg text-white">69,420</p>
+            <div class="d-flex align-items-center">
+              <svg class="bitcoin_green_arrow" width="11" height="10" viewBox="0 0 11 10" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1.34194 9.91394L0.585938 9.15794L8.21794 1.52594L1.57594 1.07594L2.56594 0.0859375L9.98194 0.499937L10.4139 7.91594L9.42394 8.90594L8.97394 2.28194L1.34194 9.91394Z"
+                  fill="#48A838" />
+              </svg>
+              <p class="mb-0 fw-bold fs_md text_success">69%</p>
+            </div>
+          </div>
+          <div
+            class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
+            <p class="mb-0 fw-bold fs_md text-white">16 sat/vB</p>
+            <p class="mb-0 fw-bold fs_md text_warning">$1.15</p>
+          </div>
+          <div
+            class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center px-3">
+            <p class="mb-0 fw-bold fs_md text-white">17 sat/vB</p>
+            <p class="mb-0 fw-bold fs_md text_warning">$1.22</p>
+          </div>
+          <div
+            class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
+            <p class="mb-0 fw-bold fs_md text-white">18 sat/vB</p>
+            <p class="mb-0 fw-bold fs_md text_warning">$1.29</p>
+          </div>
+          <div
+            class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-100 justify-content-center px-3">
+            <p class="mb-0 fw-bold fs_md text-white text-nowrap">
+              Next Block 840,000
+            </p>
+            <p class="mb-0 fw-bold text_md text_warning text-nowrap">
+              ~10 minutes
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="py_13 py-sm-3 bg-black mt-md-1">
+        <nav>
+          <div class="mx-3 px-1 mx-sm-4">
+            <div class="d-flex align-items-center justify-content-between">
+              <a class="position-relative" href="/">
+                <img class="d-none d-lg-block" src="./assets/images/svg/nav-logo.svg" alt="nav-logo" />
+                <img class="d-block d-lg-none nav_logo" src="./assets/images/svg/page-logo.svg" alt="page-logo" />
+              </a>
+              <div class="d-flex align-items-center">
+                <ul class="list-unstyled d-md-flex align-items-center mb-0 d-none">
+                  <li class="me-3">
+                    <a class="nav_links transition_03 fs_md text_secondary_emphasis fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                      href="/explorer-landing.html">Portolio</a>
+                  </li>
+                  <li class="mx-4">
+                    <a class="nav_links transition_03 fs_md text_warning fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                      href="/explorer.html">Explorer</a>
+                  </li>
+                  <li class="ms-3 me-4">
+                    <a class="nav_links transition_03 fs_md text_secondary_emphasis fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                      href="/staking.html">Staking</a>
+                  </li>
+                  <li class="ms-3">
+                    <a class="nav_links transition_03 fs_md text_secondary_emphasis fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                      href="/">Experiences</a>
+                  </li>
+                </ul>
+                <button class="nav_btn transition_03 text_warning bg-transparent fw-bold ms-4 d-none d-lg-block">
+                  Connect
+                </button>
+              </div>
+              <div class="d-flex align-items-center gap-4 d-lg-none menu_btn_parent">
+                <div onclick="Togleside()"
+                  class="text_secondary_emphasis fs_lg cursor-pointer menu_btn d-md-none transition_03" id="toggle_btn">
+                  Menu
+                </div>
+                <button class="nav_btn transition_03 text_warning bg-transparent fw-bold">
+                  Connect
+                </button>
+              </div>
+              <div
+                class="overlay position-fixed d-flex d-md-none flex-column justify-content-center align-items-center w-100 overflow-y-scroll"
+                id="overlay">
+                <div class="nav_parent w-100 d-flex flex-column justify-content-between">
+                  <div class="w-100">
+                    <div
+                      class="d-flex align-items-center gap-2 py-3 justify-content-center px-3 grey_t_border w-100 bg_black">
+                      <img src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon" />
+                      <p class="mb-0 fw-bold text_lg text-white">69,420</p>
+                      <div class="d-flex align-items-center">
+                        <svg class="bitcoin_green_arrow" width="11" height="10" viewBox="0 0 11 10" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M1.34194 9.91394L0.585938 9.15794L8.21794 1.52594L1.57594 1.07594L2.56594 0.0859375L9.98194 0.499937L10.4139 7.91594L9.42394 8.90594L8.97394 2.28194L1.34194 9.91394Z"
+                            fill="#48A838" />
+                        </svg>
+                        <p class="mb-0 fw-bold text_md text_success">69%</p>
+                      </div>
+                    </div>
+                    <div class="d-flex gap-1 w-100 grey_t_border grey_b_border bg_black">
+                      <div
+                        class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center grey_r_border grey_l_border px-4 w-100 sat_block">
+                        <p class="mb-0 fw-bold text_lg text-white">
+                          16 sat/vB
+                        </p>
+                        <p class="mb-0 fw-bold text_md text_warning">$1.15</p>
+                      </div>
+                      <div
+                        class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center px-4 w-100 sat_block">
+                        <p class="mb-0 fw-bold text_lg text-white">
+                          17 sat/vB
+                        </p>
+                        <p class="mb-0 fw-bold text_md text_warning">$1.22</p>
+                      </div>
+                      <div
+                        class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center grey_l_border px-3 w-100 sat_block">
+                        <p class="mb-0 fw-bold text_lg text-white">
+                          18 sat/vB
+                        </p>
+                        <p class="mb-0 fw-bold text_md text_warning">$1.29</p>
+                      </div>
+                    </div>
+                    <div
+                      class="d-flex align-items-center justify-content-center gap-lg-2 py-3 w-100 text-center px-3 grey_b_border bg_black">
+                      <p class="mb-0 fw-bold text_md text-white text-nowrap">
+                        Next Block 840,000
+                      </p>
+                      <p class="mb-0 fw-bold text_md text_warning text-nowrap ms-1">
+                        ~10 minutes
+                      </p>
+                    </div>
+                  </div>
+                  <ul class="list-unstyled mb-0 text-center w-100 nav_links_main_parent">
+                    <li class="nav_links_parent mx-4 py-5" onclick="hideNav()">
+                      <a class="nav_links font-lg fw-bold text-white text-decoration-none position-relative transition_03"
+                        href="/explorer-landing.html">Portolio</a>
+                    </li>
+                    <li class="nav_links_parent mx-4 py-5" onclick="hideNav()">
+                      <a class="nav_links font-lg fw-bold text_warning text-decoration-none position-relative transition_03"
+                        href="/explorer.html">Explorer</a>
+                    </li>
+                    <li class="nav_links_parent mx-4 py-5" onclick="hideNav()">
+                      <a class="nav_links font-lg fw-bold text-white text-decoration-none position-relative transition_03"
+                        href="/staking.html">Staking</a>
+                    </li>
+                    <li class="nav_links_parent border-0 py-5" onclick="hideNav()">
+                      <a class="nav_links font-lg fw-bold text-white text-decoration-none position-relative transition_03"
+                        href="/">Experiences</a>
+                    </li>
+                  </ul>
+                  <div class="d-flex justify-content-center">
+                    <button class="cross_btn border-0 bg-transparent" onclick="hideNav()">
+                      <svg onclick="hideNav()" class="d-xl-none d-block" width="15" height="15" viewBox="0 0 15 15"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="15" y="0.000488281" width="2.99996" height="3" transform="rotate(90 15 0.000488281)"
+                          fill="#D9D9D9" />
+                        <rect x="12" y="3.00098" width="2.99996" height="3" transform="rotate(90 12 3.00098)"
+                          fill="#D9D9D9" />
+                        <rect x="12" y="9.00049" width="2.99996" height="3" transform="rotate(90 12 9.00049)"
+                          fill="#D9D9D9" />
+                        <rect x="15" y="12.0005" width="2.99996" height="3" transform="rotate(90 15 12.0005)"
+                          fill="#D9D9D9" />
+                        <rect x="9" y="6.00098" width="2.99996" height="3" transform="rotate(90 9 6.00098)"
+                          fill="#D9D9D9" />
+                        <rect y="15" width="2.99996" height="3" transform="rotate(-90 0 15)" fill="#D9D9D9" />
+                        <rect x="3" y="11.9995" width="2.99996" height="3" transform="rotate(-90 3 11.9995)"
+                          fill="#D9D9D9" />
+                        <rect x="3" y="6" width="2.99996" height="3" transform="rotate(-90 3 6)" fill="#D9D9D9" />
+                        <rect y="3" width="2.99996" height="3" transform="rotate(-90 0 3)" fill="#D9D9D9" />
+                        <rect x="6" y="8.99951" width="2.99996" height="3" transform="rotate(-90 6 8.99951)"
+                          fill="#D9D9D9" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="mx_12">
+      <div class="bg-black">
+        <div class="d-flex align-items-center justify-content-center w-100 my-2 my-xl-3">
+          <h3 class="text-white py-2 fw-bold fs_lg pe-lg-4 pe-xl-5 ps-xl-5 ps-3 mb-0 d-none d-lg-block text-nowrap">
+            NodeRocks Explorer
+          </h3>
+          <div class="d-flex bg_secondary justify-content-center max_w_lg_100 m-2">
+            <div class="d-flex justify-content-between w-100 align-items-center">
+              <a class="text_warning text-decoration-none px-xl-4 mx-lg-2 py-lg-2 fs_md mb-0 d-none d-md-inline-block mx-auto"
+                href="#">bc1prvdtyd9zhnfqhnzpqq3jkjp5c7xu8lg77ld4senfj427ew8pux8s0vf0du</a>
+              <a class="text_warning text-decoration-none mx-auto fs_md mb-0 d-md-none" href="#">bc1prvd...8s0vf0du</a>
+              <div class="d-lg-inline d-none">
+                <button class="clear_button text_secondary_emphasis fs_md fw-bold">
+                  Clear
+                </button>
+              </div>
+              <div class="ps-4 ps-md-0 d-inline">
+                <button class="text-white bg_warning border-0 fs_lg fw-bold d-lg-none search_btn">
+                  Search BTC
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-none d-lg-block">
+        <div class="mb-2 d-flex justify-content-between align-items-center">
+          <div class="col-6">
+            <div class="bg-black py_13">
+              <h3 class="fw-bold fs_lg text-white mb-0 text-center mx-auto">
+                <span class="fw-bold fs_md text-white">Portfolio Value</span>
+                69.420 BTC <span class="text_warning">($420,000.69)</span>
+              </h3>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="bg-black py_13 mx-1">
+              <h3 class="text-white fs_md fw-bold mb-0 text-center">
+                Owned Rocks<span class="text_warning fs_lg ps-1 ps-xl-3">420</span>
+              </h3>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="bg-black py_13">
+              <h3 class="text-white fs_md fw-bold mb-0 text-center">
+                Listed Rocks<span class="text_warning fs_lg ps-1 ps-xl-3">69</span>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="bg-black text-white align-items-center d-flex justify-content-center portfolio_sm_heading gap-sm-3 gap-2 flex-sm-row py-1 py-sm-3 mb-2 d-lg-none mt-2 flex-wrap">
+        <h3 class="mb-0 fs_md fw-bold">Portfolio Value</h3>
+        <h2 class="mb-0 fs_xl fs_18 fw-bold text-wrap">
+          69.420 BTC <span class="text_warning">($420k)</span>
+        </h2>
+      </div>
+      <div class="header_parent d-lg-none mb-3">
+        <div class="bg-black d-flex justify-content-center align-items-center text-white fw-bold">
+          <h3 class="mb-0 py-1 fs_sm fw-bold d-flex align-items-center flex-sm-row">
+            Owned Rocks
+            <span class="text_warning fs_lg ps-2 ps-sm-3">420</span>
+          </h3>
+        </div>
+        <div class="bg-black d-flex justify-content-center align-items-center text-white fw-bold">
+          <h3 class="mb-0 py-1 fs_sm d-flex align-items-center flex-sm-row">
+            Listed Rocks
+            <span class="text_warning fs_lg ps-2 ps-sm-3">69</span>
+          </h3>
+        </div>
+        <div
+          class="bg-black d-flex px-1 header_parent flex-wrap py-1 align-items-center gap-sm-1 justify-content-center align-items-center text-white fw-bold gap-1">
+          <h3 class="text-white fs_xsm mb-0 gap-sm-1 d-flex align-items-center flex-sm-row">
+            Cliffs (1)<span class="text_secondary_emphasis px-2"> |</span>4.20
+          </h3>
+          <span class="text_warning fs_xsm"> ($69,420)</span>
+        </div>
+        <div
+          class="bg-black d-flex px-1 header_parent flex-wrap py-1 align-items-center gap-sm-1 justify-content-center align-items-center text-white fw-bold">
+          <h3 class="text-white fs_xsm mb-0 gap-sm-1 d-flex justify-content-center flex-sm-row align-items-center">
+            2-traits (3)
+            <span class="text_secondary_emphasis px-2">|</span> 0.69
+          </h3>
+          <span class="text_warning fs_xsm"> ($42,000)</span>
+        </div>
+        <div
+          class="bg-black d-flex px-1 header_parent flex-wrap py-1 align-items-center gap-sm-1 justify-content-center align-items-center text-white fw-bold">
+          <h3 class="text-white fs_xsm mb-0 gap-sm-1 d-flex justify-content-center flex-sm-row align-items-center">
+            3-traits (69)
+            <span class="text_secondary_emphasis mb-0 px-2"> |</span> 0.420
+          </h3>
+          <span class="text_warning fs_xsm"> ($69,420)</span>
+        </div>
+        <div
+          class="bg-black d-flex px-1 header_parent flex-wrap py-1 align-items-center gap-sm-1 justify-content-center align-items-center text-white fw-bold">
+          <h3 class="text-white fs_xsm mb-0 d-flex justify-content-center flex-sm-row align-items-center">
+            4-traits (347)
+            <span class="text_secondary_emphasis px-2"> |</span> 0.21
+          </h3>
+          <span class="text_warning fs_xsm"> ($42,000)</span>
+        </div>
+      </div>
+      <div class="d-none d-lg-block">
+        <div class="mb-3 d-flex justify-content-xl-between justify-content-center align-items-center mx-auto">
+          <div class="col-3">
+            <div
+              class="bg-black me-1 d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center">
+              <h3
+                class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start gap-2">
+                Cliffs (1)<span class="text_secondary_emphasis">|</span>4.20
+              </h3>
+              <span class="text_warning fs_md fw-bold"> ($69,420)</span>
+            </div>
+          </div>
+          <div class="col-3">
+            <div
+              class="bg-black me-1 d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center">
+              <h3
+                class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
+                2-traits (3)
+                <span class="text_secondary_emphasis">|</span> 0.69
+              </h3>
+              <span class="text_warning fs_md fw-bold"> ($42,000)</span>
+            </div>
+          </div>
+          <div class="col-3">
+            <div
+              class="d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center bg-black me-1">
+              <h3
+                class="text-white fw-bold fs_md mb-0 d-flex flex-row justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
+                3-traits (69)
+                <span class="text_secondary_emphasis">|</span> 0.420
+              </h3>
+              <span class="text_warning fs_md fw-bold"> ($69,420)</span>
+            </div>
+          </div>
+          <div class="col-3">
+            <div
+              class="d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center bg-black">
+              <h3
+                class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
+                4-traits (347)
+                <span class="text_secondary_emphasis">|</span> 0.21
+              </h3>
+              <span class="text_warning fs_md fw-bold"> ($42,000)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-lg-none px-lg-3">
+      <div class="mx_12">
+        <div class="bg-black py-3 fw-bold fs_md text-white text-center mb-2">
+          Rarest Noderocks
+        </div>
+      </div>
+      <div class="overflow-scroll ms_12">
+        <div class="d-flex gap-xl-4 gap-3 rarest_card_parent">
+          <div class="bg-black rarest_card px-3 py_13 px-sm-0 py-sm-3 px-md-4 col-auto">
+            <img class="w-100" src="./assets/images/png/rarest-sidebar-image-1.png" alt="demo" />
+            <p class="fw-bold text-center fs_lg text-white mb-1 pt-2">
+              #7252
+            </p>
+            <p class="fw-bold text-center fs_md text-white w-100 mb-0">
+              Highest Offer:
+              <span class="d-block text_warning">0.011 ($690.42)</span>
+            </p>
+          </div>
+          <div class="bg-black rarest_card px-3 py_13 px-sm-0 py-sm-3 px-md-4 col-auto">
+            <img class="w-100" src="./assets/images/png/rarest-sidebar-image-1.png" alt="demo" />
+            <p class="fw-bold text-center fs_lg text-white mb-1 pt-2">
+              #7252
+            </p>
+            <p class="fw-bold text-center fs_md text-white w-100 mb-0">
+              Highest Offer:
+              <span class="d-block text_warning">0.011 ($690.42)</span>
+            </p>
+          </div>
+          <div class="bg-black rarest_card px-3 py_13 px-sm-0 py-sm-3 px-md-4 col-auto">
+            <img class="w-100" src="./assets/images/png/rarest-sidebar-image-1.png" alt="demo" />
+            <p class="fw-bold text-center fs_lg text-white mb-1 pt-2">
+              #7252
+            </p>
+            <p class="fw-bold text-center fs_md text-white w-100 mb-0">
+              Highest Offer:
+              <span class="d-block text_warning">0.011 ($690.42)</span>
+            </p>
+          </div>
+          <div class="bg-black rarest_card px-3 py_13 px-sm-0 py-sm-3 px-md-4 col-auto">
+            <img class="w-100" src="./assets/images/png/rarest-sidebar-image-1.png" alt="demo" />
+            <p class="fw-bold text-center fs_lg text-white mb-1 pt-2">
+              #7252
+            </p>
+            <p class="fw-bold text-center fs_md text-white w-100 mb-0">
+              Highest Offer:
+              <span class="d-block text_warning">0.011 ($690.42)</span>
+            </p>
+          </div>
+          <div class="bg-black rarest_card px-3 py_13 px-sm-0 py-sm-3 px-md-4 col-auto">
+            <img class="w-100" src="./assets/images/png/rarest-sidebar-image-1.png" alt="demo" />
+            <p class="fw-bold text-center fs_lg text-white mb-1 pt-2">
+              #7252
+            </p>
+            <p class="fw-bold text-center fs_md text-white w-100 mb-0">
+              Highest Offer:
+              <span class="d-block text_warning">0.011 ($690.42)</span>
+            </p>
+          </div>
+          <div class="bg-black rarest_card px-3 py_13 px-sm-0 py-sm-3 px-md-4 col-auto">
+            <img class="w-100" src="./assets/images/png/rarest-sidebar-image-1.png" alt="demo" />
+            <p class="fw-bold text-center fs_lg text-white mb-1 pt-2">
+              #7252
+            </p>
+            <p class="fw-bold text-center fs_md text-white w-100 mb-0">
+              Highest Offer:
+              <span class="d-block text_warning">0.011 ($690.42)</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-sticky top-0 vh-100">
+      <div class="row mx_12">
+        <div class="col-2 d-none d-lg-block bg-black px-2">
+          <p class="ps-2 py-3 my-1 fw-bold fs_sm leading_16 text-white">
+            Filters
+          </p>
+          <div class="overflow-y-scroll max_h_460">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+              <div class="accordion-item mt-4">
+                <h2 class="text-white fs_sm fw-bold mb-2 p">
+                  Satributes (6)
+                </h2>
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                  <button
+                    class="accordion-button bg_secondary w-100 ps-3 pe-4 py-2 border-0 text_secondary_emphasis fw-bold fs_sm fs_12"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
+                    aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    Select...
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                  aria-labelledby="panelsStayOpen-headingOne">
+                  <div class="accordion-body p-0 mt-2">
+                    <ul class="w-100 mb-0 list-unstyled h-100 w-100">
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Action</a>
+                      </li>
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Another action</a>
+                      </li>
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Something else here</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item my-3">
+                <h2 class="text-white fs_sm fw-bold mb-2">Body (20)</h2>
+                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                  <button
+                    class="accordion-button bg_secondary w-100 ps-2 pe-4 py-2 border-0 text_secondary_emphasis fw-bold collapsed fs_sm fs_12"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo"
+                    aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                    Select...
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+                  aria-labelledby="panelsStayOpen-headingTwo">
+                  <div class="accordion-body p-0 mt-2">
+                    <ul class="w-100 mb-0 list-unstyled h-100 w-100">
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Action</a>
+                      </li>
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Another action</a>
+                      </li>
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Something else here</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="text-white fs_sm fw-bold mb-2">Eyes (26)</h2>
+                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                  <button
+                    class="accordion-button fs_sm fs_12 bg_secondary w-100 ps-2 pe-4 py-2 border-0 text_secondary_emphasis fw-bold collapsed"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree"
+                    aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                    Select...
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+                  aria-labelledby="panelsStayOpen-headingThree">
+                  <div class="accordion-body p-0 mt-2">
+                    <ul class="w-100 mb-0 list-unstyled h-100 w-100">
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Action</a>
+                      </li>
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Another action</a>
+                      </li>
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Something else here</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item my-3">
+                <h2 class="text-white fs_sm fw-bold mb-2">Hat (41)</h2>
+                <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                  <button
+                    class="accordion-button fs_sm fs_12 bg_secondary w-100 ps-2 pe-4 py-2 border-0 text_secondary_emphasis fw-bold collapsed"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour"
+                    aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                    Select...
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
+                  aria-labelledby="panelsStayOpen-headingFour">
+                  <div class="accordion-body p-0 mt-2">
+                    <ul class="w-100 mb-0 list-unstyled h-100 w-100">
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Action</a>
+                      </li>
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Another action</a>
+                      </li>
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Something else here</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="text-white fs_sm fw-bold mb-2">Mouth (2)</h2>
+                <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                  <button
+                    class="accordion-button fs_sm fs_12 bg_secondary w-100 ps-2 pe-4 py-2 border-0 text_secondary_emphasis fw-bold collapsed"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive"
+                    aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+                    Select...
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse"
+                  aria-labelledby="panelsStayOpen-headingFive">
+                  <div class="accordion-body p-0 mt-2">
+                    <ul class="w-100 mb-0 list-unstyled h-100 w-100">
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Action</a>
+                      </li>
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Another action</a>
+                      </li>
+                      <li>
+                        <a class="m-2 text-decoration-none fs_sm fs_12 text-white fw-normal dropdown-link"
+                          href="#">Something else here</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-7 col-lg-8 px-0">
+          <div class="nav nav-tabs d-flex justify-content-between row mx-sm-0 mx-lg-3">
+            <div class="nav-item col-4 px-0">
+              <a class="nav-link active fw-bold fs_md py-xxl-3 py-2 d-flex justify-content-center align-items-center"
+                href="#firsttab" data-bs-toggle="tab">All [420]</a>
+            </div>
+            <div class="nav-item col-4 px-1">
+              <a class="nav-link py-xxl-3 py-2 fw-bold fs_md d-flex justify-content-center align-items-center"
+                href="#secondtab" data-bs-toggle="tab">Listed [69]</a>
+            </div>
+            <div class="nav-item col-4 px-0">
+              <a class="nav-link py-xxl-3 py-2 fw-bold fs_md d-flex justify-content-center align-items-center"
+                href="#thirdtab" data-bs-toggle="tab">Unlisted [351]</a>
+            </div>
+          </div>
+          <div class="tab-content overflow-y-scroll vh-100 pt-3 mt-2xl-3 mt-lg-0 px-lg-3">
+            <div class="tab-pane show active" id="firsttab">
+              <div class="explore_tab_parent mb-3 mb-lg-0">
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-2.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #1441
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-3.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #2493
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-4.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #7033
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-5.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-7.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-8.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-9.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-11.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-2.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #1441
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-3.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #2493
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-4.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #7033
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-5.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-7.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-8.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-9.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-11.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-2.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #1441
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-3.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #2493
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-4.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #7033
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-5.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-7.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-8.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-9.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-11.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-2.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #1441
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-3.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #2493
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-4.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #7033
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-5.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-7.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-8.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-9.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-11.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-2.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #1441
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-3.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #2493
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-4.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #7033
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-5.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-7.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-8.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-9.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-11.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="secondtab">
+              <div class="explore_tab_parent mb-3 mb-lg-0">
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #8678
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-10.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="thirdtab">
+              <div class="explore_tab_parent mb-3 mb-lg-0">
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-2.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #1441
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-3.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #2493
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-4.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #7033
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-5.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-6.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3869
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    List Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-7.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-8.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-9.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-11.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-2.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #1441
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-3.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #2493
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-4.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #7033
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-5.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-7.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-8.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-9.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-11.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-2.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #1441
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-3.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #2493
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-4.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #7033
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-5.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-7.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-8.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-9.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-11.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-2.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #1441
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-3.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #2493
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-4.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #7033
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-5.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-7.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-8.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-9.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-11.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-2.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #1441
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-3.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #2493
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-4.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #7033
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-5.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-7.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-8.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-9.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3606
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                        <span class="bg_light_warning leading_14 fs_xsm d-block text_warning px-2">0.69 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-11.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #3921
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+                <div class="bg-black p-3 p-sm-4">
+                  <div class="position-relative">
+                    <div class="position-absolute end-0 mt_2 me_3">
+                      <div class="d-flex flex-column bg_secondary">
+                        <span class="fw-bold px-2 leading_16 text-white fs_sm bg_secondary mb-0">4.20 BTC</span>
+                      </div>
+                    </div>
+                    <img class="w-100" src="./assets/images/png/explore-tabs-image-1.png" alt="yellow-image" />
+                  </div>
+                  <p class="my-2 fw-bold text-center text-white fs_sm">
+                    #4885
+                  </p>
+                  <button class="fw-bold explorer_tab_card_button w-100 fs_xsm text_warning">
+                    Delist Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-lg-2 px-0 d-none d-lg-block">
+          <div class="bg_secondary py-2 py-xxl-3 fw-bold fs_md mb-3 text-white text-center">
+            Rarest Noderocks
+          </div>
+          <div class="overflow-y-scroll vh-100">
+            <div class="d-flex flex-column gap-4 mb-3 ps-xxl-3">
+              <div class="bg-black p-xxl-4 py-3">
+                <div class="px-3">
+                  <img class="w-100" src="./assets/images/png/rarest-sidebar-image-1.png" alt="demo" />
+                  <p class="fw-bold text-center fs_xl text-white mb-1 pt-3">
+                    #7252
+                  </p>
+                  <p class="fw-bold text-center fs_md text-white w-100 mb-0">
+                    Highest Offer:
+                    <span class="d-block text_warning">0.011 ($690.42)</span>
+                  </p>
+                </div>
+              </div>
+              <div class="bg-black p-xxl-4 py-3">
+                <div class="px-3">
+                  <img class="w-100" src="./assets/images/png/rarest-sidebar-image-1.png" alt="demo" />
+                  <p class="fw-bold text-center fs_xl text-white mb-1 pt-3">
+                    #7252
+                  </p>
+                  <p class="fw-bold text-center fs_md text-white w-100 mb-0">
+                    Highest Offer:
+                    <span class="d-block text_warning">0.011 ($690.42)</span>
+                  </p>
+                </div>
+              </div>
+              <div class="bg-black p-xxl-4 py-3">
+                <div class="px-3">
+                  <img class="w-100" src="./assets/images/png/rarest-sidebar-image-1.png" alt="demo" />
+                  <p class="fw-bold text-center fs_xl text-white mb-1 pt-3">
+                    #7252
+                  </p>
+                  <p class="fw-bold text-center fs_md text-white w-100 mb-0">
+                    Highest Offer:
+                    <span class="d-block text_warning">0.011 ($690.42)</span>
+                  </p>
+                </div>
+              </div>
+              <div class="bg-black p-xxl-4 py-3">
+                <div class="px-3">
+                  <img class="w-100" src="./assets/images/png/rarest-sidebar-image-1.png" alt="demo" />
+                  <p class="fw-bold text-center fs_xl text-white mb-1 pt-3">
+                    #7252
+                  </p>
+                  <p class="fw-bold text-center fs_md text-white w-100 mb-0">
+                    Highest Offer:
+                    <span class="d-block text_warning">0.011 ($690.42)</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+  </script>
+  <script src="./assets/js/nav.js"></script>
+</body>
+
+</html>

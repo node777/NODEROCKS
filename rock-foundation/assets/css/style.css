@@ -1,0 +1,305 @@
+@import url("https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap");
+
+body {
+  font-family: Jura !important;
+}
+
+:root {
+  /* ==== FONT SIZES ==== */
+  --xsm: 12px;
+  --sm: 14px;
+  --md: 18px;
+  --lg: 24px;
+  --xl: 32px;
+  --xxl: 40px;
+  --xxxl: 216px;
+
+  /* ==== COLORS ==== */
+  --danger: #f40f0f;
+  --success: #48a838;
+  --warning: #f46a0f;
+  --secondary: #111110;
+  --secondary-emphasis: #808080;
+  --light-warning: #29180e;
+}
+
+/* ==== FONT-SIZES ==== */
+.fs_xsm {
+  font-size: var(--xsm);
+}
+
+.fs_sm {
+  font-size: var(--sm);
+}
+
+.fs_md {
+  font-size: var(--md);
+}
+
+.fs_lg {
+  font-size: var(--lg);
+}
+
+.fs_xl {
+  font-size: var(--xl);
+}
+
+.fs_xxl {
+  font-size: var(--xxl);
+}
+
+.fs_3xl {
+  font-size: var(--xxxl);
+}
+
+/* ==== TEXT-COLORS ==== */
+.text_danger {
+  color: var(--danger);
+}
+
+.text_success {
+  color: var(--success);
+}
+
+.text_light_success {
+  color: var(--light-success);
+}
+
+.text_warning {
+  color: var(--warning);
+}
+
+.text_secondary {
+  color: var(--secondary);
+}
+
+.text_secondary_emphasis {
+  color: var(--secondary-emphasis);
+}
+
+/* ==== BACKGROUNG-COLORS ==== */
+.bg_danger {
+  background-color: var(--danger);
+}
+
+.bg_success {
+  background-color: var(--success);
+}
+
+.bg_light_success {
+  background-color: var(--light-success);
+}
+
+.bg_warning {
+  background: var(--warning);
+}
+
+.bg_light_warning {
+  background: var(--light-warning);
+}
+
+.bg_secondary {
+  background-color: var(--secondary);
+}
+
+.bg_secondary_emphasis {
+  background-color: var(--secondary-emphasis);
+}
+
+/* ==== COMMON CLASSES ==== */
+.transition_03 {
+  transition: all 0.3s ease-in-out;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.gap_2 {
+  gap: 2px;
+}
+
+/* ==== HOMEPAGE CSS ==== */
+.homepage_bg_img {
+  background-image: url("../images/webp/homepage_bg_img.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+}
+
+/* ==== EXPLORER CSS ==== */
+
+.mx_12 {
+  margin: 0 12px !important;
+}
+
+.stake_btn {
+  background: #F46A0F;
+  color: white;
+  border: 1px solid transparent;
+  padding: 2px 24px;
+  width: 100%;
+}
+
+.featured_btns {
+  border: 2px solid #F46A0F;
+  border-radius: 330px;
+  line-height: 21px !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  width: 114px;
+}
+
+.featured_btns:hover {
+  border: 2px solid transparent;
+  background: #F46A0F !important;
+  color: white;
+}
+
+.address_search_btn {
+  border: 1px solid transparent;
+}
+
+.address_search_btn:hover {
+  border: 1px solid #F46A0F;
+  background: transparent !important;
+}
+
+.buy_btn,
+.traits_btn,
+.price_btn,
+.address_search_btn {
+  line-height: 21px;
+}
+
+.buy_btn,
+.address_search_btn {
+  background: #F46A0F;
+}
+
+.buy_btn:hover {
+  background: transparent;
+}
+
+.featured_card {
+  width: 629px;
+}
+
+.featured_card_img_parent img {
+  max-width: 232px;
+}
+
+.featured_cards {
+  min-width: 1920px;
+}
+
+.featured_cards_parent {
+  min-width: 1920px;
+}
+
+.bitcoin_warning_icon {
+  max-width: 16px;
+}
+
+.landing_common_button {
+  border: 1.81px solid var(--warning);
+  background-color: black;
+  color: var(--warning);
+  border-radius: 330px;
+  padding: 1px 15px 3px;
+  transition: all 300ms linear;
+  line-height: 21px !important;
+}
+
+.landing_common_button:hover {
+  background-color: var(--warning);
+  color: white;
+}
+
+.tab_buy_box {
+  border: 1px solid var(--warning);
+}
+
+.tab_buy_box button {
+  background-color: var(--warning);
+  color: white;
+  border: 1px solid var(--warning);
+  transition: all 300ms linear;
+  margin-left: -1px;
+  margin-bottom: -0.5px;
+  padding: 7px 57px;
+}
+
+.tab_buy_box button:hover {
+  color: var(--warning);
+  background-color: black;
+  border: 1px solid var(--warning);
+}
+
+.w_190 {
+  width: 190px;
+}
+
+.explorer_activity {
+  min-width: 1012px;
+}
+
+.owners_card,
+.magic_card {
+  padding: 10px 0 14px;
+}
+
+.owners_card p,
+.magic_card p {
+  line-height: 28px !important;
+}
+
+.trait_card p {
+  line-height: 21px !important;
+}
+
+@media (max-width: 767.98px) {
+  .featured_card {
+    width: 300px;
+  }
+
+  .featured_cards_parent {
+    min-width: 870px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  :root {
+    /* ==== FONT SIZES ==== */
+    --xsm: 12px !important;
+    --sm: 14px !important;
+    --md: 14px !important;
+    --lg: 18px !important;
+    --xl: 24px !important;
+    --xxl: 32px !important;
+    --xxxl: 100px !important;
+  }
+
+  .bitcoin_warning_icon {
+    max-width: 13px;
+  }
+}
+
+@media (min-width:1920px) {
+  .max_w_1920 {
+    max-width: 1920px !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media (min-width:576px) {
+  .w_sm_auto {
+    width: auto !important;
+  }
+
+  .activity_tab {
+    padding-top: 12px !important;
+    padding-bottom: 14px !important;
+    line-height: 28px !important;
+  }
+}

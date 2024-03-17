@@ -1,0 +1,90 @@
+.tab_panel2 {
+    display: none;
+}
+
+.tab_panel3 {
+    display: none;
+}
+
+.tabs_box {
+    color: var(--secondary-emphasis);
+    border-bottom: 1px solid var(--secondary-emphasis);
+    cursor: pointer;
+}
+
+.active1 {
+    color: #fff;
+    background: #000;
+    border-bottom: 1px solid #F46A0F;
+}
+
+.stake_card {
+    background: #0D0D0E;
+    max-width: 190px;
+    height: 243px;
+}
+
+.stake_btn {
+    background: var(--warning);
+    color: white;
+    border: 1px solid transparent;
+    padding: 1px 24px;
+    width: 100%;
+    transition: 0.3s all ease-in-out;
+}
+
+.stake_btn:hover {
+    background: transparent;
+    border: 1px solid white;
+}
+
+.update_btn {
+    color: var(--warning);
+    background: transparent;
+    border: 1px solid var(--warning);
+    transition: 0.3s all ease-in-out;
+}
+
+.update_btn:hover {
+    color: white;
+    border: 1px solid white;
+}
+
+.unstake_btn {
+    color: #fff;
+    background: transparent;
+    border: 1px solid #fff;
+    transition: 0.3s all ease-in-out;
+}
+
+.unstake_btn:hover {
+    color: white;
+    border: 1px solid transparent;
+    background: var(--warning);
+}
+
+@media (min-width:1440px) {
+    .tab_container {
+        max-width: 1430px;
+    }
+}
+
+@media (max-width:1199.98px) {
+    .stake_card {
+        max-width: 186px;
+        height: 243px;
+    }
+}
+
+@media (max-width:427.98px) {
+    .stake_card {
+        max-width: 132px;
+        height: 190px;
+        padding: 12px !important;
+    }
+
+    .fs_custom_md {
+        font-size: 10px !important;
+    }
+
+}
