@@ -394,3 +394,15 @@ body {
     width: auto !important;
   }
 }
+
+
+
+
+
+
+
+/* additions */
+.rock{
+  width: 100%;
+  image-rendering: pixelated;
+}
