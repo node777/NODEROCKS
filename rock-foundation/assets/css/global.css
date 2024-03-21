@@ -403,6 +403,9 @@ body {
 
 /* additions */
 .rock{
-  width: 100%;
+  width: 142px !important;
   image-rendering: pixelated;
+}
+#address{
+  padding-left: 50px;
 }

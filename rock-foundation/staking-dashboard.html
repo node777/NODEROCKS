@@ -86,9 +86,11 @@
                       href="./">Experiences</a>
                   </li>
                 </ul>
-                <button class="nav_btn transition_03 text_warning bg-transparent fw-bold ms-4 d-none d-lg-block">
-                  Connect
-                </button>
+                <div id="account">
+                  <button class="nav_btn transition_03 text_warning bg-transparent fw-bold ms-4 d-none d-lg-block">
+                    Connect
+                  </button>
+                </div>
               </div>
               <div class="d-flex align-items-center gap-4 d-lg-none menu_btn_parent">
                 <div onclick="Togleside()"
@@ -248,17 +250,17 @@
           class="d-flex flex-wrap pt-sm-4 pt-3 justify-content-sm-between list-unstyled position-sticky tabs_position">
           <div class="col-4 ps-0">
             <li id="tab1" class="text-center py-2 py-md-3 fs_md fw-bold tabs_box text-nowrap fs_custom_sm active1">
-              All (100)
+              All <div id="rocks-total"></div>
             </li>
           </div>
           <div class="col-4 px-1">
             <li id="tab2" class="text-center py-2 py-md-3 fs_md fw-bold tabs_box text-nowrap fs_custom_sm">
-              Staked (75)
+              Staked <div id="rocks-staked"></div>
             </li>
           </div>
           <div class="col-4 pe-0">
             <li id="tab3" class="text-center py-2 py-md-3 fs_md fw-bold tabs_box text-nowrap fs_custom_sm">
-              Unstaked (25)
+              Unstaked <div id="rocks-unstaked"></div>
             </li>
           </div>
         </ul>
@@ -10870,18 +10872,19 @@
     "d17b53e7fbb7807ac06f8555ea6e537382427406d34cf673b874c88c4967a21ci0",
     "4217ed02fca8b69097c3bd7d3c290b9a1ecf4260c902cb42fadf33f451947ebai0"
 ]
-    let userInscriptions=
-    async function loadRocks(offset){
+    let userInscriptions=[]
+    async function loadRocks(offset, type){
       let r = ""
       let limit = 60
-      let inscriptionRes = await fetch(`https://api.hiro.so/ordinals/v1/inscriptions?address=bc1qx2x90wf2rh84nvdw8ulme0ec47497ll50xt392&offset=${offset||0}&limit=${limit}`)
+      let inscriptionRes = await fetch(`https://api.hiro.so/ordinals/v1/inscriptions?address=${bitprint.wallet.address}&offset=${offset||0}&limit=${limit}`)
       inscriptionRes = await inscriptionRes.json()
+      userInscriptions = [...userInscriptions, ...inscriptionRes.results]
 
-      for(rock in inscriptionRes.results){
-        if(rockList.includes(inscriptionRes[rock].id)){
+      for(rock in userInscriptions){
+        if(rockList.includes(userInscriptions[rock].id)){
           r+=`
             <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4">
-              <img class="w-100 rock" src="https://api.hiro.so/ordinals/v1/inscriptions/${inscriptionRes.results[rock].id}/content" alt="stake-card-img" />
+              <img class="w-100 rock" src="https://api.hiro.so/ordinals/v1/inscriptions/${userInscriptions[rock].id}/content" alt="stake-card-img" />
               <button class="stake_btn fs_xsm fw-bold fs_custom_md">
                 Stake
               </button>
@@ -10892,12 +10895,19 @@
           `
         }
       }
-      document.getElementById("portfolio").innerHTML+=r
-      if(userInscriptions.total>(offset+limit)){
-        loadRocks((offset+limit))
+      // console.log(offset+limit)
+      if(inscriptionRes.total>(offset+limit)){
+        loadRocks((offset+limit), type)
+      }else{
+        document.getElementById("portfolio").innerHTML+=r
+
       }
     }
-    loadRocks(0)
+    
+    window.onload=async function(){
+      await bitprint.load()
+      loadRocks(0)
+    }
   </script>
 </body>
 

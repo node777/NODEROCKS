@@ -220,7 +220,7 @@
                 alt="cross-img" />
             </div>
             <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4">
-              <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4">
+              <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4" onclick="bitprint.connect('unisat')">
                 <img class="wallet_icons" height="36" width="36" src="./assets/images/png/leather-logo.png"
                   alt="images" />
                 <p class="text-white fs_lg fw-bold mb-0">Leather</p>
@@ -251,7 +251,7 @@
                 Connect
               </a>
             </div>
-            <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4">
+            <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" onclick="bitprint.connect('unisat')">
               <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4">
                 <img class="wallet_icons" height="36" width="36" src="./assets/images/png/unisat.png" alt="unisat" />
                 <p class="text-white fs_lg fw-bold mb-0">UniSat</p>
@@ -270,6 +270,7 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
   </script>
   <script src="./assets/js/nav.js"></script>
+  <script src="./bitprint.js"></script>
   <script>
     function open_popup() {
       document.getElementById("connect_wallet_popup").style.display = "block";
@@ -279,6 +280,15 @@
     function closed_popup() {
       document.getElementById("connect_wallet_popup").style.display = "none";
       document.getElementsByTagName("body")[0].style.overflow = "hidden";
+    }
+  </script>
+  <script>
+    window.onload=async()=>{
+      await bitprint.load()
+      if(bitprint.account){
+        console.log("t")
+        window.location="./staking-dashboard.html"
+      }
     }
   </script>
 </body>

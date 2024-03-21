@@ -1,3 +1,12 @@
+
+
+var lux = {
+  displayUsername(){
+    if(document.getElementById("account") && bitprint.wallet.address){
+      document.getElementById("account").innerHTML=`<div class="mb-0 fw-bold text_md text_warning text-nowrap" id="address">${bitprint.wallet.address}</div>`
+    }
+  }
+}
 var bitprint = {
     account:{},
     //called on app load get acc data
