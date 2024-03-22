@@ -903,8 +903,8 @@
               <button style="display:none" class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}', 1)" id="unstake-button-${userInscriptions[rock].id}">
                 Unstake
               </button>
-              <button class="update_btn fs_xsm fw-bold fs_custom_md">
-                Update Hashrate
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('https://bitscape.io/inscription/${userInscriptions[rock].id}', '_blank')">
+                View On Explorer
               </button>
             </div>
           `
@@ -917,7 +917,7 @@
               <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}')">
                 Stake
               </button>
-              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.location='https://bitscape.io/inscription/${userInscriptions[rock].id}'">
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('https://bitscape.io/inscription/${userInscriptions[rock].id}', '_blank')">
                 View On Explorer
               </button>
             </div>
