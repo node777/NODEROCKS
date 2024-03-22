@@ -373,7 +373,7 @@ var bitprint = {
           return (res)
         } catch (e) {
           console.log(e);
-          return
+          throw e
         }
       }else if(bitprint.account.type=="leather"){
         try {
@@ -384,7 +384,7 @@ var bitprint = {
           return (res.result.signature)
         } catch (e) {
           console.log(e);
-          return
+          throw e
         }
       }else if(bitprint.account.type=="okx"){
         try {
@@ -392,7 +392,7 @@ var bitprint = {
           return (res)
         } catch (e) {
           console.log(e);
-          return
+          throw e
         }
       }else if(bitprint.account.type=="xverse"||bitprint.account.type=="magicEden"){
         try {
@@ -406,11 +406,11 @@ var bitprint = {
           return (res.result.signature)
         } catch (e) {
           console.log(e);
-          return
+          throw e
         }
       }
       else{
-        return "Invalid Sig"
+        throw "Invalid Sig"
       }
     },
     //send phone?
