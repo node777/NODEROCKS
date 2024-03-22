@@ -10905,6 +10905,37 @@
               </button>
             </div>
           `
+          /* html */
+          rUnstaked += `
+            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="unstaked-rock-${userInscriptions[rock].id}">
+              <div class="position-relative">
+                <img class="w-100 rock" src="https://api.hiro.so/ordinals/v1/inscriptions/${userInscriptions[rock].id}/content" alt="stake-card-img" />
+              </div>
+              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}')">
+                Stake
+              </button>
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.location='https://bitscape.io/inscription/${userInscriptions[rock].id}'">
+                View On Explorer
+              </button>
+            </div>
+          `
+          /* html */
+          rStaked+=`
+            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="staked-rock-${userInscriptions[rock].id}" style="display:none">
+              <div class="position-relative">
+                <img class="w-100 rock" src="https://api.hiro.so/ordinals/v1/inscriptions/${userInscriptions[rock].id}/content" alt="stake-card-img" />
+                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0">
+                    STAKED
+                </p>
+              </div>
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}', 1)">
+                Unstake
+              </button>
+              <button class="update_btn fs_xsm fw-bold fs_custom_md">
+                Update Hashrate
+              </button>
+            </div>
+          `
         }
       }
       // console.log(offset+limit)
@@ -10940,11 +10971,17 @@
 
       for (rock in stakedRocks) {
         if(stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked>stakedRocks[rock].date_unstaked){
+          document.getElementById(`staked-rock-${rock}`).style = "display:none !important;"
+          document.getElementById(`unstaked-rock-${rock}`).style = "display:initial"
+
           document.getElementById(`staked-tag-${rock}`).style = "display:none"
           document.getElementById(`stake-button-${rock}`).style = "display:initial;"
           document.getElementById(`unstake-button-${rock}`).style = "display:none"
 
         }else{
+          document.getElementById(`staked-rock-${rock}`).style = "display:initial"
+          document.getElementById(`unstaked-rock-${rock}`).style = "display:none !important;"
+
           document.getElementById(`staked-tag-${rock}`).style = "display:initial"
           document.getElementById(`stake-button-${rock}`).style = "display:none;"
           document.getElementById(`unstake-button-${rock}`).style = "display:initial"
