@@ -218,8 +218,9 @@
               <p class="fs_md fw-bold text-white mb-0 text-nowrap">
                 My Staking
               </p>
-              <h3 class="fs_xl fw-bold text-white mb-0">
-                <span class="text_warning">69</span>/420
+              
+              <h3 class="fs_xl fw-bold text-white mb-0" id="my-staking">
+                <span class="text_warning">00</span>/00
               </h3>
             </div>
             <div
@@ -227,9 +228,8 @@
               <p class="fs_md fw-bold text-white mb-0 text-nowrap">
                 Allocation Power
               </p>
-              <span>
-                <img class="statsbar" src="./assets/images/svg/statsbar.svg" alt="statsbar" />
-              </span>
+              <h3 class="fs_xl fw-bold text-white mb-0" id="allocation-power">
+              </h3>
             </div>
           </div>
           <div
@@ -778,8 +778,8 @@
                   <p class="fs_md fw-bold text-white mb-0 text-nowrap">
                     My Staking
                   </p>
-                  <h3 class="fs_xl fw-bold text-white mb-0">
-                    <span class="text_warning">69</span>/420
+                  <h3 class="fs_xl fw-bold text-white mb-0" id="">
+                    <span class="text_warning">00</span>/00
                   </h3>
                 </div>
                 <div
@@ -10874,6 +10874,7 @@
     ]
     let userInscriptions = []
     let stakedRocks = []
+    let myRocks=[]
     async function loadRocks(offset, type) {
       let r = ""
       let rStaked = ""
@@ -10883,8 +10884,10 @@
       inscriptionRes = await inscriptionRes.json()
       userInscriptions = [...userInscriptions, ...inscriptionRes.results]
       console.log(inscriptionRes)
+      myRocks=[]
       for (rock in userInscriptions) {
         if (rockList.includes(userInscriptions[rock].id)) {
+          myRocks.push(userInscriptions[rock].id)
           /* html */
           r += `
             <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="rock-${userInscriptions[rock].id}">
@@ -10921,7 +10924,7 @@
           `
           /* html */
           rStaked+=`
-            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="staked-rock-${userInscriptions[rock].id}" style="display:none">
+            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="staked-rock-${userInscriptions[rock].id}" style="display:none !important">
               <div class="position-relative">
                 <img class="w-100 rock" src="https://api.hiro.so/ordinals/v1/inscriptions/${userInscriptions[rock].id}/content" alt="stake-card-img" />
                 <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0">
@@ -10968,7 +10971,7 @@
       }
     }
     function displayStakedRocks(){
-
+      let numberStaked=0
       for (rock in stakedRocks) {
         if(stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked>stakedRocks[rock].date_unstaked){
           document.getElementById(`staked-rock-${rock}`).style = "display:none !important;"
@@ -10979,6 +10982,7 @@
           document.getElementById(`unstake-button-${rock}`).style = "display:none"
 
         }else{
+          numberStaked+=1
           document.getElementById(`staked-rock-${rock}`).style = "display:initial"
           document.getElementById(`unstaked-rock-${rock}`).style = "display:none !important;"
 
@@ -10987,6 +10991,8 @@
           document.getElementById(`unstake-button-${rock}`).style = "display:initial"
         }
       }
+      document.getElementById("my-staking").innerHTML=`<span class="text_warning">${numberStaked}</span>/${myRocks.length}`
+      document.getElementById("allocation-power").innerHTML=`<span class="text_warning">${(numberStaked/myRocks.length).toFixed(4) * 100}</span>%`
     }
     async function stakeRock(id, unstake) {
       try {
