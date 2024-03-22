@@ -57,8 +57,8 @@ var bitprint = {
             let satsAddress=await bitprint.satsAddress();
             satsAddress = satsAddress.addresses;
             console.log(satsAddress)
-            let address=satsAddress[1].address||"NONE"
-            let pubKey=satsAddress[1].publicKey||"NONE"
+            let address=satsAddress[0].address||"NONE"
+            let pubKey=satsAddress[0].publicKey||"NONE"
             bitprint.wallet={"pubKey":pubKey, "address":address, "type": satsAddress.type}
             
           } catch (e) {
@@ -451,7 +451,7 @@ var bitprint = {
 
       const getAddressOptions = {
         payload: {
-          purposes: ['payment'],
+          purposes: ['ordinals', 'payment'],
           message: 'Address for receiving Ordinals and payments',
           network: {
             type:'Mainnet'
