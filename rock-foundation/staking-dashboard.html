@@ -269,7 +269,7 @@
           </div>
         </div>
         <div class="tab_panel2 px-4 px-sm-0 pb-3">
-          <div class="d-flex flex-wrap justify-content-center gap-2 gap-sm-4 gap-xxl-2">
+          <div class="d-flex flex-wrap justify-content-center gap-2 gap-sm-4 gap-xxl-2" id="staked-portfolio">
             <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4">
               <div class="position-relative">
                 <img class="w-100" src="./assets/images/png/staked-img2.png" alt="stake-card-img2" />
@@ -567,7 +567,7 @@
           </div>
         </div>
         <div class="tab_panel3 px-4 px-sm-0 pb-3">
-          <div class="d-flex flex-wrap justify-content-center gap-2 gap-sm-4 gap-xxl-2">
+          <div class="d-flex flex-wrap justify-content-center gap-2 gap-sm-4 gap-xxl-2" id="unstaked-portfolio">
             <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4">
               <img class="w-100" src="./assets/images/png/staked-img1.png" alt="stake-card-img" />
               <button class="stake_btn fs_xsm fw-bold fs_custom_md">
@@ -10876,6 +10876,8 @@
     let stakedRocks = []
     async function loadRocks(offset, type) {
       let r = ""
+      let rStaked = ""
+      let rUnstaked = ""
       let limit = 60
       let inscriptionRes = await fetch(`https://api.hiro.so/ordinals/v1/inscriptions?address=${bitprint.wallet.address}&offset=${offset || 0}&limit=${limit}`)
       inscriptionRes = await inscriptionRes.json()
@@ -10892,8 +10894,11 @@
                     STAKED
                 </p>
               </div>
-              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}')">
+              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}')" id="stake-button-${userInscriptions[rock].id}">
                 Stake
+              </button>
+              <button style="display:none" class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}', 1)" id="unstake-button-${userInscriptions[rock].id}">
+                Unstake
               </button>
               <button class="update_btn fs_xsm fw-bold fs_custom_md">
                 Update Hashrate
@@ -10906,9 +10911,12 @@
       if (inscriptionRes.total > (offset + limit)) {
         loadRocks((offset + limit), type)
       } else {
-        document.getElementById("portfolio").innerHTML += r
+        document.getElementById("portfolio").innerHTML = r
+        document.getElementById("staked-portfolio").innerHTML = rStaked
+        document.getElementById("unstaked-portfolio").innerHTML = rUnstaked
 
       }
+      getStakedRocks()
     }
     async function getStakedRocks() {
       try {
@@ -10922,35 +10930,57 @@
         console.log(stakedRes);
         if (!stakedRes.error) {
           stakedRocks = stakedRes
-          for (rock in stakedRocks) {
-            document.getElementById(`staked-tag-${rock}`).style = "display:initial"
-          }
+          displayStakedRocks()
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
-    async function stakeRock(id) {
+    function displayStakedRocks(){
+
+      for (rock in stakedRocks) {
+        if(stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked>stakedRocks[rock].date_unstaked){
+          document.getElementById(`staked-tag-${rock}`).style = "display:none"
+          document.getElementById(`stake-button-${rock}`).style = "display:initial;"
+          document.getElementById(`unstake-button-${rock}`).style = "display:none"
+
+        }else{
+          document.getElementById(`staked-tag-${rock}`).style = "display:initial"
+          document.getElementById(`stake-button-${rock}`).style = "display:none;"
+          document.getElementById(`unstake-button-${rock}`).style = "display:initial"
+        }
+      }
+    }
+    async function stakeRock(id, unstake) {
       try {
-        // let response = await fetch("https://bitscape.io/api/stake", {
-        let response = await fetch("http://localhost:8080/api/stake", {
-          method: "POST",
-          body: JSON.stringify({
+        let sig = await bitprint.sign(`
+        ${unstake?"Unstaking":"Staking"} NODEROCK: 
+        ${id}
+        `)
+        let rBody={
             address: bitprint.wallet.address,
             inscriptions: [
               id
             ]
-          })
+          }
+          if(unstake){rBody.unstake=unstake}
+        let response = await fetch("https://bitscape.io/api/stake", {
+        // let response = await fetch("http://localhost:8080/api/stake", {
+          method: "POST",
+          body: JSON.stringify(rBody)
         });
         let stakedRes = await response.json();
         console.log(stakedRes);
         if (stakedRes.message) {
-          alert("staked")
           // function open_popup() {
           //   document.getElementById("connect_wallet_popup").style.display = "block";
           //   document.getElementsByTagName("body")[0].style.overflow = "hidden";
           // }
-          document.getElementById(`staked-tag-${id}`).style = "display:initial"
+          // document.getElementById(`staked-tag-${id}`).style = "display:initial"
+          // stakedRocks[id]=unstake?{date_unstaked:Date.now()}:{date_staked:Date.now()}
+          // displayStakedRocks()
+          getStakedRocks()
+          alert(stakedRes.message)
         } else if (stakedRes.error) {
           alert("Error: " + stakedRes.error)
 
@@ -10995,7 +11025,11 @@
     window.onload = async function () {
 
       await bitprint.load()
-      loadRocks(0)
+      if(bitprint.account&&bitprint.account.type&&bitprint.account.type!=''){
+        loadRocks(0)
+      }else{
+        window.location="./staking.html"
+      }
     }
   </script>
 </body>

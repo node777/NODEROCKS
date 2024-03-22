@@ -219,8 +219,8 @@
               <img onclick="closed_popup()" class="cusor_pointer" src="./assets/images/svg/cross-img.svg"
                 alt="cross-img" />
             </div>
-            <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4">
-              <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4" onclick="bitprint.connect('unisat')">
+            <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" onclick="bitprint.connect('leather')">
+              <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4">
                 <img class="wallet_icons" height="36" width="36" src="./assets/images/png/leather-logo.png"
                   alt="images" />
                 <p class="text-white fs_lg fw-bold mb-0">Leather</p>
@@ -230,7 +230,7 @@
                 Connect
               </a>
             </div>
-            <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4">
+            <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" onclick="bitprint.connect('xverse')">
               <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4">
                 <img class="wallet_icons" height="36" width="36" src="./assets/images/png/xverse-logo.png"
                   alt="images" />
@@ -241,7 +241,7 @@
                 Connect
               </a>
             </div>
-            <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4">
+            <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" onclick="bitprint.connect('okx')">
               <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4">
                 <img class="wallet_icons" height="36" width="36" src="./assets/images/png/okx-logo.png" alt="images" />
                 <p class="text-white fs_lg fw-bold mb-0">OKX</p>
@@ -287,7 +287,7 @@
       await bitprint.load()
       console.log(bitprint.account)
       if(bitprint.account && bitprint.account!={}){
-        console.log("t")
+        // console.log("t")
         // window.location="./staking-dashboard.html"
       }
     }
