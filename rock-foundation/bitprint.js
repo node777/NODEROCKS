@@ -451,7 +451,7 @@ var bitprint = {
 
       const getAddressOptions = {
         payload: {
-          purposes: ['ordinals', 'payment'],
+          purposes: ['payment'],
           message: 'Address for receiving Ordinals and payments',
           network: {
             type:'Mainnet'
