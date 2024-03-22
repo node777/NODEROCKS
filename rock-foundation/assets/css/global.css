@@ -408,4 +408,5 @@ body {
 }
 #address{
   padding-left: 50px;
+  cursor: pointer;
 }

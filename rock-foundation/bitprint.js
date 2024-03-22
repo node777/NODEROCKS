@@ -2,9 +2,9 @@
 
 var lux = {
   displayUsername(){
-    if(document.getElementById("account") && bitprint.wallet.address){
-      document.getElementById("account").innerHTML=`<div class="mb-0 fw-bold text_md text_warning text-nowrap" id="address">${bitprint.wallet.address}</div>`
-    }
+    if(document.getElementById("account") && bitprint.wallet?.address){
+      document.getElementById("account").innerHTML=`<div class="mb-0 fw-bold text_md text_warning text-nowrap" id="address" onclick="bitprint.disconnect()">${bitprint.wallet.address}</div>`
+    }else if(window){}
   }
 }
 var bitprint = {

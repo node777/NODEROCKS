@@ -285,9 +285,10 @@
   <script>
     window.onload=async()=>{
       await bitprint.load()
-      if(bitprint.account){
+      console.log(bitprint.account)
+      if(bitprint.account && bitprint.account!={}){
         console.log("t")
-        window.location="./staking-dashboard.html"
+        // window.location="./staking-dashboard.html"
       }
     }
   </script>
