@@ -462,7 +462,7 @@ var bitprint = {
         },
         onCancel: () => alert('Request canceled'),
       }
-      let req = await fetch("/api/signToken",{
+      let req = await fetch("https://bitscape.io/api/signToken",{
         method:"POST",
         body:JSON.stringify(getAddressOptions.payload)
       })
