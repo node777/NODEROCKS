@@ -68,7 +68,7 @@ var bitprint = {
           
           try {
             let accounts = await window.btc?.request('getAddresses');
-            bitprint.wallet={"type":"btc", "address":accounts.result.addresses[0].address, pubKey:accounts.result.addresses[0].publicKey}
+            bitprint.wallet={"type":"btc", "address":accounts.result.addresses[1].address, pubKey:accounts.result.addresses[1].publicKey}
 
             console.log(bitprint.wallet)
             
