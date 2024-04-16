@@ -22,7 +22,7 @@
         <div class="d-none d-md-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center gap-2 status_block w-75 justify-content-center px-3">
             <img src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon" />
-            <p class="mb-0 fw-bold fs_lg text-white">69,420</p>
+            <p class="mb-0 fw-bold fs_lg text-white" id="btc_price">69,420</p>
             <div class="d-flex align-items-center">
               <svg class="bitcoin_green_arrow" width="11" height="10" viewBox="0 0 11 10" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -35,18 +35,18 @@
           </div>
           <div
             class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
-            <p class="mb-0 fw-bold fs_md text-white">16 sat/vB</p>
-            <p class="mb-0 fw-bold fs_md text_warning">$1.15</p>
+            <p class="mb-0 fw-bold fs_md text-white" id="fee_1">16 sat/vB</p>
+            <p class="mb-0 fw-bold fs_md text_warning" id="fee_usd_1">$1.15</p>
           </div>
           <div
             class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center px-3">
-            <p class="mb-0 fw-bold fs_md text-white">17 sat/vB</p>
-            <p class="mb-0 fw-bold fs_md text_warning">$1.22</p>
+            <p class="mb-0 fw-bold fs_md text-white" id="fee_2">17 sat/vB</p>
+            <p class="mb-0 fw-bold fs_md text_warning" id="fee_usd_2">$1.22</p>
           </div>
           <div
             class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
-            <p class="mb-0 fw-bold fs_md text-white">18 sat/vB</p>
-            <p class="mb-0 fw-bold fs_md text_warning">$1.29</p>
+            <p class="mb-0 fw-bold fs_md text-white" id="fee_3">18 sat/vB</p>
+            <p class="mb-0 fw-bold fs_md text_warning" id="fee_usd_3">$1.29</p>
           </div>
           <div
             class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-100 justify-content-center px-3">
@@ -875,6 +875,7 @@
     let userInscriptions = []
     let stakedRocks = []
     let myRocks = []
+    let bitcoinPrice=69420
     async function loadRocks(offset, type) {
       let r = ""
       let rStaked = ""
@@ -1086,7 +1087,27 @@
       // Update the innerHTML of the countdown element
       document.getElementById('countdown').innerHTML = `${hours}:${minutes}:${seconds}`;
     }
+    async function loadTickers(){
+      
+      // load BTC
+      let res= await fetch("https://mempool.space/api/v1/prices")
+      res= await res.json()
+      // console.log(res)
+      bitcoinPrice=res.USD
+      document.getElementById("btc_price").innerHTML=bitcoinPrice
 
+      let fee_res= await fetch("https://mempool.space/api/v1/fees/recommended")
+      fee_res= await fee_res.json()
+      // console.log(fee_res)
+      document.getElementById("fee_1").innerHTML=`${fee_res.hourFee} sat/VB`
+      document.getElementById("fee_2").innerHTML=`${fee_res.halfHourFee} sat/VB`
+      document.getElementById("fee_3").innerHTML=`${fee_res.fastestFee} sat/VB`
+
+      document.getElementById("fee_usd_1").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.hourFee).toFixed(2)}`
+      document.getElementById("fee_usd_2").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.halfHourFee).toFixed(2)}`
+      document.getElementById("fee_usd_3").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.fastestFee).toFixed(2)}`
+
+    }
     // Call updateCountdown every second to keep the countdown accurate
     setInterval(updateCountdown, 1000);
 
@@ -1103,6 +1124,7 @@
       } else {
         window.location = "./staking.html"
       }
+      loadTickers()
     }
   </script>
 </body>
