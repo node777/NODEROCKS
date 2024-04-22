@@ -999,23 +999,27 @@
     function displayStakedRocks() {
       let numberStaked = 0
       for (rock in stakedRocks) {
-        if (stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked > stakedRocks[rock].date_unstaked) {
-          document.getElementById(`staked-rock-${rock}`).style = "display:none !important;"
-          document.getElementById(`unstaked-rock-${rock}`).style = "display:initial"
+        console.log(rock)
+        if(!document.getElementById(`staked-rock-${rock}`) || !document.getElementById(`unstaked-rock-${rock}`)){}else{
+          if (stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked > stakedRocks[rock].date_unstaked) {
+            document.getElementById(`staked-rock-${rock}`).style = "display:none !important;"
+            document.getElementById(`unstaked-rock-${rock}`).style = "display:initial"
 
-          document.getElementById(`staked-tag-${rock}`).style = "display:none"
-          document.getElementById(`stake-button-${rock}`).style = "display:initial;"
-          document.getElementById(`unstake-button-${rock}`).style = "display:none"
+            document.getElementById(`staked-tag-${rock}`).style = "display:none"
+            document.getElementById(`stake-button-${rock}`).style = "display:initial;"
+            document.getElementById(`unstake-button-${rock}`).style = "display:none"
 
-        } else {
-          numberStaked += 1
-          document.getElementById(`staked-rock-${rock}`).style = "display:initial"
-          document.getElementById(`unstaked-rock-${rock}`).style = "display:none !important;"
+          } else {
+            numberStaked += 1
+            document.getElementById(`staked-rock-${rock}`).style = "display:initial"
+            document.getElementById(`unstaked-rock-${rock}`).style = "display:none !important;"
 
-          document.getElementById(`staked-tag-${rock}`).style = "display:initial"
-          document.getElementById(`stake-button-${rock}`).style = "display:none;"
-          document.getElementById(`unstake-button-${rock}`).style = "display:initial"
+            document.getElementById(`staked-tag-${rock}`).style = "display:initial"
+            document.getElementById(`stake-button-${rock}`).style = "display:none;"
+            document.getElementById(`unstake-button-${rock}`).style = "display:initial"
+          }
         }
+        
       }
       document.getElementById("my-staking").innerHTML = `<span class="text_warning">${numberStaked}</span>/${myRocks.length}`
       document.getElementById("allocation-power").innerHTML = `<span class="text_warning">${(numberStaked / myRocks.length).toFixed(4) * 100}</span>%`
