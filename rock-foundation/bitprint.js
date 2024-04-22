@@ -396,7 +396,7 @@ var bitprint = {
         }
       }else if(bitprint.account.type=="xverse"||bitprint.account.type=="magicEden"){
         try {
-          const res = await window.btc.request('signMessage', { 
+          const res = await window.BitcoinProvider.request('signMessage', { 
 
             network: "mainnet",
             address: bitprint.wallet.address,
