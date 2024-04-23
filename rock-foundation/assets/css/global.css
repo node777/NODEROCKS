@@ -417,7 +417,7 @@ body {
   flex:4;
 }
 .leaderboard_item .rock-image{
-  flex:4;
+  flex:1;
 }
 .leaderboard_address{
   width: calc(100% - 64px);
@@ -427,7 +427,6 @@ body {
 .leaderboard_address .leaderboard_item {
   background-color: #111110;
   margin: 8px;
-  width: 120px;
   float: left;
   padding: 8px;
 }
