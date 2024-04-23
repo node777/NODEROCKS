@@ -7,7 +7,7 @@
   <title>node-rocks</title>
   <link rel="shortcut icon" href="./assets/images/svg/fav-icon.svg" type="fav-icon" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    crossorigin="anonymous" />
   <link rel="stylesheet" href="./assets/css/style.css" />
   <link rel="stylesheet" href="./assets/css/global.css" />
   <link rel="stylesheet" href="./assets/css/nav.css" />
@@ -873,156 +873,109 @@
   <script src="./rocklist.js"></script>
   <script>
     let userInscriptions = []
-    let stakedRocks = []
+    let leaderboard = {}
     let myRocks = []
     let bitcoinPrice=69420
     async function loadRocks(offset, type) {
-      let r = ""
-      let rStaked = ""
-      let rUnstaked = ""
-      let limit = 60
-      let inscriptionRes = await fetch(`https://api.hiro.so/ordinals/v1/inscriptions?address=${bitprint.wallet.address}&offset=${offset || 0}&limit=${limit}`)
-      inscriptionRes = await inscriptionRes.json()
-      userInscriptions = [...userInscriptions, ...inscriptionRes.results]
-      console.log(inscriptionRes)
-      myRocks = []
-      for (rock in userInscriptions) {
-        if (rockList.includes(userInscriptions[rock].id)) {
-          myRocks.push(userInscriptions[rock].id)
-          /* html */
-          r += `
-            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="rock-${userInscriptions[rock].id}">
-              <div class="position-relative">
-                <img class="w-100 rock" src="./rocks/${userInscriptions[rock].id}.png" alt="stake-card-img" />
-                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0" id="staked-tag-${userInscriptions[rock].id}" style="display:none">
-                    STAKED
-                </p>
-              </div>
-              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}')" id="stake-button-${userInscriptions[rock].id}">
-                Stake
-              </button>
-              <button style="display:none" class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}', 1)" id="unstake-button-${userInscriptions[rock].id}">
-                Unstake
-              </button>
-              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('https://bitscape.io/inscription/${userInscriptions[rock].id}', '_blank')">
-                View On Explorer
-              </button>
-            </div>
-          `
-          /* html */
-          rUnstaked += `
-            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="unstaked-rock-${userInscriptions[rock].id}">
-              <div class="position-relative">
-                <img class="w-100 rock" src="./rocks/${userInscriptions[rock].id}.png" alt="stake-card-img" />
-              </div>
-              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}')">
-                Stake
-              </button>
-              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('https://bitscape.io/inscription/${userInscriptions[rock].id}', '_blank')">
-                View On Explorer
-              </button>
-            </div>
-          `
-          /* html */
-          rStaked += `
-            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="staked-rock-${userInscriptions[rock].id}" style="display:none !important">
-              <div class="position-relative">
-                <img class="w-100 rock" src="./rocks/${userInscriptions[rock].id}.png" alt="stake-card-img" />
-                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0">
-                    STAKED
-                </p>
-              </div>
-              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}', 1)">
-                Unstake
-              </button>
-              <button class="update_btn fs_xsm fw-bold fs_custom_md">
-                Update Hashrate
-              </button>
-            </div>
-          `
-        }
-      }
-      // console.log(offset+limit)
-      if (inscriptionRes.total > (offset + limit)) {
-        loadRocks((offset + limit), type)
-      } else {
-
-        if (myRocks.length == 0) {
-          /*html*/
-          r = `
-          <section class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
-            <div class="custom_container">
-              <div class="bg_warning ">
-                <h1 class="text-white fw-bold mb-0 fs_xxl text-center  w-100">
-                  NOT A SINGLE ROCK DETECTED
-                </h1>
-                <h2 class=" w-100">
-                  GO GET YOU SOME ROCKS
-                </h2><br>
-                <button onclick="window.location='https://magiceden.io/ordinals/marketplace/noderocks'" class="bg-black fs_md login_connect_btn transition_03 text-white border-0 mt-3 mt-sm-0 fw-bold w-100">
-                  GET EM
-                </button><br>
-                <button onclick="bitprint.disconnect()" class="bg-black fs_md login_connect_btn transition_03 text-white border-0 mt-3 mt-sm-0 fw-bold w-100">
-                  Connect different account
-                </button>
-              </div>
-            </div>
-          </section>
-          `
-        }
-        document.getElementById("portfolio").innerHTML = r
-        document.getElementById("staked-portfolio").innerHTML = rStaked
-        document.getElementById("unstaked-portfolio").innerHTML = rUnstaked
-        getStakedRocks()
-
-
-      }
-    }
-    async function getStakedRocks() {
       try {
         let response = await fetch("https://bitscape.io/api/staked", {
           method: "POST",
-          body: JSON.stringify({
-            address: bitprint.wallet.address
+          body:JSON.stringify({
+            type:"all"
           })
         });
         let stakedRes = await response.json();
         console.log(stakedRes);
         if (!stakedRes.error) {
-          stakedRocks = stakedRes
-          displayStakedRocks()
+          leaderboard=stakedRes
+          displayLeaderboard()
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
-    function displayStakedRocks() {
-      let numberStaked = 0
-      for (rock in stakedRocks) {
-        console.log(rock)
-        if(!document.getElementById(`staked-rock-${rock}`) || !document.getElementById(`unstaked-rock-${rock}`)){}else{
-          if (stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked > stakedRocks[rock].date_unstaked) {
-            document.getElementById(`staked-rock-${rock}`).style = "display:none !important;"
-            document.getElementById(`unstaked-rock-${rock}`).style = "display:initial"
+    function transformAndSortByAddress(input) {
+        const addressMap = {};
 
-            document.getElementById(`staked-tag-${rock}`).style = "display:none"
-            document.getElementById(`stake-button-${rock}`).style = "display:initial;"
-            document.getElementById(`unstake-button-${rock}`).style = "display:none"
+        // Group entries by address
+        Object.entries(input).forEach(([key, { address, date_staked }]) => {
+            if (!addressMap[address]) {
+                addressMap[address] = [];
+            }
+            addressMap[address].push({ key, date_staked });
+        });
 
-          } else {
-            numberStaked += 1
-            document.getElementById(`staked-rock-${rock}`).style = "display:initial"
-            document.getElementById(`unstaked-rock-${rock}`).style = "display:none !important;"
+        // Create an array from the address map and sort it by the number of items per address
+        const sortedAddresses = Object.entries(addressMap).sort((a, b) => b[1].length - a[1].length);
 
-            document.getElementById(`staked-tag-${rock}`).style = "display:initial"
-            document.getElementById(`stake-button-${rock}`).style = "display:none;"
-            document.getElementById(`unstake-button-${rock}`).style = "display:initial"
-          }
-        }
-        
+        // Convert sorted array back to object
+        const sortedObject = {};
+        sortedAddresses.forEach(([address, entries]) => {
+            sortedObject[address] = entries;
+        });
+
+        return sortedObject;
+    }
+    async function displayLeaderboard(){
+      let r =  ``
+      let addressR =  ``
+      let sortedLeaderboard=transformAndSortByAddress(leaderboard);
+      console.log(sortedLeaderboard)
+      for(rock in leaderboard){
+        r += `
+            <div class="leaderboard_item text-center d-flex flex-column align-itemcoe gap-2 p-4" id="rock-${rock}">
+              <div class="position-relative">
+                <img class="w-100 rock" src="./rocks/${rock}.png" alt="stake-card-img" />
+                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0" id="staked-tag-${rock}" style="display:none">
+                    STAKED
+                </p>
+              </div>
+              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${rock}')" id="stake-button-${rock}">
+                Stake
+              </button>
+              <button style="display:none" class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${rock}', 1)" id="unstake-button-${rock}">
+                Unstake
+              </button>
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('https://bitscape.io/inscription/${rock}', '_blank')">
+                View On Explorer
+              </button>
+            </div>
+          `
       }
-      document.getElementById("my-staking").innerHTML = `<span class="text_warning">${numberStaked}</span>/${myRocks.length}`
-      document.getElementById("allocation-power").innerHTML = `<span class="text_warning">${(numberStaked / myRocks.length).toFixed(4) * 100}</span>%`
+      for(address in sortedLeaderboard){
+        addressR+=`
+          <div class="leaderboard_address" id="leaderboard-address-${rock}">
+            <h2>${address}</h2>
+        `
+        for(rockRef in sortedLeaderboard[address]){
+          let rock = sortedLeaderboard[address][rockRef].key
+          let dateTime=Date(leaderboard[rock].date_staked).toLocaleString(undefined, {
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit',
+        timeZoneName: 'short'
+    });
+          addressR+=`
+              <div class="leaderboard_item" id="rock-${rock}">
+                <div class="rock-image">
+                  <img class="rock" src="./rocks/${rock}.png" alt="stake-card-img" />
+                  <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0" id="staked-tag-${rock}" style="display:none">
+                      STAKED
+                  </p>
+                </div>
+                <div class="info">
+                  <div class="text_warning">${dateTime}</div>
+                </div>
+              </div>
+            `
+        }
+        addressR+=`</div>`
+      }
+      document.getElementById("portfolio").innerHTML=addressR
+      document.getElementById("staked-portfolio").innerHTML=r
     }
     async function stakeRock(id, unstake) {
       try {
@@ -1071,12 +1024,12 @@
       const now = new Date();
       const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
 
-      // Calculate the time until 48 hours later (midnight UTC, two days later)
-      const nextUTC48Hour = new Date(utcNow);
-      nextUTC48Hour.setUTCDate(utcNow.getUTCDate() + 2); // Move to two days ahead
-      nextUTC48Hour.setUTCHours(0, 0, 0, 0); // Set to midnight
+      // Calculate the time until midnight UTC
+      const utcMidnight = new Date(utcNow);
+      utcMidnight.setUTCDate(utcNow.getUTCDate() + 1); // Move to the next day
+      utcMidnight.setUTCHours(0, 0, 0, 0); // Set to midnight
 
-      const diff = nextUTC48Hour - utcNow; // Difference in milliseconds
+      const diff = utcMidnight - utcNow; // Difference in milliseconds
 
       // Convert difference to hours, minutes, and seconds
       let hours = Math.floor(diff / (1000 * 60 * 60));
@@ -1090,8 +1043,7 @@
 
       // Update the innerHTML of the countdown element
       document.getElementById('countdown').innerHTML = `${hours}:${minutes}:${seconds}`;
-  }
-
+    }
     async function loadTickers(){
       
       // load BTC

@@ -410,3 +410,27 @@ body {
   padding-left: 50px;
   cursor: pointer;
 }
+.leaderboard_item{
+  display: flex;
+}
+.leaderboard_item .info{
+  flex:4;
+}
+.leaderboard_item .rock-image{
+  flex:4;
+}
+.leaderboard_address{
+  width: calc(100% - 64px);
+  margin: 32px;
+  background-color: #F46A0F;
+}
+.leaderboard_address .leaderboard_item {
+  background-color: #111110;
+  margin: 8px;
+  width: 120px;
+  float: left;
+  padding: 8px;
+}
+.leaderboard_item .rock{
+  width: 58px !important;
+}
