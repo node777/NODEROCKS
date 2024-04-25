@@ -1,0 +1,323 @@
+<!-- <div id=""></div> -->
+<div id="container" style="width: 300px; height: 300px; position: relative; border: 1px solid #000;">
+  <!-- JavaScript will append child divs here -->
+</div>
+<script>
+  function packSquares(sizes, containerSize) {
+    let packedPositions = [];
+    let openSpots = [{ x: 0, y: 0, width: containerSize, height: containerSize }];
+
+    for (let size of sizes) {
+        let placed = false;
+        for (let i = 0; i < openSpots.length && !placed; i++) {
+            let spot = openSpots[i];
+            if (size <= spot.width && size <= spot.height) {
+                // Place the square in the spot
+                packedPositions.push({ x: spot.x, y: spot.y, size: size });
+                updateOpenSpots(openSpots, spot, size);
+                placed = true;
+            }
+        }
+        if (!placed) {
+            console.error("Failed to place a square of size:", size);
+        }
+    }
+    return packedPositions;
+}
+
+function updateOpenSpots(spots, usedSpot, size) {
+    // Modify spots array to reflect the space used by the new square
+    let newSpots = [];
+    // Check right and bottom areas for unused space
+    if (usedSpot.width > size) {
+        newSpots.push({ x: usedSpot.x + size, y: usedSpot.y, width: usedSpot.width - size, height: size });
+    }
+    if (usedSpot.height > size) {
+        newSpots.push({ x: usedSpot.x, y: usedSpot.y + size, width: size, height: usedSpot.height - size });
+    }
+    spots.push(...newSpots);
+    // Remove the used spot
+    spots.splice(spots.indexOf(usedSpot), 1);
+}
+
+let sizes = [100, 150, 50, 25]; // Sizes of the squares
+let containerSize = 300; // Size of the larger square container
+
+let positions = packSquares(sizes, containerSize);
+console.log(positions);
+  // Assuming `positions` is available from the above script
+  const container = document.getElementById('container');
+  positions.forEach(pos => {
+      const div = document.createElement('div');
+      div.style.position = 'absolute';
+      div.style.left = `${pos.x}px`;
+      div.style.top = `${pos.y}px`;
+      div.style.width = `${pos.size}px`;
+      div.style.height = `${pos.size}px`;
+      div.style.backgroundColor = '#ccc'; // Just to visualize the squares
+      container.appendChild(div);
+  });
+</script>
+  <!-- <script src="./bitprint.js"></script>
+  <script src="./rocklist.js"></script>
+  <script>
+    let userInscriptions = []
+    let stakedRocks = []
+    let myRocks = []
+    let bitcoinPrice=69420
+    async function loadRocks(offset, type) {
+      let r = ""
+      let rStaked = ""
+      let rUnstaked = ""
+      let limit = 60
+      let inscriptionRes = await fetch(`https://api.hiro.so/ordinals/v1/inscriptions?address=${bitprint.wallet.address}&offset=${offset || 0}&limit=${limit}`)
+      inscriptionRes = await inscriptionRes.json()
+      userInscriptions = [...userInscriptions, ...inscriptionRes.results]
+      console.log(inscriptionRes)
+      myRocks = []
+      for (rock in userInscriptions) {
+        if (rockList.includes(userInscriptions[rock].id)) {
+          myRocks.push(userInscriptions[rock].id)
+          /* html */
+          r += `
+            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="rock-${userInscriptions[rock].id}">
+              <div class="position-relative">
+                <img class="w-100 rock" src="./rocks/${userInscriptions[rock].id}.png" alt="stake-card-img" />
+                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0" id="staked-tag-${userInscriptions[rock].id}" style="display:none">
+                    STAKED
+                </p>
+              </div>
+              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}')" id="stake-button-${userInscriptions[rock].id}">
+                Stake
+              </button>
+              <button style="display:none" class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}', 1)" id="unstake-button-${userInscriptions[rock].id}">
+                Unstake
+              </button>
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('https://bitscape.io/inscription/${userInscriptions[rock].id}', '_blank')">
+                View On Explorer
+              </button>
+            </div>
+          `
+          /* html */
+          rUnstaked += `
+            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="unstaked-rock-${userInscriptions[rock].id}">
+              <div class="position-relative">
+                <img class="w-100 rock" src="./rocks/${userInscriptions[rock].id}.png" alt="stake-card-img" />
+              </div>
+              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}')">
+                Stake
+              </button>
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('https://bitscape.io/inscription/${userInscriptions[rock].id}', '_blank')">
+                View On Explorer
+              </button>
+            </div>
+          `
+          /* html */
+          rStaked += `
+            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="staked-rock-${userInscriptions[rock].id}" style="display:none !important">
+              <div class="position-relative">
+                <img class="w-100 rock" src="./rocks/${userInscriptions[rock].id}.png" alt="stake-card-img" />
+                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0">
+                    STAKED
+                </p>
+              </div>
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}', 1)">
+                Unstake
+              </button>
+              <button class="update_btn fs_xsm fw-bold fs_custom_md">
+                Update Hashrate
+              </button>
+            </div>
+          `
+        }
+      }
+      // console.log(offset+limit)
+      if (inscriptionRes.total > (offset + limit)) {
+        loadRocks((offset + limit), type)
+      } else {
+
+        if (myRocks.length == 0) {
+          /*html*/
+          r = `
+          <section class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+            <div class="custom_container">
+              <div class="bg_warning ">
+                <h1 class="text-white fw-bold mb-0 fs_xxl text-center  w-100">
+                  NOT A SINGLE ROCK DETECTED
+                </h1>
+                <h2 class=" w-100">
+                  GO GET YOU SOME ROCKS
+                </h2><br>
+                <button onclick="window.location='https://magiceden.io/ordinals/marketplace/noderocks'" class="bg-black fs_md login_connect_btn transition_03 text-white border-0 mt-3 mt-sm-0 fw-bold w-100">
+                  GET EM
+                </button><br>
+                <button onclick="bitprint.disconnect()" class="bg-black fs_md login_connect_btn transition_03 text-white border-0 mt-3 mt-sm-0 fw-bold w-100">
+                  Connect different account
+                </button>
+              </div>
+            </div>
+          </section>
+          `
+        }
+        document.getElementById("portfolio").innerHTML = r
+        document.getElementById("staked-portfolio").innerHTML = rStaked
+        document.getElementById("unstaked-portfolio").innerHTML = rUnstaked
+        getStakedRocks()
+
+
+      }
+    }
+    async function getStakedRocks() {
+      try {
+        let response = await fetch("https://bitscape.io/api/staked", {
+          method: "POST",
+          body: JSON.stringify({
+            address: bitprint.wallet.address
+          })
+        });
+        let stakedRes = await response.json();
+        console.log(stakedRes);
+        if (!stakedRes.error) {
+          stakedRocks = stakedRes
+          displayStakedRocks()
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    function displayStakedRocks() {
+      let numberStaked = 0
+      for (rock in stakedRocks) {
+        console.log(rock)
+        if(!document.getElementById(`staked-rock-${rock}`) || !document.getElementById(`unstaked-rock-${rock}`)){}else{
+          if (stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked > stakedRocks[rock].date_unstaked) {
+            document.getElementById(`staked-rock-${rock}`).style = "display:none !important;"
+            document.getElementById(`unstaked-rock-${rock}`).style = "display:initial"
+
+            document.getElementById(`staked-tag-${rock}`).style = "display:none"
+            document.getElementById(`stake-button-${rock}`).style = "display:initial;"
+            document.getElementById(`unstake-button-${rock}`).style = "display:none"
+
+          } else {
+            numberStaked += 1
+            document.getElementById(`staked-rock-${rock}`).style = "display:initial"
+            document.getElementById(`unstaked-rock-${rock}`).style = "display:none !important;"
+
+            document.getElementById(`staked-tag-${rock}`).style = "display:initial"
+            document.getElementById(`stake-button-${rock}`).style = "display:none;"
+            document.getElementById(`unstake-button-${rock}`).style = "display:initial"
+          }
+        }
+        
+      }
+      document.getElementById("my-staking").innerHTML = `<span class="text_warning">${numberStaked}</span>/${myRocks.length}`
+      document.getElementById("allocation-power").innerHTML = `<span class="text_warning">${(numberStaked / myRocks.length).toFixed(4) * 100}</span>%`
+    }
+    async function stakeRock(id, unstake) {
+      try {
+        let sig = await bitprint.sign(`
+        ${unstake ? "Unstaking" : "Staking"} NODEROCK: 
+        ${id}
+        `)
+        let rBody = {
+          address: bitprint.wallet.address,
+          inscriptions: [
+            id
+          ]
+        }
+        if (unstake) { rBody.unstake = unstake }
+        let response = await fetch("https://bitscape.io/api/stake", {
+          // let response = await fetch("http://localhost:8080/api/stake", {
+          method: "POST",
+          body: JSON.stringify(rBody)
+        });
+        let stakedRes = await response.json();
+        console.log(stakedRes);
+        if (stakedRes.message) {
+          // function open_popup() {
+          //   document.getElementById("connect_wallet_popup").style.display = "block";
+          //   document.getElementsByTagName("body")[0].style.overflow = "hidden";
+          // }
+          // document.getElementById(`staked-tag-${id}`).style = "display:initial"
+          // stakedRocks[id]=unstake?{date_unstaked:Date.now()}:{date_staked:Date.now()}
+          // displayStakedRocks()
+          getStakedRocks()
+          alert(stakedRes.message)
+        } else if (stakedRes.error) {
+          alert("Error: " + stakedRes.error)
+
+        } else {
+          alert("Could not stake: Error code 42069")
+
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+
+    }
+    function updateCountdown() {
+      // Get the current time in UTC
+      const now = new Date();
+      const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+
+      // Calculate the time until 48 hours later (midnight UTC, two days later)
+      const nextUTC48Hour = new Date(utcNow);
+      nextUTC48Hour.setUTCDate(utcNow.getUTCDate() + 2); // Move to two days ahead
+      nextUTC48Hour.setUTCHours(0, 0, 0, 0); // Set to midnight
+
+      const diff = nextUTC48Hour - utcNow; // Difference in milliseconds
+
+      // Convert difference to hours, minutes, and seconds
+      let hours = Math.floor(diff / (1000 * 60 * 60));
+      let minutes = Math.floor((diff / (1000 * 60)) % 60);
+      let seconds = Math.floor((diff / 1000) % 60);
+
+      // Pad with zeros to ensure two digits
+      hours = String(hours).padStart(2, '0');
+      minutes = String(minutes).padStart(2, '0');
+      seconds = String(seconds).padStart(2, '0');
+
+      // Update the innerHTML of the countdown element
+      document.getElementById('countdown').innerHTML = `${hours}:${minutes}:${seconds}`;
+  }
+
+    async function loadTickers(){
+      
+      // load BTC
+      let res= await fetch("https://mempool.space/api/v1/prices")
+      res= await res.json()
+      // console.log(res)
+      bitcoinPrice=res.USD
+      document.getElementById("btc_price").innerHTML=bitcoinPrice
+
+      let fee_res= await fetch("https://mempool.space/api/v1/fees/recommended")
+      fee_res= await fee_res.json()
+      // console.log(fee_res)
+      document.getElementById("fee_1").innerHTML=`${fee_res.hourFee} sat/VB`
+      document.getElementById("fee_2").innerHTML=`${fee_res.halfHourFee} sat/VB`
+      document.getElementById("fee_3").innerHTML=`${fee_res.fastestFee} sat/VB`
+
+      document.getElementById("fee_usd_1").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.hourFee).toFixed(2)}`
+      document.getElementById("fee_usd_2").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.halfHourFee).toFixed(2)}`
+      document.getElementById("fee_usd_3").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.fastestFee).toFixed(2)}`
+
+    }
+    // Call updateCountdown every second to keep the countdown accurate
+    setInterval(updateCountdown, 1000);
+
+    window.onload = async function () {
+
+      await bitprint.load()
+      if (bitprint.account && bitprint.account.type && bitprint.account.type != '') {
+        if (bitprint.wallet && bitprint.wallet.address) {
+          loadRocks(0)
+        } else {
+          // document.getElementById("portfolio").innerHTML = ` `
+          bitprint.disconnect();
+        }
+      } else {
+        window.location = "./staking.html"
+      }
+      loadTickers()
+    }
+  </script> -->

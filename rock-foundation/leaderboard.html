@@ -1019,6 +1019,11 @@
       }
 
     }
+    async function loadListedRocks(){
+      let res = await fetch("https://api-mainnet.magiceden.dev/v2/ord/btc/collections/noderocks")
+      res=await res.json()
+      window.listedRocks=res
+    }
     function updateCountdown() {
       // Get the current time in UTC
       const now = new Date();
