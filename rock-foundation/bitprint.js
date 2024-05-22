@@ -2,9 +2,9 @@
 
 var lux = {
   displayUsername(){
-    if(document.getElementById("account") && bitprint.wallet?.address){
-      document.getElementById("account").innerHTML=`<div class="mb-0 fw-bold text_md text_warning text-nowrap" id="address" onclick="bitprint.disconnect()">${bitprint.wallet.address}</div>`
-    }else if(window){}
+    //if(document.getElementById("account") && bitprint.wallet?.address){
+    //  document.getElementById("account").innerHTML=`<div class="mb-0 fw-bold text_md text_warning text-nowrap" id="address" onclick="bitprint.disconnect()">${bitprint.wallet.address}</div>`
+    //}else if(window){}
   }
 }
 var bitprint = {
@@ -102,10 +102,18 @@ var bitprint = {
           bitprint.signer = bitprint.wallet
           
         }
-      }
-      //display add
-      lux.displayUsername()
 
+        if (bitprint.wallet?.address) { 
+          //display add
+          lux.displayUsername()
+          console.log("connected: " + bitprint.wallet?.address)
+        }
+        else {
+          bitprint.disconnect();
+        }
+
+        setConnected(bitprint.wallet?.address);
+      }
     },
     //save acc data to localstorage
     save:()=>{
@@ -115,6 +123,9 @@ var bitprint = {
     },
     isConnected(){
       return (bitprint.account && JSON.stringify(bitprint.account) != "{}")
+    },
+    isConnectedHasWallet(){
+      return (bitprint.account && bitprint.account.type && bitprint.account.type != '') && (bitprint.wallet && bitprint.wallet.address);
     },
     //connect to an account
     connect:async(t)=>{
@@ -182,9 +193,12 @@ var bitprint = {
         torus.logout();
       }
       localStorage.clear();
-      bitprint.account=null;
+      bitprint.account = null;
+      bitprint.wallet = null;
       
       location.reload();
+
+      setConnected(bitprint.wallet?.address);
     },
     //check if user exists
     async getAccountStatus(){

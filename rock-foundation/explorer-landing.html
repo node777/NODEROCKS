@@ -17,45 +17,45 @@
     <div class="lg_vh_100 max_w_1920 mx-auto">
         <div class="sticky-top bg_secondary">
             <div class="bg-black">
-                <div class="d-none d-md-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center gap-2 status_block w-75 justify-content-center px-3">
-                        <img src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon" />
-                        <p class="mb-0 fw-bold fs_lg text-white">69,420</p>
-                        <div class="d-flex align-items-center">
-                            <svg class="bitcoin_green_arrow" width="11" height="10" viewBox="0 0 11 10" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M1.34194 9.91394L0.585938 9.15794L8.21794 1.52594L1.57594 1.07594L2.56594 0.0859375L9.98194 0.499937L10.4139 7.91594L9.42394 8.90594L8.97394 2.28194L1.34194 9.91394Z"
-                                    fill="#48A838" />
-                            </svg>
-                            <p class="mb-0 fw-bold fs_md text_success">69%</p>
-                        </div>
-                    </div>
-                    <div
-                        class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
-                        <p class="mb-0 fw-bold fs_md text-white">16 sat/vB</p>
-                        <p class="mb-0 fw-bold fs_md text_warning">$1.15</p>
-                    </div>
-                    <div
-                        class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center px-3">
-                        <p class="mb-0 fw-bold fs_md text-white">17 sat/vB</p>
-                        <p class="mb-0 fw-bold fs_md text_warning">$1.22</p>
-                    </div>
-                    <div
-                        class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
-                        <p class="mb-0 fw-bold fs_md text-white">18 sat/vB</p>
-                        <p class="mb-0 fw-bold fs_md text_warning">$1.29</p>
-                    </div>
-                    <div
-                        class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-100 justify-content-center px-3">
-                        <p class="mb-0 fw-bold fs_md text-white text-nowrap">
-                            Next Block 840,000
-                        </p>
-                        <p class="mb-0 fw-bold text_md text_warning text-nowrap">
-                            ~10 minutes
-                        </p>
-                    </div>
+              <div class="d-none d-md-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2 status_block w-75 justify-content-center px-3">
+                  <img src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon" />
+                  <p class="mb-0 fw-bold fs_lg text-white" id="btc_price">69,420</p>
+                  <div class="d-flex align-items-center">
+                    <svg class="bitcoin_green_arrow" width="11" height="10" viewBox="0 0 11 10" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M1.34194 9.91394L0.585938 9.15794L8.21794 1.52594L1.57594 1.07594L2.56594 0.0859375L9.98194 0.499937L10.4139 7.91594L9.42394 8.90594L8.97394 2.28194L1.34194 9.91394Z"
+                        fill="#48A838" />
+                    </svg>
+                    <p class="mb-0 fw-bold fs_md text_success">69%</p>
+                  </div>
                 </div>
+                <div
+                  class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
+                  <p class="mb-0 fw-bold fs_md text-white" id="fee_1">16 sat/vB</p>
+                  <p class="mb-0 fw-bold fs_md text_warning" id="fee_usd_1">$1.15</p>
+                </div>
+                <div
+                  class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center px-3">
+                  <p class="mb-0 fw-bold fs_md text-white" id="fee_2">17 sat/vB</p>
+                  <p class="mb-0 fw-bold fs_md text_warning" id="fee_usd_2">$1.22</p>
+                </div>
+                <div
+                  class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
+                  <p class="mb-0 fw-bold fs_md text-white" id="fee_3">18 sat/vB</p>
+                  <p class="mb-0 fw-bold fs_md text_warning" id="fee_usd_3">$1.29</p>
+                </div>
+                <div
+                  class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-100 justify-content-center px-3">
+                  <p class="mb-0 fw-bold fs_md text-white text-nowrap">
+                    Next Block <span id="next_block_num">840000</span>
+                  </p>
+                  <p class="mb-0 fw-bold text_md text_warning text-nowrap">
+                    ~<span id="next_block_estimate">10</span> minutes
+                  </p>
+                </div>
+              </div>
             </div>
             <div class="py_13 py-sm-3 bg-black mt-md-1">
                 <nav>
@@ -85,7 +85,7 @@
                                             href="./">Experiences</a>
                                     </li>
                                 </ul>
-                                <button
+                                <button id="connectMain"
                                     class="nav_btn transition_03 text_warning bg-transparent fw-bold ms-4 d-none d-lg-block">
                                     Connect
                                 </button>
@@ -96,7 +96,7 @@
                                     id="toggle_btn">
                                     Menu
                                 </div>
-                                <button class="nav_btn transition_03 text_warning bg-transparent fw-bold">
+                                <button id="connectInMenu" class="nav_btn transition_03 text_warning bg-transparent fw-bold">
                                     Connect
                                 </button>
                             </div>
@@ -1870,8 +1870,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+    </script>   
+    <script src="./bitprint.js"></script>
     <script src="./assets/js/nav.js"></script>
+    <script src="./assets/js/common.js"></script>
+    <script>
+        window.onload = async function () {
+            await startup();
+        }
+    </script>
 </body>
 
 </html>

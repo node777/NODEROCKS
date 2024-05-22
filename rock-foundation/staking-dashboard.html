@@ -51,10 +51,10 @@
           <div
             class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-100 justify-content-center px-3">
             <p class="mb-0 fw-bold fs_md text-white text-nowrap">
-              Next Block 840,000
+              Next Block <span id="next_block_num">840000</span>
             </p>
             <p class="mb-0 fw-bold text_md text_warning text-nowrap">
-              ~10 minutes
+              ~<span id="next_block_estimate">10</span> minutes
             </p>
           </div>
         </div>
@@ -87,8 +87,7 @@
                   </li>
                 </ul>
                 <div id="account">
-                  <button class="nav_btn transition_03 text_warning bg-transparent fw-bold ms-4 d-none d-lg-block"
-                    onclick="bitprint.disconnect()">
+                  <button id="connectMain" class="nav_btn transition_03 text_warning bg-transparent fw-bold ms-4 d-none d-lg-block">
                     Connect
                   </button>
                 </div>
@@ -98,7 +97,7 @@
                   class="text_secondary_emphasis fs_lg cursor-pointer menu_btn d-md-none transition_03" id="toggle_btn">
                   Menu
                 </div>
-                <button class="nav_btn transition_03 text_warning bg-transparent fw-bold">
+                <button id="connectInMenu" class="nav_btn transition_03 text_warning bg-transparent fw-bold">
                   Connect
                 </button>
               </div>
@@ -871,11 +870,12 @@
   </script>
   <script src="./bitprint.js"></script>
   <script src="./rocklist.js"></script>
+  <script src="./assets/js/common.js"></script>
   <script>
     let userInscriptions = []
     let stakedRocks = []
     let myRocks = []
-    let bitcoinPrice=69420
+
     async function loadRocks(offset, type) {
       let r = ""
       let rStaked = ""
@@ -996,7 +996,7 @@
         console.error("Error fetching data:", error);
       }
     }
-    function displayStakedRocks() {
+    function displayStakedRocks() { 
       let numberStaked = 0
       for (rock in stakedRocks) {
         console.log(rock)
@@ -1066,70 +1066,16 @@
       }
 
     }
-    function updateCountdown() {
-      // Get the current time in UTC
-      const now = new Date();
-      const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-
-      // Calculate the time until 48 hours later (midnight UTC, two days later)
-      const nextUTC48Hour = new Date(utcNow);
-      nextUTC48Hour.setUTCDate(utcNow.getUTCDate() + 2); // Move to two days ahead
-      nextUTC48Hour.setUTCHours(0, 0, 0, 0); // Set to midnight
-
-      const diff = nextUTC48Hour - utcNow; // Difference in milliseconds
-
-      // Convert difference to hours, minutes, and seconds
-      let hours = Math.floor(diff / (1000 * 60 * 60));
-      let minutes = Math.floor((diff / (1000 * 60)) % 60);
-      let seconds = Math.floor((diff / 1000) % 60);
-
-      // Pad with zeros to ensure two digits
-      hours = String(hours).padStart(2, '0');
-      minutes = String(minutes).padStart(2, '0');
-      seconds = String(seconds).padStart(2, '0');
-
-      // Update the innerHTML of the countdown element
-      document.getElementById('countdown').innerHTML = `${hours}:${minutes}:${seconds}`;
-  }
-
-    async function loadTickers(){
-      
-      // load BTC
-      let res= await fetch("https://mempool.space/api/v1/prices")
-      res= await res.json()
-      // console.log(res)
-      bitcoinPrice=res.USD
-      document.getElementById("btc_price").innerHTML=bitcoinPrice
-
-      let fee_res= await fetch("https://mempool.space/api/v1/fees/recommended")
-      fee_res= await fee_res.json()
-      // console.log(fee_res)
-      document.getElementById("fee_1").innerHTML=`${fee_res.hourFee} sat/VB`
-      document.getElementById("fee_2").innerHTML=`${fee_res.halfHourFee} sat/VB`
-      document.getElementById("fee_3").innerHTML=`${fee_res.fastestFee} sat/VB`
-
-      document.getElementById("fee_usd_1").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.hourFee).toFixed(2)}`
-      document.getElementById("fee_usd_2").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.halfHourFee).toFixed(2)}`
-      document.getElementById("fee_usd_3").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.fastestFee).toFixed(2)}`
-
-    }
-    // Call updateCountdown every second to keep the countdown accurate
-    setInterval(updateCountdown, 1000);
 
     window.onload = async function () {
+      await startup();
 
-      await bitprint.load()
-      if (bitprint.account && bitprint.account.type && bitprint.account.type != '') {
-        if (bitprint.wallet && bitprint.wallet.address) {
-          loadRocks(0)
-        } else {
-          // document.getElementById("portfolio").innerHTML = ` `
-          bitprint.disconnect();
-        }
-      } else {
+      if (bitprint.isConnectedHasWallet()) {
+        loadRocks(0);
+      } 
+      else {
         window.location = "./staking.html"
       }
-      loadTickers()
     }
   </script>
 </body>
