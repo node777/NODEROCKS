@@ -1,4 +1,3 @@
-
 let bitcoinPrice=69420
 
 
@@ -140,7 +139,7 @@ function closed_popup() {
 }
 
 function addWalletConnect() {
-    let section = 
+    let sectionText = 
     `
     <section class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
     <div class="custom_container">
@@ -199,6 +198,9 @@ function addWalletConnect() {
       </div>
       `;
 
-      document.body.innerHTML += section;
+      let section = document.createElement('template');
+      section.innerHTML = sectionText;
+
+      document.body.append(section.content.children[0]);
       closed_popup();
     }
