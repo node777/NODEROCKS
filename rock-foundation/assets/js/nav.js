@@ -1,7 +1,7 @@
-const sidebar = document.querySelector(".overlay");
-const toggleBtn = document.getElementById("toggle_btn");
-
 function Togleside() {
+    const sidebar = document.querySelector(".overlay");
+    const toggleBtn = document.getElementById("toggle_btn");
+
     sidebar.classList.toggle("show_nav");
     document.body.classList.toggle("overflow-hidden");
     document.body.classList.toggle("overflow-auto");
@@ -18,6 +18,9 @@ function Togleside() {
 }
 
 function hideNav() {
+    const sidebar = document.querySelector(".overlay");
+    const toggleBtn = document.getElementById("toggle_btn");
+
     sidebar.classList.remove("show_nav");
     document.body.classList.add("overflow-auto");
     document.body.classList.remove("overflow-hidden");
