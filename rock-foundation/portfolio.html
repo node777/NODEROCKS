@@ -205,27 +205,7 @@
     <section class="d-flex flex-column justify-content-center align-items-center d-none d-sm-block px-2">
       <div class="w-100 statsbar_parent px-1">
         <div class="d-flex flex-column flex_row align-items-center gap-2">
-          <div class="d-flex align-items-center gap-2 w-100 w_auto">
-            <div
-              class="d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 py-sm-1 px-3 px-sm-5 bg-black gap-3 gap-sm-4 staking_card w-50 w_auto"
-              Expand Down>
-              <p class="fs_md fw-bold text-white mb-0 text-nowrap">
-                My Rock Count
-              </p>
 
-              <h3 class="fs_xl fw-bold text-white mb-0" id="my-staking">
-                <span class="text_warning">00</span>
-              </h3>
-            </div>
-            <div
-              class="d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 py-sm-1 px-3 px-sm-5 bg-black gap-3 staking_card w-50 w_auto">
-              <p class="fs_md fw-bold text-white mb-0 text-nowrap">
-                Staking
-              </p>
-              <h3 class="fs_xl fw-bold text-white mb-0" id="allocation-power">
-              </h3>
-            </div>
-          </div>
           <!-- <div
             class="d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row text-center py-3 py-sm-1 px-3 px-sm-5 bg-black gap-3 gap-sm-4 staking_card w-100">
             <p class="fs_md fw-bold text-white mb-0">Portfolio Value</p>
@@ -240,11 +220,21 @@
     <section>
       <div class="px-sm-4 tab_container mx-auto mb-5 mb-sm-0">
         <!-- DEFINE TABS CODE -->
-        <ul
-          class="d-flex flex-wrap pt-sm-4 pt-3 justify-content-sm-between list-unstyled position-sticky tabs_position">
+        <ul class="d-flex flex-wrap pt-sm-4 pt-3 justify-content-sm-between list-unstyled position-sticky tabs_position">
           <div class="col-4 ps-0">
             <li id="tab1" class="text-center py-2 py-md-3 fs_md fw-bold tabs_box text-nowrap fs_custom_sm active1">
-              My Rocks <div id="rocks-total"></div>
+              My Rocks 
+            </li>
+          </div>
+          <div class="col-4 ps-0">
+            <li id="tab1" class="text-center py-2 py-md-3 fs_md fw-bold tabs_box text-nowrap fs_custom_sm active1">
+              Total: <span class="fs_md fw-bold text_warning mb-0" id="my-staking">
+            </li>
+          </div>
+          <div class="col-4 ps-0">
+            <li id="tab1" class="text-center py-2 py-md-3 fs_md fw-bold tabs_box text-nowrap fs_custom_sm active1">
+              Staking: <span class="fs_md fw-bold text_warning mb-0" id="allocation-power">
+              </h3>
             </li>
           </div>
         </ul>
@@ -254,54 +244,26 @@
         </div>
       </div>
     </section>
-    <div class="position-relative flex-grow-1 d-sm-none">
-      <div class="claim_rewards_popup w-100 transition_03 bg_secondary pt-4" id="claim_rewards_popup">
-        <div class="popup-content">
-          <div class="px-1 mx-2 w-100 statsbar_parent">
-            <div class="py-3 bg-black w-100 mb-2">
-              <h3 class="fw-bold fs_xl text-white d-flex align-items-center gap-2 mb-0 justify-content-center">
-                <img src="./assets/images/svg/airdrop-icon.svg" alt="airdrop-icon" />
-                Airdrop in <span class="text_warning">00:00:00</span>
-              </h3>
-            </div>
-            <div class="d-flex flex-column flex_row align-items-center gap-2">
-              <div class="d-flex align-items-center gap-2 w-100 w_auto">
-                <div
-                  class="d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 py-sm-1 px-3 px-sm-5 bg-black gap-3 gap-sm-4 staking_card w-50 w_auto">
-                  <p class="fs_md fw-bold text-white mb-0 text-nowrap">
-                    My Rocks
-                  </p>
-                  <h3 class="fs_xl fw-bold text-white mb-0" id="">
-                    <span id="rocknum">00</span>
-                  </h3>
-                </div>
-                <div
-                  class="d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 py-sm-1 px-3 px-sm-5 bg-black gap-3 staking_card w-50 w_auto">
-                  <p class="fs_md fw-bold text-white mb-0 text-nowrap">
-                    Staked
-                  </p>
-                  <span>
-                    <img class="statsbar" src="./assets/images/svg/statsbar.svg" alt="statsbar" />
-                  </span>
-                </div>
-              </div>
-              <div
-                class="d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row text-center py-3 py-sm-1 px-3 px-sm-5 bg-black gap-3 gap-sm-4 staking_card w-100">
-                <p class="fs_md fw-bold text-white mb-0">Portfolio Value</p>
-                <h3 class="fs_xl fw-bold text-white mb-0">
-                  69.420 BTC
-                  <span class="text_warning"> ($420,000.69)</span>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
+  </div>
+  <div class="details-container" id="details-popup" onclick="closeDetails()">
+    <div class="details-popup" onclick="">
+      <div class="details-content-topdiv">
+        <p class="fs_lg px-2 fw-bold text-white bg-black text-left top-0 end-0" style="margin:0px">
+          <span id="details-name"></span><br>
+          <span id="details-inscriptionid" class="details-content-id fs_sm px-2 fw-bold text-white bg-black text-left top-0 end-0"></span>
+        </p>
       </div>
-      <div class="bg_secondary position-fixed bottom-0 z-2 w-100 text-center mt-3">
-        <button onclick="togglePopup()" id="popupButton"
-          class="border-0 bg_secondary pop_up_btn mb-2 pb-1 transition_03">
-          <img src="./assets/images/svg/down-arrow.svg" alt="down-arrow" />
-        </button>
+      <div class="details-content" onclick="">
+        <div class="details-content-leftdiv">
+          <img class="details-content-img" id="details-image" src="" />
+        </div>
+        <div class="details-content-rightdiv">
+          <p class="fs_md px-2 fw-bold text-white bg-black text-center top-0 end-0" id="details-traits">
+          </p>
+          <p class="fs_md px-2 fw-bold text-white bg-black text-center top-0 end-0">
+            Listed: <span id="details-listed">-</span>
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -323,22 +285,25 @@
     }
   </script>
   <script>
-    function togglePopup() {
-      var popup = document.getElementById("claim_rewards_popup");
-      var popupButton = document.getElementById("popupButton");
-      popup.classList.toggle("popup_open");
-      popupButton.classList.toggle("arrow_rotate");
+    function showDetails(rockid) {
+      let rock = getRock(rockid);
+      document.getElementById("details-image").setAttribute('src', rock.image);
+      document.getElementById("details-name").textContent = rock.name;
+      document.getElementById("details-inscriptionid").textContent = rock.id;
+      document.getElementById("details-traits").innerHTML = rock.traitListHTML;
+      document.getElementById("details-listed").textContent = "---";
+
+      var popup = document.getElementById("details-popup");
+      popup.classList.add("popup_open");
+      popup.style.display = "";
     }
 
-    function closePopup() {
-      var popup = document.getElementById("claim_rewards_popup");
+    function closeDetails() {
+      var popup = document.getElementById("details-popup");
       popup.classList.remove("popup_open");
+      popup.style.display = "none";
     }
-
-    // Open the popup by default when the page loads
-    window.addEventListener("DOMContentLoaded", (event) => {
-      togglePopup(); // Open the popup when the page loads
-    });
+    closeDetails();
   </script>
   <script src="./assets/js/aes.js"></script>
   <script src="./bitprint.js"></script>
@@ -381,7 +346,7 @@
           r += `
             <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="rock-${userInscriptions[rock].id}">
               <div class="position-relative">
-                <img class="w-100 rock" src="${myRock.image}" alt="stake-card-img" />
+                <img class="w-100 rock" src="${myRock.image}" alt="stake-card-img" onclick="showDetails('${myRock.id}')" />
                 <p class="position-absolute fs_xsm px-2 fw-bold text-white bg-black text-center top-0 end-0">
                   ${myRock.name}
                 </p>
@@ -395,7 +360,7 @@
       }
       // console.log(offset+limit)
       if (inscriptionRes.total > (offset + limit)) {
-        loadRocks((offset + limit - 1), type)
+        await loadRocks((offset + limit), type)
       } else {
 
         if (myRocks.length == 0) {
@@ -423,7 +388,7 @@
         }
 
         document.getElementById("portfolio").innerHTML = r;
-        getStakedRocks();
+        await getStakedRocks();
       }
     }
 
