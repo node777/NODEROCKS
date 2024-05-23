@@ -264,11 +264,11 @@
             </li>
           </div>
         </ul>
-        <div class="tab_panel1 px-4 px-sm-0 pb-3">
+        <div id="tab_panel1" class="tab_panel1 px-4 px-sm-0 pb-3">
           <div class="d-flex flex-wrap justify-content-center gap-2 gap-sm-4 gap-xxl-2" id="portfolio">
           </div>
         </div>
-        <div class="tab_panel2 px-4 px-sm-0 pb-3">
+        <div id="tab_panel2" class="tab_panel2 px-4 px-sm-0 pb-3">
           <div class="d-flex flex-wrap justify-content-center gap-2 gap-sm-4 gap-xxl-2" id="staked-portfolio">
             <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4">
               <div class="position-relative">
@@ -566,7 +566,7 @@
             </div>
           </div>
         </div>
-        <div class="tab_panel3 px-4 px-sm-0 pb-3">
+        <div id="tab_panel3" class="tab_panel3 px-4 px-sm-0 pb-3">
           <div class="d-flex flex-wrap justify-content-center gap-2 gap-sm-4 gap-xxl-2" id="unstaked-portfolio">
             <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4">
               <img class="w-100" src="./assets/images/png/staked-img1.png" alt="stake-card-img" />
@@ -817,38 +817,17 @@
     </script>
   <script src="./assets/js/nav.js"></script>
   <script>
-    var tab1 = document.querySelector("#tab1");
-    var tab2 = document.querySelector("#tab2");
-    var tab3 = document.querySelector("#tab3");
+    for (let index = 1; index <= 3; index++) {
+      document.getElementById("tab" + index)?.setAttribute('onClick', 'selectTab(' + index + ')');
+    }
 
-    var panel1 = document.querySelector(".tab_panel1");
-    var panel2 = document.querySelector(".tab_panel2");
-    var panel3 = document.querySelector(".tab_panel3");
-
-    tab1.addEventListener("click", () => {
-      panel1.style.display = "block";
-      panel2.style.display = "none";
-      panel3.style.display = "none";
-      tab1.classList.add("active1");
-      tab2.classList.remove("active1");
-      tab3.classList.remove("active1");
-    });
-    tab2.addEventListener("click", () => {
-      panel1.style.display = "none";
-      panel2.style.display = "block";
-      panel3.style.display = "none";
-      tab2.classList.add("active1");
-      tab1.classList.remove("active1");
-      tab3.classList.remove("active1");
-    });
-    tab3.addEventListener("click", () => {
-      panel1.style.display = "none";
-      panel2.style.display = "none";
-      panel3.style.display = "block";
-      tab3.classList.add("active1");
-      tab1.classList.remove("active1");
-      tab2.classList.remove("active1");
-    });
+    function selectTab(tabnum) {
+      for (let index = 1; index <= 3; index++) {
+        let isActive = (tabnum == index);
+        document.getElementById("tab_panel" + index)?.style.setProperty('display', isActive ? "block" : "none");
+        document.getElementById("tab" + index)?.classList.toggle("active1", isActive);
+      }
+    }
   </script>
   <script>
     function togglePopup() {

@@ -16,7 +16,6 @@ async function startup() {
     await bitprint.load();
 }
 
-let mempoolres = {};
 async function loadTickers() {
     // load BTC
     let res= await fetch("https://mempool.space/api/v1/prices")
@@ -134,12 +133,10 @@ function addOnClicks() {
 
 function open_popup() {
     document.getElementById("connect_wallet_popup").style.display = "block";
-    document.getElementsByTagName("body")[0].style.overflow = "hidden";
 }
 
 function closed_popup() {
     document.getElementById("connect_wallet_popup").style.display = "none";
-    document.getElementsByTagName("body")[0].style.overflow = "hidden";
 }
 
 function addWalletConnect() {
