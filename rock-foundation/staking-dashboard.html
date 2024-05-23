@@ -936,7 +936,7 @@
       }
       // console.log(offset+limit)
       if (inscriptionRes.total > (offset + limit)) {
-        loadRocks((offset + limit), type)
+        await loadRocks((offset + limit), type);
       } else {
 
         if (myRocks.length == 0) {
@@ -966,7 +966,7 @@
         document.getElementById("portfolio").innerHTML = r
         document.getElementById("staked-portfolio").innerHTML = rStaked
         document.getElementById("unstaked-portfolio").innerHTML = rUnstaked
-        getStakedRocks()
+        await getStakedRocks();
       }
     }
     async function getStakedRocks() {
