@@ -138,6 +138,16 @@ function closed_popup() {
     document.getElementById("connect_wallet_popup").style.display = "none";
 }
 
+async function connectButtonAsync(providerName) {
+    await bitprint.connect(providerName);
+
+    if (bitprint.isConnectedHasWallet()) {
+        if (window.location.toString().includes('staking.html')) {
+            window.location = "./staking-dashboard.html";
+        }
+    }
+}
+
 function addWalletConnect() {
     let sectionText = 
     `
@@ -152,44 +162,44 @@ function addWalletConnect() {
             <img onclick="closed_popup()" class="cusor_pointer" src="./assets/images/svg/cross-img.svg"
               alt="cross-img" />
           </div>
-          <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" onclick="bitprint.connect('leather')">
+          <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" id='connect-leather'>
             <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4">
               <img class="wallet_icons" height="36" width="36" src="./assets/images/png/leather-logo.png"
                 alt="images" />
               <p class="text-white fs_lg fw-bold mb-0">Leather</p>
             </div>
-            <a href="./staking-dashboard.html"
+            <span
               class="bg_warning fs_md connect_btn text-decoration-none connect_btn_wallet transition_03 text-white my-md-2">
               Connect
             </a>
           </div>
-          <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" onclick="bitprint.connect('xverse')">
+          <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" id='connect-xverse'>
             <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4">
               <img class="wallet_icons" height="36" width="36" src="./assets/images/png/xverse-logo.png"
                 alt="images" />
               <p class="text-white fs_lg fw-bold mb-0">Xverse</p>
             </div>
-            <a href="./staking-dashboard.html" onclick="closed_popup()"
+            <span
               class="bg_warning fs_md connect_btn connect_btn_wallet transition_03 text-white my-md-2 text-decoration-none">
               Connect
             </a>
           </div>
-          <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" onclick="bitprint.connect('okx')">
+          <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" id='connect-okx'>
             <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4">
               <img class="wallet_icons" height="36" width="36" src="./assets/images/png/okx-logo.png" alt="images" />
               <p class="text-white fs_lg fw-bold mb-0">OKX</p>
             </div>
-            <a href="./staking-dashboard.html"
+            <span
               class="bg_warning fs_md connect_btn text-decoration-none connect_btn_wallet transition_03 text-white my-md-2">
               Connect
             </a>
           </div>
-          <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" onclick="bitprint.connect('unisat')">
+          <div class="d-flex justify-content-between align-items-center bg_secondary p-3 ps-md-4" id='connect-unisat'>
             <div class="d-flex align-items-center my-md-2 gap-3 gap-md-4">
               <img class="wallet_icons" height="36" width="36" src="./assets/images/png/unisat.png" alt="unisat" />
               <p class="text-white fs_lg fw-bold mb-0">UniSat</p>
             </div>
-            <a href="./staking-dashboard.html"
+            <span
               class="bg_warning fs_md connect_btn text-decoration-none connect_btn_wallet transition_03 text-white my-md-2">
               Connect
             </a>
@@ -203,4 +213,8 @@ function addWalletConnect() {
 
       document.body.append(section.content.children[0]);
       closed_popup();
+      document.getElementById('connect-unisat').onclick = async() => {await connectButtonAsync('unisat')};
+      document.getElementById('connect-okx').onclick = async() => {await connectButtonAsync('okx')};
+      document.getElementById('connect-xverse').onclick = async() => {await connectButtonAsync('xverse')};
+      document.getElementById('connect-leather').onclick = async() => {await connectButtonAsync('leather')};
     }

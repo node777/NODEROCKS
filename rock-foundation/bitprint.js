@@ -200,7 +200,7 @@ var bitprint = {
           }
         }
         await bitprint.load();
-        lux.connect();
+        //lux.connect();
     },
     //disconnect acc
     disconnect(){
