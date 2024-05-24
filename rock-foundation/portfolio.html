@@ -258,11 +258,12 @@
           <img class="details-content-img" id="details-image" src="" />
         </div>
         <div class="details-content-rightdiv">
-          <p class="fs_md px-2 fw-bold text-white bg-black text-center top-0 end-0" id="details-traits">
-          </p>
-          <p class="fs_md px-2 fw-bold text-white bg-black text-center top-0 end-0">
-            Listed: <span id="details-listed">-</span>
-          </p>
+          <div id='details-content-text' class="details-content-text">
+            <br>
+            <table class="fs_md px-2 fw-bold text-white text-center bg-black top-0 end-0" id="details-text">
+            </table>
+            <br>
+          </div>
         </div>
       </div>
     </div>
@@ -291,8 +292,14 @@
       document.getElementById("details-image").onclick = () => {window.location = rock.image};
       document.getElementById("details-name").textContent = rock.name;
       document.getElementById("details-inscriptionid").textContent = rock.id;
-      document.getElementById("details-traits").innerHTML = rock.traitListHTML;
-      document.getElementById("details-listed").textContent = "---";
+
+      let detailsTextHTML = `<tr><td class='details-trait-type'>[Ordinal]</td><td class='details-trait-value'>${rock.ordinalNumber}</td></tr>` +
+                      `<tr><td class='details-trait-type'>[Genesis]</td><td class='details-trait-value'>${rock.genesisDateString}</td></tr>` +
+                      `<tr><td class='details-trait-type'>[Cursed]</td><td class='details-trait-value'>${(rock.curseType) ? rock.curseType : "no"}</td></tr>` +
+                      `<tr><td class='details-trait-type'>[Listed]</td><td class='details-trait-value'>---</td></tr>` + 
+                      `<tr><td class='details-trait-type'>&nbsp;</td><td class='details-trait-value'>&nbsp;</td></tr>` +
+                      rock.traitTableHTML;
+      document.getElementById("details-text").innerHTML = detailsTextHTML;
 
       var popup = document.getElementById("details-popup");
       popup.classList.add("popup_open");
@@ -339,7 +346,8 @@
           if (myRocks.find(element => element.id == userInscriptions[rock].id))
             continue;
 
-          let myRock = getRock(userInscriptions[rock].id)
+          let myRock = getRock(userInscriptions[rock].id);
+          myRock.inputHiroData(userInscriptions[rock]);
 
           myRocks.push(myRock);
 
