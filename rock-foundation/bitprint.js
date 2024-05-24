@@ -442,7 +442,9 @@ var bitprint = {
             method:"POST",
             body:JSON.stringify(signMessageOptions.payload)
           })
-          req= await req.text()
+          req = await req.text()
+          if (req[req.length-1] == '.')
+            req = req.substring(0, req.length-1);
           console.log('req: ' + req)
           const res = await window.BitcoinProvider.signMessage(req);
           console.log(res)
