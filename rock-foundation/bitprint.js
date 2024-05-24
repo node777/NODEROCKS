@@ -428,28 +428,38 @@ var bitprint = {
         }
       }else if(bitprint.account.type=="xverse"||bitprint.account.type=="magicEden"){
         try {
-          pagelog("starting signing");
-          const signMessageOptions = {
-            payload: {
+          if (window.BitcoinProvider.request) {
+            const res = await window.BitcoinProvider.request('signMessage', { 
+
+              network: "mainnet",
               address: bitprint.wallet.address,
-              message: msg,
-              /*network: {
-                type:'Mainnet'
-              },*/
-            }
+              message: msg
+            });
+            console.log(res.result)
+            return (res.result.signature)
           }
-          pagelog(`payload: ${JSON.stringify(signMessageOptions.payload)}`);
-          let req = await fetch("https://bitscape.io/api/signToken",{
-            method:"POST",
-            body:JSON.stringify(signMessageOptions.payload)
-          })
-          req = await req.text()
-          if (req[req.length-1] == '.')
-            req = req.substring(0, req.length-1);
-          pagelog(`req: ${req}`);
-          const res = await window.BitcoinProvider.signMessage(req);
-          pagelog(`res: ${res}`);
-          return (res)
+          else {
+            pagelog("starting signing");
+            const signMessageOptions = {
+              payload: {
+                address: bitprint.wallet.address,
+                message: msg,
+                /*network: {
+                  type:'Mainnet'
+                },*/
+              }
+            }
+            pagelog(`payload: ${JSON.stringify(signMessageOptions.payload)}`);
+            let req = await fetch("https://bitscape.io/api/signToken",{
+              method:"POST",
+              body:JSON.stringify(signMessageOptions.payload)
+            })
+            req = await req.text()
+            pagelog(`req: ${req}`);
+            const res = await window.BitcoinProvider.signMessage(req);
+            pagelog(`res: ${res}`);
+            return (res);
+          }
         } catch (e) {
           pagelog(`error: ${e}`);
           throw e
