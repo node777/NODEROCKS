@@ -109,7 +109,7 @@
                     <div
                       class="d-flex align-items-center gap-2 py-3 justify-content-center px-3 grey_t_border w-100 bg_black">
                       <img src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon" />
-                      <p class="mb-0 fw-bold text_lg text-white">69,420</p>
+                      <p class="mb-0 fw-bold text_lg text-white" id="menu_btc_price">69,420</p>
                       <div class="d-flex align-items-center">
                         <svg class="bitcoin_green_arrow" width="11" height="10" viewBox="0 0 11 10" fill="none"
                           xmlns="http://www.w3.org/2000/svg">
@@ -123,33 +123,33 @@
                     <div class="d-flex gap-1 w-100 grey_t_border grey_b_border bg_black">
                       <div
                         class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center grey_r_border grey_l_border px-4 w-100 sat_block">
-                        <p class="mb-0 fw-bold text_lg text-white">
+                        <p class="mb-0 fw-bold text_lg text-white" id="menu_fee_1">
                           16 sat/vB
                         </p>
-                        <p class="mb-0 fw-bold text_md text_warning">$1.15</p>
+                        <p class="mb-0 fw-bold text_md text_warning" id="menu_fee_usd_1">$1.15</p>
                       </div>
                       <div
                         class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center px-4 w-100 sat_block">
-                        <p class="mb-0 fw-bold text_lg text-white">
+                        <p class="mb-0 fw-bold text_lg text-white" id="menu_fee_2">
                           17 sat/vB
                         </p>
-                        <p class="mb-0 fw-bold text_md text_warning">$1.22</p>
+                        <p class="mb-0 fw-bold text_md text_warning" id="menu_fee_usd_2">$1.22</p>
                       </div>
                       <div
                         class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center grey_l_border px-3 w-100 sat_block">
-                        <p class="mb-0 fw-bold text_lg text-white">
+                        <p class="mb-0 fw-bold text_lg text-white" id="menu_fee_3">
                           18 sat/vB
                         </p>
-                        <p class="mb-0 fw-bold text_md text_warning">$1.29</p>
+                        <p class="mb-0 fw-bold text_md text_warning" id="menu_fee_usd_3">$1.29</p>
                       </div>
                     </div>
                     <div
                       class="d-flex align-items-center justify-content-center gap-lg-2 py-3 w-100 text-center px-3 grey_b_border bg_black">
                       <p class="mb-0 fw-bold text_md text-white text-nowrap">
-                        Next Block 840,000
+                        Next Block <span id="menu_next_block_num">840000</span>
                       </p>
                       <p class="mb-0 fw-bold text_md text_warning text-nowrap ms-1">
-                        ~10 minutes
+                        ~<span id="next_block_estimate">10</span> minutes
                       </p>
                     </div>
                   </div>
@@ -936,7 +936,7 @@
       }
       // console.log(offset+limit)
       if (inscriptionRes.total > (offset + limit)) {
-        await loadRocks((offset + limit), type);
+        await loadRocks((offset + limit-1), type);
       } else {
 
         if (myRocks.length == 0) {
@@ -991,6 +991,18 @@
       let numberStaked = 0
       for (rock in stakedRocks) {
         console.log(rock)
+        if (!myRocks.includes(rock)) {
+          console.log('myrocks did not contain ' + rock);
+          let finduser = userInscriptions.find(element => element.id == rock)
+          if (!finduser) {
+            console.log('userInscriptions did not contain ' + rock);
+          }
+          else {
+            console.log('userInscriptions did contain ' + finduser);
+            userInscriptions.push({'id':rock}); //try and throw the missing one in and reload? lol
+            loadRocks(666);
+          }
+        }
         if(!document.getElementById(`staked-rock-${rock}`) || !document.getElementById(`unstaked-rock-${rock}`)){}else{
           if (stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked > stakedRocks[rock].date_unstaked) {
             document.getElementById(`staked-rock-${rock}`).style = "display:none !important;"
@@ -1062,7 +1074,7 @@
       await startup();
 
       if (bitprint.isConnectedHasWallet()) {
-        loadRocks(0);
+        await loadRocks(0);
       } 
       else {
         window.location = "./staking.html"

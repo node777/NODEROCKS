@@ -1,5 +1,6 @@
-let bitcoinPrice=69420
-
+let bitcoinPrice=-1
+let fee_res={};
+let block_height = -1;
 
 async function startup() {
     if (document.getElementById('countdown')) {
@@ -8,6 +9,7 @@ async function startup() {
     }
 
     loadTickers();
+    loadTickers("menu_");
 
     addOnClicks();
     addWalletConnect();
@@ -15,29 +17,30 @@ async function startup() {
     await bitprint.load();
 }
 
-async function loadTickers() {
-    // load BTC
-    let res= await fetch("https://mempool.space/api/v1/prices")
-    res= await res.json()
-    // console.log(res)
-    bitcoinPrice=res.USD
-    document.getElementById("btc_price").innerHTML=bitcoinPrice
+async function loadTickers(prefix = "") {
+    if (bitcoinPrice == -1) {// load BTC
+        let res = await fetch("https://mempool.space/api/v1/prices")
+        res = await res.json()
+        
+        bitcoinPrice = res.USD
+        document.getElementById(prefix + "btc_price").innerHTML=bitcoinPrice
+    
+        fee_res = await fetch("https://mempool.space/api/v1/fees/recommended")
+        fee_res = await fee_res.json()
 
-    let fee_res= await fetch("https://mempool.space/api/v1/fees/recommended")
-    fee_res= await fee_res.json()
-    // console.log(fee_res)
-    document.getElementById("fee_1").innerHTML=`${fee_res.minimumFee} sat/VB`
-    document.getElementById("fee_2").innerHTML=`${fee_res.economyFee} sat/VB`
-    document.getElementById("fee_3").innerHTML=`${fee_res.fastestFee} sat/VB`
+        let height_res = await fetch("https://mempool.space/api/blocks/tip/height")
+        block_height = await height_res.text()
+    }
+    
+    document.getElementById(prefix + "fee_1").innerHTML=`${fee_res.minimumFee} sat/VB`
+    document.getElementById(prefix + "fee_2").innerHTML=`${fee_res.economyFee} sat/VB`
+    document.getElementById(prefix + "fee_3").innerHTML=`${fee_res.fastestFee} sat/VB`
 
-    document.getElementById("fee_usd_1").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.minimumFee).toFixed(2)}`
-    document.getElementById("fee_usd_2").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.economyFee).toFixed(2)}`
-    document.getElementById("fee_usd_3").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.fastestFee).toFixed(2)}`
+    document.getElementById(prefix + "fee_usd_1").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.minimumFee).toFixed(2)}`
+    document.getElementById(prefix + "fee_usd_2").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.economyFee).toFixed(2)}`
+    document.getElementById(prefix + "fee_usd_3").innerHTML=`$${(0.000001*bitcoinPrice*fee_res.fastestFee).toFixed(2)}`
 
-    let height_res= await fetch("https://mempool.space/api/blocks/tip/height")
-    height= await height_res.text()
-    // console.log(fee_res)
-    document.getElementById("next_block_num").innerHTML=`${height+1}`;
+    document.getElementById(prefix + "next_block_num").innerHTML=`${block_height+1}`;
   }
 
 function updateCountdown() {
@@ -117,7 +120,7 @@ function setConnected(addr) {
     buttonConnectMain.setAttribute('title', title);
     buttonConnectInMenu.setAttribute('title', title);
 
-    console.log(text);
+    //console.log(text);
     buttonConnectMain.innerHTML = text;
     buttonConnectInMenu.innerHTML = text;
 }
