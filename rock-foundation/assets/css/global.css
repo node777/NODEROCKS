@@ -405,6 +405,7 @@ body {
 .rock{
   width: 142px !important;
   image-rendering: pixelated;
+  cursor:pointer;
 }
 #address{
   padding-left: 50px;

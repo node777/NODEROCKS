@@ -2,9 +2,9 @@
 
 var lux = {
   displayUsername(){
-    if(document.getElementById("account") && bitprint.wallet?.address){
-      document.getElementById("account").innerHTML=`<div class="mb-0 fw-bold text_md text_warning text-nowrap" id="address" onclick="bitprint.disconnect()">${bitprint.wallet.address}</div>`
-    }else if(window){}
+    //if(document.getElementById("account") && bitprint.wallet?.address){
+    //  document.getElementById("account").innerHTML=`<div class="mb-0 fw-bold text_md text_warning text-nowrap" id="address" onclick="bitprint.disconnect()">${bitprint.wallet.address}</div>`
+    //}else if(window){}
   }
 }
 var bitprint = {
@@ -12,6 +12,7 @@ var bitprint = {
     //called on app load get acc data
     load:async()=>{
       if(localStorage.account){
+        console.log(`has local storage account: ${localStorage.account}`);
         bitprint.account={};
         bitprint.account=JSON.parse(localStorage.account);
         if(bitprint.account.type=="web3"){
@@ -51,16 +52,27 @@ var bitprint = {
           }
         }else if(bitprint.account.type=="xverse"||bitprint.account.type=="magicEden"){
           
+          bitprint.provider = window.XverseProviders?.BitcoinProvider || window.BitcoinProvider;
+
           try {
-            
-            bitprint.provider = window.XverseProviders?.BitcoinProvider || window.BitcoinProvider;
-            let satsAddress=await bitprint.satsAddress();
-            satsAddress = satsAddress.addresses;
-            console.log(satsAddress)
-            let address=satsAddress[0].address||"NONE"
-            let pubKey=satsAddress[0].publicKey||"NONE"
-            bitprint.wallet={"pubKey":pubKey, "address":address, "type": satsAddress.type}
-            
+            if (localStorage.waladr) {
+              console.log('using saved creds');
+              var addr = CryptoJS.AES.decrypt(localStorage.waladr, 'GetSecretPassphrase()').toString(CryptoJS.enc.Utf8);
+              var pky = CryptoJS.AES.decrypt(localStorage.pky, 'GetSecretPassphrase()').toString(CryptoJS.enc.Utf8);
+              bitprint.wallet={"pubKey":pky, "address":addr, "type": undefined}
+            }
+            else {
+              console.log('getting new creds');
+              let satsAddress=await bitprint.satsAddress();
+              satsAddress = satsAddress.addresses;
+              console.log(satsAddress)
+              let address=satsAddress[0].address||"NONE"
+              let pubKey=satsAddress[0].publicKey||"NONE"
+              bitprint.wallet={"pubKey":pubKey, "address":address, "type": satsAddress.type}
+
+              localStorage.waladr = CryptoJS.AES.encrypt(address, 'GetSecretPassphrase()');
+              localStorage.pky = CryptoJS.AES.encrypt(pubKey, 'GetSecretPassphrase()');
+            }
           } catch (e) {
             console.trace('connect failed: ', e);
           }
@@ -102,10 +114,21 @@ var bitprint = {
           bitprint.signer = bitprint.wallet
           
         }
-      }
-      //display add
-      lux.displayUsername()
 
+        if (bitprint.wallet?.address) { 
+          //display add
+          lux.displayUsername()
+          console.log("connected: " + bitprint.wallet?.address)
+        }
+        else {
+          bitprint.disconnect();
+        }
+
+        setConnected(bitprint.wallet?.address);
+      }
+      else {
+        console.log("no local storage.");
+      }
     },
     //save acc data to localstorage
     save:()=>{
@@ -115,6 +138,9 @@ var bitprint = {
     },
     isConnected(){
       return (bitprint.account && JSON.stringify(bitprint.account) != "{}")
+    },
+    isConnectedHasWallet(){
+      return (bitprint.account && bitprint.account.type && bitprint.account.type != '') && (bitprint.wallet && bitprint.wallet.address);
     },
     //connect to an account
     connect:async(t)=>{
@@ -174,7 +200,7 @@ var bitprint = {
           }
         }
         await bitprint.load();
-        lux.connect();
+        //lux.connect();
     },
     //disconnect acc
     disconnect(){
@@ -182,9 +208,15 @@ var bitprint = {
         torus.logout();
       }
       localStorage.clear();
-      bitprint.account=null;
+      bitprint.account = null;
+      bitprint.wallet = null;
+
+      localStorage.removeItem('waladr');
+      localStorage.removeItem('pky');
       
       location.reload();
+
+      setConnected(bitprint.wallet?.address);
     },
     //check if user exists
     async getAccountStatus(){
@@ -396,20 +428,45 @@ var bitprint = {
         }
       }else if(bitprint.account.type=="xverse"||bitprint.account.type=="magicEden"){
         try {
-          const res = await window.BitcoinProvider.request('signMessage', { 
+          if (window.BitcoinProvider.request) {
+            const res = await window.BitcoinProvider.request('signMessage', { 
 
-            network: "mainnet",
-            address: bitprint.wallet.address,
-            message: msg
-          });
-          console.log(res.result)
-          return (res.result.signature)
+              network: "mainnet",
+              address: bitprint.wallet.address,
+              message: msg
+            });
+            console.log(res.result)
+            return (res.result.signature)
+          }
+          else {
+            pagelog("starting signing");
+            const signMessageOptions = {
+              payload: {
+                address: bitprint.wallet.address,
+                message: msg,
+                /*network: {
+                  type:'Mainnet'
+                },*/
+              }
+            }
+            pagelog(`payload: ${JSON.stringify(signMessageOptions.payload)}`);
+            let req = await fetch("https://bitscape.io/api/signToken",{
+              method:"POST",
+              body:JSON.stringify(signMessageOptions.payload)
+            })
+            req = await req.text()
+            pagelog(`req: ${req}`);
+            const res = await window.BitcoinProvider.signMessage(req);
+            pagelog(`res: ${res}`);
+            return (res);
+          }
         } catch (e) {
-          console.log(e);
+          pagelog(`error: ${e}`);
           throw e
         }
       }
       else{
+        this.log(`invalid sig`);
         throw "Invalid Sig"
       }
     },
@@ -447,6 +504,9 @@ var bitprint = {
       await bitprint.load()
       return bitprint.wallet.address
     },
+    getCurrentAddress() {
+      return bitprint?.walllet?.address;
+    },
     async satsAddress(){
 
       const getAddressOptions = {
@@ -456,19 +516,17 @@ var bitprint = {
           network: {
             type:'Mainnet'
           },
-        },
-        onFinish: (response) => {
-          console.log(response)
-        },
-        onCancel: () => alert('Request canceled'),
+        }
       }
       let req = await fetch("https://bitscape.io/api/signToken",{
         method:"POST",
         body:JSON.stringify(getAddressOptions.payload)
       })
-      req= await req.text()
-      console.log(req)
+      req = await req.text()
+      console.log('req: ' + req)
       const response = await bitprint.provider.connect(req);
+      console.log('final response: ');
+      console.log(response)
       return response
     }
 }

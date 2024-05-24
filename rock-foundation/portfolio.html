@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>node-rocks</title>
+  <link rel="shortcut icon" href="./assets/images/svg/fav-icon.svg" type="fav-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/global.css" />
+  <link rel="stylesheet" href="./assets/css/nav.css" />
+  <link rel="stylesheet" href="./assets/css/home.css" />
+</head>
+
+<body class="bg_secondary">
+  <div class="min-vh-100 max_w_1920 mx-auto d-flex flex-column">
+    <!-- Header -->
+    <div class="sticky-top bg_secondary">
+      <div class="bg-black">
+        <div class="d-none d-md-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-2 status_block w-75 justify-content-center px-3">
+            <img src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon" />
+            <p class="mb-0 fw-bold fs_lg text-white" id="btc_price">69,420</p>
+            <div class="d-flex align-items-center">
+              <svg class="bitcoin_green_arrow" width="11" height="10" viewBox="0 0 11 10" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1.34194 9.91394L0.585938 9.15794L8.21794 1.52594L1.57594 1.07594L2.56594 0.0859375L9.98194 0.499937L10.4139 7.91594L9.42394 8.90594L8.97394 2.28194L1.34194 9.91394Z"
+                  fill="#48A838" />
+              </svg>
+              <p class="mb-0 fw-bold fs_md text_success">69%</p>
+            </div>
+          </div>
+          <div
+            class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
+            <p class="mb-0 fw-bold fs_md text-white" id="fee_1">16 sat/vB</p>
+            <p class="mb-0 fw-bold fs_md text_warning" id="fee_usd_1">$1.15</p>
+          </div>
+          <div
+            class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center px-3">
+            <p class="mb-0 fw-bold fs_md text-white" id="fee_2">17 sat/vB</p>
+            <p class="mb-0 fw-bold fs_md text_warning" id="fee_usd_2">$1.22</p>
+          </div>
+          <div
+            class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-75 justify-content-center grey_r_border grey_l_border px-3">
+            <p class="mb-0 fw-bold fs_md text-white" id="fee_3">18 sat/vB</p>
+            <p class="mb-0 fw-bold fs_md text_warning" id="fee_usd_3">$1.29</p>
+          </div>
+          <div
+            class="d-flex align-items-center flex-column flex-xl-row gap-xl-2 status_block w-100 justify-content-center px-3">
+            <p class="mb-0 fw-bold fs_md text-white text-nowrap">
+              Next Block <span id="next_block_num">840000</span>
+            </p>
+            <p class="mb-0 fw-bold text_md text_warning text-nowrap">
+              ~<span id="next_block_estimate">10</span> minutes
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="py-3 bg-black mt-md-1">
+        <nav>
+          <div class="mx-3 px-1 mx-sm-4">
+            <div class="d-flex align-items-center justify-content-between">
+              <a class="position-relative" href="./">
+                <img class="d-none d-lg-block" src="./assets/images/svg/nav-logo.svg" alt="nav-logo" />
+                <img class="d-block d-lg-none nav_logo" src="./assets/images/svg/page-logo.svg" alt="page-logo" />
+              </a>
+              <div class="d-flex align-items-center">
+                <ul class="list-unstyled d-md-flex align-items-center mb-0 d-none">
+                  <li class="me-3">
+                    <a class="nav_links transition_03 fs_md text_warning fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                      href="./portfolio.html">Portfolio</a>
+                  </li>
+                  <li class="mx-4">
+                    <a class="nav_links transition_03 fs_md text_secondary_emphasis fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                      href="./explorer.html">Explorer</a>
+                  </li>
+                  <li class="ms-3 me-4">
+                    <a class="nav_links transition_03 fs_md text_secondary_emphasis fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                      href="./staking.html">Staking</a>
+                  </li>
+                  <li class="ms-3">
+                    <a class="nav_links transition_03 fs_md text_secondary_emphasis fw-bold ff_trap_SemiBold text-decoration-none position-relative"
+                      href="./">Experiences</a>
+                  </li>
+                </ul>
+                <div id="account">
+                  <button id="connectMain" class="nav_btn transition_03 text_warning bg-transparent fw-bold ms-4 d-none d-lg-block">
+                    Connect
+                  </button>
+                </div>
+              </div>
+              <div class="d-flex align-items-center gap-4 d-lg-none menu_btn_parent">
+                <div onclick="Togleside()"
+                  class="text_secondary_emphasis fs_lg cursor-pointer menu_btn d-md-none transition_03" id="toggle_btn">
+                  Menu
+                </div>
+                <button id="connectInMenu" class="nav_btn transition_03 text_warning bg-transparent fw-bold">
+                  Connect
+                </button>
+              </div>
+              <div
+                class="overlay position-fixed d-flex d-md-none flex-column justify-content-center align-items-center w-100 overflow-y-scroll"
+                id="overlay">
+                <div class="nav_parent w-100 d-flex flex-column justify-content-between">
+                  <div class="w-100">
+                    <div
+                      class="d-flex align-items-center gap-2 py-3 justify-content-center px-3 grey_t_border w-100 bg_black">
+                      <img src="./assets/images/svg/bitcoin-icon.svg" alt="bitcoin-icon" />
+                      <p class="mb-0 fw-bold text_lg text-white" id="menu_btc_price">69,420</p>
+                      <div class="d-flex align-items-center">
+                        <svg class="bitcoin_green_arrow" width="11" height="10" viewBox="0 0 11 10" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M1.34194 9.91394L0.585938 9.15794L8.21794 1.52594L1.57594 1.07594L2.56594 0.0859375L9.98194 0.499937L10.4139 7.91594L9.42394 8.90594L8.97394 2.28194L1.34194 9.91394Z"
+                            fill="#48A838" />
+                        </svg>
+                        <p class="mb-0 fw-bold text_md text_success">69%</p>
+                      </div>
+                    </div>
+                    <div class="d-flex gap-1 w-100 grey_t_border grey_b_border bg_black">
+                      <div
+                        class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center grey_r_border grey_l_border px-4 w-100 sat_block">
+                        <p class="mb-0 fw-bold text_lg text-white" id="menu_fee_1">
+                          16 sat/vB
+                        </p>
+                        <p class="mb-0 fw-bold text_md text_warning" id="menu_fee_usd_1">$1.15</p>
+                      </div>
+                      <div
+                        class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center px-4 w-100 sat_block">
+                        <p class="mb-0 fw-bold text_lg text-white" id="menu_fee_2">
+                          17 sat/vB
+                        </p>
+                        <p class="mb-0 fw-bold text_md text_warning" id="menu_fee_usd_2">$1.22</p>
+                      </div>
+                      <div
+                        class="d-flex align-items-center flex-column flex-lg-row gap-lg-2 status_block justify-content-center grey_l_border px-3 w-100 sat_block">
+                        <p class="mb-0 fw-bold text_lg text-white" id="menu_fee_3">
+                          18 sat/vB
+                        </p>
+                        <p class="mb-0 fw-bold text_md text_warning" id="menu_fee_usd_3">$1.29</p>
+                      </div>
+                    </div>
+                    <div
+                      class="d-flex align-items-center justify-content-center gap-lg-2 py-3 w-100 text-center px-3 grey_b_border bg_black">
+                      <p class="mb-0 fw-bold text_md text-white text-nowrap">
+                        Next Block <span id="menu_next_block_num">840000</span>
+                      </p>
+                      <p class="mb-0 fw-bold text_md text_warning text-nowrap ms-1">
+                        ~<span id="next_block_estimate">10</span> minutes
+                      </p>
+                    </div>
+                  </div>
+                  <ul class="list-unstyled mb-0 text-center w-100 nav_links_main_parent">
+                    <li class="nav_links_parent mx-4 py-5" onclick="hideNav()">
+                      <a class="nav_links font-lg fw-bold text_warning text-decoration-none position-relative transition_03"
+                        href="./portfolio.html">Portfolio</a>
+                    </li>
+                    <li class="nav_links_parent mx-4 py-5" onclick="hideNav()">
+                      <a class="nav_links font-lg fw-bold text-white text-decoration-none position-relative transition_03"
+                        href="./explorer.html">Explorer</a>
+                    </li>
+                    <li class="nav_links_parent mx-4 py-5" onclick="hideNav()">
+                      <a class="nav_links font-lg fw-bold text_white text-decoration-none position-relative transition_03"
+                        href="./staking.html">Staking</a>
+                    </li>
+                    <li class="nav_links_parent border-0 py-5" onclick="hideNav()">
+                      <a class="nav_links font-lg fw-bold text-white text-decoration-none position-relative transition_03"
+                        href="./">Experiences</a>
+                    </li>
+                  </ul>
+                  <div class="d-flex justify-content-center">
+                    <button class="cross_btn border-0 bg-transparent" onclick="hideNav()">
+                      <svg onclick="hideNav()" class="d-xl-none d-block" width="15" height="15" viewBox="0 0 15 15"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="15" y="0.000488281" width="2.99996" height="3" transform="rotate(90 15 0.000488281)"
+                          fill="#D9D9D9" />
+                        <rect x="12" y="3.00098" width="2.99996" height="3" transform="rotate(90 12 3.00098)"
+                          fill="#D9D9D9" />
+                        <rect x="12" y="9.00049" width="2.99996" height="3" transform="rotate(90 12 9.00049)"
+                          fill="#D9D9D9" />
+                        <rect x="15" y="12.0005" width="2.99996" height="3" transform="rotate(90 15 12.0005)"
+                          fill="#D9D9D9" />
+                        <rect x="9" y="6.00098" width="2.99996" height="3" transform="rotate(90 9 6.00098)"
+                          fill="#D9D9D9" />
+                        <rect y="15" width="2.99996" height="3" transform="rotate(-90 0 15)" fill="#D9D9D9" />
+                        <rect x="3" y="11.9995" width="2.99996" height="3" transform="rotate(-90 3 11.9995)"
+                          fill="#D9D9D9" />
+                        <rect x="3" y="6" width="2.99996" height="3" transform="rotate(-90 3 6)" fill="#D9D9D9" />
+                        <rect y="3" width="2.99996" height="3" transform="rotate(-90 0 3)" fill="#D9D9D9" />
+                        <rect x="6" y="8.99951" width="2.99996" height="3" transform="rotate(-90 6 8.99951)"
+                          fill="#D9D9D9" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <section class="d-flex flex-column justify-content-center align-items-center d-none d-sm-block px-2">
+      <div class="w-100 statsbar_parent px-1">
+        <div class="d-flex flex-column flex_row align-items-center gap-2">
+
+          <!-- <div
+            class="d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row text-center py-3 py-sm-1 px-3 px-sm-5 bg-black gap-3 gap-sm-4 staking_card w-100">
+            <p class="fs_md fw-bold text-white mb-0">Portfolio Value</p>
+            <h3 class="fs_xl fw-bold text-white mb-0">
+              69.420 BTC
+              <span class="text_warning"> ($420,000.69)</span>
+            </h3>
+          </div>-->
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="px-sm-4 tab_container mx-auto mb-5 mb-sm-0">
+        <!-- DEFINE TABS CODE -->
+        <ul class="d-flex flex-wrap pt-sm-4 pt-3 justify-content-sm-between list-unstyled position-sticky tabs_position">
+          <div class="col-4 ps-0">
+            <li id="tab1" class="text-center py-2 py-md-3 fs_md fw-bold tabs_box text-nowrap fs_custom_sm active1">
+              My Rocks 
+            </li>
+          </div>
+          <div class="col-4 ps-0">
+            <li id="tab1" class="text-center py-2 py-md-3 fs_md fw-bold tabs_box text-nowrap fs_custom_sm active1">
+              Total: <span class="fs_md fw-bold text_warning mb-0" id="my-staking">
+            </li>
+          </div>
+          <div class="col-4 ps-0">
+            <li id="tab1" class="text-center py-2 py-md-3 fs_md fw-bold tabs_box text-nowrap fs_custom_sm active1">
+              Staking: <span class="fs_md fw-bold text_warning mb-0" id="allocation-power">
+              </h3>
+            </li>
+          </div>
+        </ul>
+        <div id="tab_panel1" class="tab_panel1 px-4 px-sm-0 pb-3">
+          <div class="d-flex flex-wrap justify-content-center gap-2 gap-sm-4 gap-xxl-2" id="portfolio">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="details-container" id="details-popup" onclick="closeDetails()">
+    <div class="details-popup" onclick="">
+      <div class="details-content-topdiv">
+        <p class="fs_lg px-2 fw-bold text-white bg-black text-left top-0 end-0" style="margin:0px">
+          <span id="details-name"></span><br>
+          <span id="details-inscriptionid" class="details-content-id fs_sm px-2 fw-bold text-white bg-black text-left top-0 end-0"></span>
+        </p>
+      </div>
+      <div class="details-content" onclick="">
+        <div class="details-content-leftdiv">
+          <img class="details-content-img" id="details-image" src="" />
+        </div>
+        <div class="details-content-rightdiv">
+          <p class="fs_md px-2 fw-bold text-white bg-black text-center top-0 end-0" id="details-traits">
+          </p>
+          <p class="fs_md px-2 fw-bold text-white bg-black text-center top-0 end-0">
+            Listed: <span id="details-listed">-</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+  <script src="./assets/js/nav.js"></script>
+  <script>
+    for (let index = 1; index <= 3; index++) {
+      document.getElementById("tab" + index)?.setAttribute('onClick', 'selectTab(' + index + ')');
+    }
+
+    function selectTab(tabnum) {
+      for (let index = 1; index <= 3; index++) {
+        let isActive = (tabnum == index);
+        document.getElementById("tab_panel" + index)?.style.setProperty('display', isActive ? "block" : "none");
+        document.getElementById("tab" + index)?.classList.toggle("active1", isActive);
+      }
+    }
+  </script>
+  <script>
+    function showDetails(rockid) {
+      let rock = getRock(rockid);
+      document.getElementById("details-image").setAttribute('src', rock.image);
+      document.getElementById("details-image").onclick = () => {window.location = rock.image};
+      document.getElementById("details-name").textContent = rock.name;
+      document.getElementById("details-inscriptionid").textContent = rock.id;
+      document.getElementById("details-traits").innerHTML = rock.traitListHTML;
+      document.getElementById("details-listed").textContent = "---";
+
+      var popup = document.getElementById("details-popup");
+      popup.classList.add("popup_open");
+      popup.style.display = "";
+    }
+
+    function closeDetails() {
+      var popup = document.getElementById("details-popup");
+      popup.classList.remove("popup_open");
+      popup.style.display = "none";
+    }
+    closeDetails();
+  </script>
+  <script src="./assets/js/aes.js"></script>
+  <script src="./bitprint.js"></script>
+  <script src="./rocklist.js"></script>
+  <script src="./../rock-mine/rocks.js"></script>
+  <script src="./assets/js/rockdata.js"></script>
+  <script src="./assets/js/common.js"></script>
+  <script>
+    let userInscriptions = []
+    let stakedRocks = []
+    let myRocks = []
+    let r = "";
+
+    async function loadRocks(offset, type) {
+      if (offset == 0) {
+        myRocks = []
+        userInscriptions = []
+        stakedRocks = []
+        r = ""
+      }
+
+      let rStaked = ""
+      let rUnstaked = ""
+      let limit = 60
+      let inscriptionRes = await fetch(`https://api.hiro.so/ordinals/v1/inscriptions?address=${bitprint.wallet.address}&offset=${offset || 0}&limit=${limit}`)
+      inscriptionRes = await inscriptionRes.json()
+      userInscriptions = [...userInscriptions, ...inscriptionRes.results]
+      console.log(inscriptionRes)
+
+      for (rock in userInscriptions) {
+        if (rockList.includes(userInscriptions[rock].id)) {
+          if (myRocks.find(element => element.id == userInscriptions[rock].id))
+            continue;
+
+          let myRock = getRock(userInscriptions[rock].id)
+
+          myRocks.push(myRock);
+
+          /* html */
+          r += `
+            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="rock-${userInscriptions[rock].id}">
+              <div class="position-relative">
+                <img class="w-100 rock" src="${myRock.image}" alt="stake-card-img" onclick="showDetails('${myRock.id}')" />
+                <p class="position-absolute fs_xsm px-2 fw-bold text-white bg-black text-center top-0 end-0">
+                  ${myRock.name}
+                </p>
+              </div>
+                <p class="fs_xsm px-2 fw-bold text-white bg-black text-center top-0 end-0">
+                  ${myRock.traitString}
+                </p>
+            </div>
+          `
+        }
+      }
+      // console.log(offset+limit)
+      if (inscriptionRes.total > (offset + limit)) {
+        await loadRocks((offset + limit-1), type)
+      } else {
+
+        if (myRocks.length == 0) {
+          /*html*/
+          r = `
+          <section class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+            <div class="custom_container">
+              <div class="bg_warning ">
+                <h1 class="text-white fw-bold mb-0 fs_xxl text-center  w-100">
+                  NOT A SINGLE ROCK DETECTED
+                </h1>
+                <h2 class=" w-100">
+                  GO GET YOU SOME ROCKS
+                </h2><br>
+                <button onclick="window.location='https://magiceden.io/ordinals/marketplace/noderocks'" class="bg-black fs_md login_connect_btn transition_03 text-white border-0 mt-3 mt-sm-0 fw-bold w-100">
+                  GET EM
+                </button><br>
+                <button onclick="bitprint.disconnect()" class="bg-black fs_md login_connect_btn transition_03 text-white border-0 mt-3 mt-sm-0 fw-bold w-100">
+                  Connect different account
+                </button>
+              </div>
+            </div>
+          </section>
+          `
+        }
+
+        document.getElementById("portfolio").innerHTML = r;
+        await getStakedRocks();
+      }
+    }
+
+    async function getStakedRocks() {
+      try {
+        let response = await fetch("https://bitscape.io/api/staked", {
+          method: "POST",
+          body: JSON.stringify({
+            address: bitprint.wallet.address
+          })
+        });
+        let stakedRes = await response.json();
+        console.log(stakedRes);
+        if (!stakedRes.error) {
+          stakedRocks = stakedRes;
+          displayStakedRocks()
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+      let numberStaked = 0
+    function displayStakedRocks() { 
+      for (rock in stakedRocks) {
+        console.log(rock)
+          if (stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked > stakedRocks[rock].date_unstaked) {
+            /*
+            document.getElementById(`staked-rock-${rock}`).style = "display:none !important;"
+            document.getElementById(`unstaked-rock-${rock}`).style = "display:initial"
+
+            document.getElementById(`staked-tag-${rock}`).style = "display:none"
+            document.getElementById(`stake-button-${rock}`).style = "display:initial;"
+            document.getElementById(`unstake-button-${rock}`).style = "display:none"
+            */
+          } else {
+            numberStaked += 1
+            /*
+            document.getElementById(`staked-rock-${rock}`).style = "display:initial"
+            document.getElementById(`unstaked-rock-${rock}`).style = "display:none !important;"
+
+            document.getElementById(`staked-tag-${rock}`).style = "display:initial"
+            document.getElementById(`stake-button-${rock}`).style = "display:none;"
+            document.getElementById(`unstake-button-${rock}`).style = "display:initial"
+            */
+          }
+        
+      }
+      document.getElementById("my-staking").innerHTML = `<span class="text_warning">${myRocks.length}</span>`
+      document.getElementById("allocation-power").innerHTML = `<span class="text_warning">${(numberStaked / myRocks.length).toFixed(4) * 100}</span>%`
+    }
+    async function stakeRock(id, unstake) {
+      try {
+        let sig = await bitprint.sign(`
+        ${unstake ? "Unstaking" : "Staking"} NODEROCK: 
+        ${id}
+        `)
+        let rBody = {
+          address: bitprint.wallet.address,
+          inscriptions: [
+            id
+          ]
+        }
+        if (unstake) { rBody.unstake = unstake }
+        let response = await fetch("https://bitscape.io/api/stake", {
+          // let response = await fetch("http://localhost:8080/api/stake", {
+          method: "POST",
+          body: JSON.stringify(rBody)
+        });
+        let stakedRes = await response.json();
+        console.log(stakedRes);
+        if (stakedRes.message) {
+          // function open_popup() {
+          //   document.getElementById("connect_wallet_popup").style.display = "block";
+          //   document.getElementsByTagName("body")[0].style.overflow = "hidden";
+          // }
+          // document.getElementById(`staked-tag-${id}`).style = "display:initial"
+          // stakedRocks[id]=unstake?{date_unstaked:Date.now()}:{date_staked:Date.now()}
+          // displayStakedRocks()
+          getStakedRocks()
+          alert(stakedRes.message)
+        } else if (stakedRes.error) {
+          alert("Error: " + stakedRes.error)
+
+        } else {
+          alert("Could not stake: Error code 42069")
+
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+
+    }
+
+    window.onload = async function () {
+      await startup();
+
+      if (bitprint.isConnectedHasWallet()) {
+        loadRocks(0);
+      } 
+      else {
+        window.location = "./staking.html"
+      }
+    }
+  </script>
+</body>
+
+</html>

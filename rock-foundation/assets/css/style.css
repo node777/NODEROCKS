@@ -303,3 +303,68 @@ body {
     line-height: 28px !important;
   }
 }
+body {
+}
+
+.floating-div {
+}
+
+.details-container {
+  position:absolute;
+  top:0%;
+  left:0%;
+  bottom:0%;
+  right:0%;
+  color: white; background: transparent;
+  z-index: 1000;
+  
+  justify-content: center;
+  align-items: center;
+}
+
+.details-popup {
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:75%;
+  transform: translate(-50%, -50%);
+  color: white; background: #666666; opacity: 1;
+  z-index: 1000;
+  
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(33, 33, 33, 0.95); /* Optional for visibility */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional for some styling */
+}
+
+.details-content {
+  display: flex;
+}
+
+.details-content-topdiv {
+  border-bottom: 2px solid #F46A0F;
+  margin-bottom: 20px;
+}
+
+.details-content-leftdiv {
+  width: 40%; /* 60% width of the container */    
+  height: 100%;
+}
+.details-content-rightdiv {
+  width: 60%; /* 60% width of the container */   
+  background-color: rgb(0, 0, 0, 0.95); /* Optional for visibility */ 
+}
+
+.details-content-img {
+  width: 100%; /* 60% width of the container */    
+  height: 100%; /* 60% width of the container */    
+  image-rendering: pixelated;
+  cursor:pointer;
+}
+
+.details-content-id {
+  text-wrap:wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+}
