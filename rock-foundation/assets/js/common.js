@@ -69,6 +69,11 @@ function updateCountdown() {
     let countdown = document.getElementById('countdown');
     if (countdown)
         countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
+
+    // Update the innerHTML of the mobile countdown element
+    let mobileCountdown = document.getElementById('mobile-countdown');
+    if (mobileCountdown)
+        mobileCountdown.innerHTML = `${hours}:${minutes}:${seconds}`;
 }
 
 let buttonConnectMain = {};

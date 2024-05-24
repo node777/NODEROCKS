@@ -761,14 +761,14 @@
         </div>
       </div>
     </section>
-    <div class="position-relative flex-grow-1 d-sm-none">
+    <div class="position-relative flex-grow-1 d-sm-none" id="claim_rewards_popup_parent">
       <div class="claim_rewards_popup w-100 transition_03 bg_secondary pt-4" id="claim_rewards_popup">
         <div class="popup-content">
           <div class="px-1 mx-2 w-100 statsbar_parent">
             <div class="py-3 bg-black w-100 mb-2">
               <h3 class="fw-bold fs_xl text-white d-flex align-items-center gap-2 mb-0 justify-content-center">
                 <img src="./assets/images/svg/airdrop-icon.svg" alt="airdrop-icon" />
-                Airdrop in <span class="text_warning">00:00:00</span>
+                Airdrop in <span class="text_warning" id="mobile-countdown">00:00:00</span>
               </h3>
             </div>
             <div class="d-flex flex-column flex_row align-items-center gap-2">
@@ -778,7 +778,7 @@
                   <p class="fs_md fw-bold text-white mb-0 text-nowrap">
                     My Staking
                   </p>
-                  <h3 class="fs_xl fw-bold text-white mb-0" id="">
+                  <h3 class="fs_xl fw-bold text-white mb-0" id="mobile-my-staking">
                     <span class="text_warning">00</span>/00
                   </h3>
                 </div>
@@ -788,7 +788,9 @@
                     Allocation Power
                   </p>
                   <span>
-                    <img class="statsbar" src="./assets/images/svg/statsbar.svg" alt="statsbar" />
+                    <h3 class="fs_xl fw-bold text-white mb-0" id="mobile-allocation-power">
+                    </h3>
+                    <!--<img class="statsbar" src="./assets/images/svg/statsbar.svg" alt="statsbar" />-->
                   </span>
                 </div>
               </div>
@@ -835,11 +837,18 @@
       var popupButton = document.getElementById("popupButton");
       popup.classList.toggle("popup_open");
       popupButton.classList.toggle("arrow_rotate");
+      if (popup.classList.contains("popup_open")) {
+        popup.style.display = "";
+      }
+      else {
+        setTimeout(() => {popup.style.display = "none";}, 500);
+      }
     }
 
     function closePopup() {
       var popup = document.getElementById("claim_rewards_popup");
       popup.classList.remove("popup_open");
+      popup.style.display = "none";
     }
 
     // Open the popup by default when the page loads
@@ -1026,6 +1035,9 @@
       }
       document.getElementById("my-staking").innerHTML = `<span class="text_warning">${numberStaked}</span>/${myRocks.length}`
       document.getElementById("allocation-power").innerHTML = `<span class="text_warning">${(numberStaked / myRocks.length).toFixed(4) * 100}</span>%`
+    
+      document.getElementById("mobile-my-staking").innerHTML = `<span class="text_warning">${numberStaked}</span>/${myRocks.length}`
+      document.getElementById("mobile-allocation-power").innerHTML = `<span class="text_warning">${(numberStaked / myRocks.length).toFixed(4) * 100}</span>%`
     }
     async function stakeRock(id, unstake) {
       try {
