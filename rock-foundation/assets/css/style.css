@@ -368,3 +368,30 @@ body {
   word-wrap: break-word;
   word-break: break-all;
 }
+
+.details-content-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:10px
+}
+
+.details-text {
+  text-wrap:wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  text-align: left;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.details-trait-type {
+  color:white;
+  text-align: left;
+  padding-right:10px;
+}
+.details-trait-value {
+  color:var(--warning);
+  text-align: left;
+}

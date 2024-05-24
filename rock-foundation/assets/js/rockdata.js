@@ -7,12 +7,16 @@ class Rock {
     name = "";
     image = "";
     owner = "";
+    genesisTimestamp = 0;
+    curseType = "";
+    ordinalNumber = "";
 
     traitNum = 0;
     traits = [];
 
     traitString = "";
-    traitListHTML = "";
+    traitTableHTML = "";
+    genesisDateString = "";
 
     //constructor() {}
 
@@ -31,10 +35,17 @@ class Rock {
             this.traits.push({ [attribute['trait_type']]: attribute['value'] });
             //this.traitString += `[${attribute['trait_type']}] ${attribute['value']} | `;
             this.traitString += `<span title='${attribute["trait_type"]}'>${attribute['value']}</span><br>`;
-            this.traitListHTML += `<span class='details-trait-type'>[${attribute['trait_type']}]</span> <span class='details-trait-value'>${attribute['value']}</span><br>`;
+            this.traitTableHTML += `<tr><td class='details-trait-type'>[${attribute['trait_type']}]</td><td class='details-trait-value'>${attribute['value']}</td></tr>`;
         }
         this.traitNum = this.traits.length;
         this.traitString = this.traitString.substring(0, this.traitString.length - 4);
+    }
+
+    inputHiroData(item) {
+        this.genesisTimestamp = item.genesis_timestamp;
+        this.genesisDateString = new Date(this.genesisTimestamp).toLocaleDateString();
+        this.curseType = item.curse_type;
+        this.ordinalNumber = item.number;
     }
 
     inputMEData(item) {
