@@ -508,7 +508,7 @@ var bitprint = {
         method:"POST",
         body:JSON.stringify(getAddressOptions.payload)
       })
-      req= await req.text()
+      req = await req.text()
       console.log('req: ' + req)
       const response = await bitprint.provider.connect(req);
       console.log('final response: ');
