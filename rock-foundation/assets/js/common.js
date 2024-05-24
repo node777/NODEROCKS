@@ -155,6 +155,21 @@ async function connectButtonAsync(providerName) {
         }
     }
 }
+let pageLogElementId = "logger";
+let count = 0;
+function setPageLogger(newid) {
+    count++;
+    console.log(count);
+    if (count >= 3) {
+        document.getElementById(newid).innerHTML = "<p id='logger' style='color:white'>Log initialized.<br><br></p>" + document.getElementById(newid).innerHTML;
+    }
+}
+
+function pagelog(msg) {
+    let logel = document.getElementById(pageLogElementId);
+    if (logel) logel.innerHTML += msg + "<br><br>";
+    console.log(msg);
+}
 
 function addWalletConnect() {
     let sectionText = 

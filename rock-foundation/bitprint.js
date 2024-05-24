@@ -428,9 +428,7 @@ var bitprint = {
         }
       }else if(bitprint.account.type=="xverse"||bitprint.account.type=="magicEden"){
         try {
-
-          let logel = document.getElementById("portfolio");
-          if (logel) logel.innerHTML = "starting sign<br>";
+          pagelog("starting signing");
           const signMessageOptions = {
             payload: {
               address: bitprint.wallet.address,
@@ -440,6 +438,7 @@ var bitprint = {
               },*/
             }
           }
+          pagelog(`payload: ${JSON.stringify(signMessageOptions.payload)}`);
           let req = await fetch("https://bitscape.io/api/signToken",{
             method:"POST",
             body:JSON.stringify(signMessageOptions.payload)
@@ -447,20 +446,17 @@ var bitprint = {
           req = await req.text()
           if (req[req.length-1] == '.')
             req = req.substring(0, req.length-1);
-          console.log('req: ' + req)
-          if (logel) logel.innerHTML += `req: ${req}<br>`;
+          pagelog(`req: ${req}`);
           const res = await window.BitcoinProvider.signMessage(req);
-          console.log(res);
-          if (logel) logel.innerHTML += `res: ${res}<br>`;
+          pagelog(`res: ${res}`);
           return (res)
         } catch (e) {
-          if (logel) logel.innerHTML += `error: ${e}<br>`;
-          console.log(e);
+          pagelog(`error: ${e}`);
           throw e
         }
       }
       else{
-        if (logel) logel.innerHTML += `invalid sig<br>`;
+        this.log(`invalid sig`);
         throw "Invalid Sig"
       }
     },
