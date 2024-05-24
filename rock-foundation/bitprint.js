@@ -446,10 +446,14 @@ var bitprint = {
           if (req[req.length-1] == '.')
             req = req.substring(0, req.length-1);
           console.log('req: ' + req)
+          alert('about to sign');
           const res = await window.BitcoinProvider.signMessage(req);
-          console.log(res)
+          console.log(res);
+          alert('finished sign');
+          alert(res);
           return (res)
         } catch (e) {
+          alert(e);
           console.log(e);
           throw e
         }
