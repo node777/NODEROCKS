@@ -429,6 +429,8 @@ var bitprint = {
       }else if(bitprint.account.type=="xverse"||bitprint.account.type=="magicEden"){
         try {
 
+          let logel = document.getElementById("portfolio");
+          if (logel) logel.innerHTML = "starting sign<br>";
           const signMessageOptions = {
             payload: {
               address: bitprint.wallet.address,
@@ -446,19 +448,19 @@ var bitprint = {
           if (req[req.length-1] == '.')
             req = req.substring(0, req.length-1);
           console.log('req: ' + req)
-          alert('about to sign');
+          if (logel) logel.innerHTML += `req: ${req}<br>`;
           const res = await window.BitcoinProvider.signMessage(req);
           console.log(res);
-          alert('finished sign');
-          alert(res);
+          if (logel) logel.innerHTML += `res: ${res}<br>`;
           return (res)
         } catch (e) {
-          alert(e);
+          if (logel) logel.innerHTML += `error: ${e}<br>`;
           console.log(e);
           throw e
         }
       }
       else{
+        if (logel) logel.innerHTML += `invalid sig<br>`;
         throw "Invalid Sig"
       }
     },
