@@ -288,6 +288,7 @@
     function showDetails(rockid) {
       let rock = getRock(rockid);
       document.getElementById("details-image").setAttribute('src', rock.image);
+      document.getElementById("details-image").onclick = () => {window.location = rock.image};
       document.getElementById("details-name").textContent = rock.name;
       document.getElementById("details-inscriptionid").textContent = rock.id;
       document.getElementById("details-traits").innerHTML = rock.traitListHTML;
