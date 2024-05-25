@@ -28,14 +28,60 @@
     background: var(--warning);
     color: white;
     border: 1px solid transparent;
-    padding: 1px 24px;
     width: 100%;
+    max-width: 150px;
     transition: 0.3s all ease-in-out;
 }
 
 .stake_btn:hover {
     background: transparent;
     border: 1px solid white;
+}
+
+.stake_btn:disabled,
+.stake_btn[disabled] {
+  /*border: 1px solid #999999;*/
+  background-color: #666666;
+  color: #333333;
+  border: 1px solid transparent;
+  width: 100%;
+  max-width: 150px;
+  font-style: italic;
+  transition: 0.3s all ease-in-out;
+}
+
+.stakeall {
+    min-width: 50;
+}
+.unstakeall {
+    min-width: 50;
+}
+
+.unstake_btn {
+    color: #fff;
+    background: transparent;
+    border: 1px solid #fff;
+    width: 100%;
+    max-width: 150px;
+    transition: 0.3s all ease-in-out;
+}
+
+.unstake_btn:hover {
+    color: white;
+    border: 1px solid transparent;
+    background: var(--warning);
+}
+
+.unstake_btn:disabled,
+.unstake_btn[disabled] {
+  /*border: 1px solid #999999;*/
+  background-color: transparent;
+  color: #666666;
+  font-style: italic;
+  border: 1px solid #666666;
+  width: 100%;
+  max-width: 150px;
+  transition: 0.3s all ease-in-out;
 }
 
 .update_btn {
@@ -48,19 +94,6 @@
 .update_btn:hover {
     color: white;
     border: 1px solid white;
-}
-
-.unstake_btn {
-    color: #fff;
-    background: transparent;
-    border: 1px solid #fff;
-    transition: 0.3s all ease-in-out;
-}
-
-.unstake_btn:hover {
-    color: white;
-    border: 1px solid transparent;
-    background: var(--warning);
 }
 
 @media (min-width:1440px) {
