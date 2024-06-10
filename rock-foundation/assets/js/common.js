@@ -8,13 +8,106 @@ async function startup() {
         setInterval(updateCountdown, 1000);
     }
 
-    loadTickers();
+    await loadTickers();
     loadTickers("menu_");
 
     addOnClicks();
     addWalletConnect();
 
     await bitprint.load();
+
+    checkForSecret();
+}
+
+function checkForSecret() {
+  // a key map of allowed keys
+  var allowedKeys = {
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down',
+    65: 'a',
+    66: 'b',
+    13: 'enter',
+  };
+
+  // the 'official' Konami Code sequence
+  var konamiCode = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'b', 'a', 'enter'];
+
+  // a variable to remember the 'position' the user has reached so far.
+  var konamiCodePosition = 0;
+
+  // add keydown event listener
+  document.addEventListener('keydown', function(e) {
+    // get the value of the key code from the key map
+    var key = allowedKeys[e.keyCode];
+    // get the value of the required key from the konami code
+    var requiredKey = konamiCode[konamiCodePosition];
+
+    // compare the key with the required key
+    if (key == requiredKey) {
+
+      // move to the next key in the konami code sequence
+      konamiCodePosition++;
+
+      // if the last key is reached, activate cheats
+      if (konamiCodePosition == konamiCode.length) {
+        secretbounce();
+        konamiCodePosition = 0;
+      }
+    } else {
+      konamiCodePosition = 0;
+    }
+  });
+}
+
+function secretbounce() {
+  let add = "";
+  for (let rockIndex = 0; rockIndex < myRocks.length; rockIndex++) {
+    let img = '';
+    if (myRocks[rockIndex].id) {
+      img = `./rocks/${myRocks[rockIndex].id}.png`;
+    } else {
+      img = `./rocks/${myRocks[rockIndex]}.png`;
+    }
+    let color = 
+    add += `<div class='bouncyrock' style="position: absolute; 
+            top: 20px;
+            left: 20px;
+            image-rendering: pixelated;
+            border: 5px solid;
+            border-color: hsl(${Math.floor(Math.random() * 360)},${Math.floor(Math.random() * 30) + 70}%,${Math.floor(Math.random() * 20) + 40}%);
+            z-index: 10000;
+            width: 100px;
+            height: 100px;
+            background: url(${img});
+            background-size: 100% 100%;" ></div>`;
+  }
+  document.body.innerHTML = add + document.body.innerHTML;
+
+  var MR = function (X) { return Math.random() * X }, TwL = TweenLite, G = document.querySelectorAll('.bouncyrock');
+
+  function BTweens() {
+      var W = window.innerWidth, H = window.innerHeight, C = 40;
+      TwL.killDelayedCallsTo(BTweens); 
+      TwL.delayedCall(C * 4, BTweens);
+      for (var i = G.length; i--;) {
+          var c = C, BA = [], GWidth = G[i].offsetWidth, GHeight = G[i].offsetHeight;
+          while (c--) { 
+              var SO = MR(1); 
+              BA.push({ x: MR(W - GWidth), y: MR(H - GHeight)}); 
+          };
+          if (G[i].T) { 
+              G[i].T.kill() 
+          }
+          G[i].T = TweenMax.to(G[i], C * 4, { bezier: { timeResolution: 0, type: "soft", values: BA }, delay: i * 0.35, ease: Linear.easeNone });
+      }
+  };
+  BTweens();
+  window.onresize = function () {
+      TwL.killDelayedCallsTo(BTweens); 
+      TwL.delayedCall(0.4, BTweens);
+  };
 }
 
 async function loadTickers(prefix = "") {
