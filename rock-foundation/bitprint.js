@@ -504,9 +504,6 @@ var bitprint = {
       await bitprint.load()
       return bitprint.wallet.address
     },
-    getCurrentAddress() {
-      return bitprint?.walllet?.address;
-    },
     async satsAddress(){
 
       const getAddressOptions = {

@@ -62,9 +62,24 @@ body {
   background-color: transparent;
   padding: 6px 20px;
   transition: all 300ms linear;
+  display:none;
 }
 
 .clear_button:hover {
+  background-color: var(--warning);
+  border: 1px solid transparent;
+  color: white;
+  transition: all 300ms linear;
+}
+
+.clear_filters_button {
+  border: 1px solid var(--secondary-emphasis);
+  background-color: transparent;
+  transition: all 300ms linear;
+  margin-left: 10px;
+}
+
+.clear_filters_button:hover {
   background-color: var(--warning);
   border: 1px solid transparent;
   color: white;
@@ -433,4 +448,7 @@ body {
 }
 .leaderboard_item .rock{
   width: 58px !important;
+}
+.pixelated {
+  image-rendering: pixelated;
 }

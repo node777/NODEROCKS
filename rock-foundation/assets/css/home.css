@@ -18,6 +18,10 @@
     border-bottom: 1px solid #F46A0F;
 }
 
+.hiddenRock {
+    display:none;
+}
+
 .stake_card {
     background: #0D0D0E;
     max-width: 190px;
@@ -94,6 +98,12 @@
 .update_btn:hover {
     color: white;
     border: 1px solid white;
+}
+
+.wallet-address {
+  text-wrap: wrap;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 @media (min-width:1440px) {

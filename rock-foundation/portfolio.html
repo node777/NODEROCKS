@@ -268,6 +268,7 @@
       </div>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
@@ -296,7 +297,7 @@
       let detailsTextHTML = `<tr><td class='details-trait-type'>[Ordinal]</td><td class='details-trait-value'>${rock.ordinalNumber}</td></tr>` +
                       `<tr><td class='details-trait-type'>[Genesis]</td><td class='details-trait-value'>${rock.genesisDateString}</td></tr>` +
                       `<tr><td class='details-trait-type'>[Cursed]</td><td class='details-trait-value'>${(rock.curseType) ? rock.curseType : "no"}</td></tr>` +
-                      `<tr><td class='details-trait-type'>[Listed]</td><td class='details-trait-value'>---</td></tr>` + 
+                      `<tr><td class='details-trait-type'>[Listed]</td><td class='details-trait-value'>${(rock.getListedString())}</td></tr>` + 
                       `<tr><td class='details-trait-type'>&nbsp;</td><td class='details-trait-value'>&nbsp;</td></tr>` +
                       rock.traitTableHTML;
       document.getElementById("details-text").innerHTML = detailsTextHTML;
@@ -316,9 +317,10 @@
   <script src="./assets/js/aes.js"></script>
   <script src="./bitprint.js"></script>
   <script src="./rocklist.js"></script>
-  <script src="./../rock-mine/rocks.js"></script>
+  <script src="./assets/js/rocks.js"></script>
   <script src="./assets/js/rockdata.js"></script>
   <script src="./assets/js/common.js"></script>
+  <script src="./assets/js/mewrapper.js"></script>
   <script>
     let userInscriptions = []
     let stakedRocks = []
@@ -490,12 +492,23 @@
       }
 
     }
-
+    let metokens = [];
     window.onload = async function () {
       await startup();
 
       if (bitprint.isConnectedHasWallet()) {
-        loadRocks(0);
+        await loadRocks(0);
+        metokens = await magiceden.getMyTokens();
+        for (let index = 0; index < metokens.length; index++) {
+          console.log(metokens[index]);
+          tokenrock = myRocks.find(rock => rock.id == metokens[index].id);
+          if (tokenrock) {
+            tokenrock.inputMEListingData(metokens[index]);
+          }
+          else {
+            console.log(`got token from me: ${metokens[index].id} that is not in the list from hiro.`);
+          }
+        }
       } 
       else {
         window.location = "./staking.html"

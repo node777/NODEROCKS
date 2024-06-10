@@ -1,35 +1,51 @@
-
-
 var magiceden = {
-    baseMEurl: "https://api-mainnet.magiceden.dev/v2/ord/btc/",
-    apikey: "",
-    options: {method: 'GET', headers: {accept: 'application/json', Authorization: `Bearer ${this.apikey}`}},
+    baseMEWrapperurl: "http://duckduckduck.io/",
 
+    beforeParamsChar: "/", //for real ME it'd be: "?"
+    collectionSymbol: "", //for real ME it'd be: "collectionSymbol=noderocks&"
+    
     sleep: ms => new Promise(r => setTimeout(r, ms)),
     retryWaitTime: 2000,
 
-    async mecall(url, params, retries = 2) {
-        const fullurl = `${this.baseMEurl}${url}?collectionSymbol=noderocks&${params}`;
-        const response = await fetch(fullurl, options);
+    mecall:async(url, params, retries = 0) => {
+        let fullurl = `${magiceden.baseMEWrapperurl}${url}`;
+        if (params) {
+            fullurl += `${magiceden.beforeParamsChar}${magiceden.collectionSymbol}${params}`;
+        }
+        else {
+        }
+
+        console.log(fullurl);
+        const response = await fetch(fullurl, magiceden.options);
         if (!response.ok)
         {
             if (retries > 0) {
                 console.log(`call to ${fullurl} failed. Retrying in ${(retryWaitTime / 1000)} seconds.`)
-                await sleep(retryWaitTime);
+                await magiceden.sleep(retryWaitTime);
                 retries = retries - 1;
-                return mecall(url, retries);
+                return magiceden.mecall(url, retries);
             }
             return undefined;
         }
-
-        return await response.json();
+        let json = await response.json();
+        console.log(json);
+        return json;
     },
 
-    async getMyTokens(includeUnlisted = true) {
-        return await mecall("tokens", `ownerAddress=${bitprint.getCurrentAddress()}&showAll=${includeUnlisted.toString()}`);
+    getMyTokens:async(includeUnlisted = true) => {
+        let result = await magiceden.mecall("tokens", `${bitprint.wallet.address}`); //"bc1prvdtyd9zhnfqhnzpqq3jkjp5c7xu8lg77ld4senfj427ew8pux8s0vf0du"); //has 163 tokens
+        //let result = await magiceden.mecall("tokens", "bc1prvdtyd9zhnfqhnzpqq3jkjp5c7xu8lg77ld4senfj427ew8pux8s0vf0du"); //has 163 tokens
+        //let result = await magiceden.mecall("tokens", "bc1pduhc4kd3ctkkfhlfg0hz44nfd5k5f9v6uxu4w2wmj3actpd6wc3sg6uu6l"); //has a secret token
+        
+        return result.tokens;
     },
 
-    async getTokens(includeUnlisted = true) {
-        return await mecall("tokens", `showAll=${includeUnlisted.toString()}`);
-    }
+    getTokens:async(ownerAddress) => {
+        return await magiceden.mecall("tokens", `ownerAddress=${ownerAddress}`);
+    },
+
+    getFloors:async(includeUnlisted = true) => {
+        let result = await magiceden.mecall("floors");
+        return result.floors;
+    },
 }
