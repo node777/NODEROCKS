@@ -1,5 +1,5 @@
 var magiceden = {
-    baseMEWrapperurl: "http://srv545295.hstgr.cloud",
+    baseMEWrapperurl: "https://duckapi.xyz",
 
     beforeParamsChar: "/", //for real ME it'd be: "?"
     collectionSymbol: "", //for real ME it'd be: "collectionSymbol=noderocks&"
