@@ -2001,25 +2001,25 @@
 
 
         let totalbtc = 0;
-        for (let traitCount = 4; traitCount >= 2; traitCount--) {
-          let numTraitsRocks = myRocks.filter(rock => rock.traitNum == traitCount);
-          let len = numTraitsRocks.length;
-          let price = floors[traitCount] != -1 ? floors[traitCount] : highest;
-          price = price * priceMod;
-
-          let amt = (len * price);
-          totalbtc += amt;
-          
-          WriteTraitDetails(traitCount.toString(), len, amt, highestBTC, highestUSD);
-
-          numTraitsRocks.forEach(rock => rock.floorType = traitCount);
-        }
+        let usedIds = 5;
 
         {
           let specials = [];
           cliffs = myRocks.filter(rock => rock.Body == 'Cliff');
-          secrets = myRocks.filter(rock => rock.Secret != undefined && !cliffs.find(element => element.id == rock.id));
+          console.log("cliffs");
+          console.log(cliffs);
+
+          usedIds = new Set(cliffs.map(cliff => cliff.id));
+
+          secrets = myRocks.filter(rock => rock.traitsDirect['Secret'] != undefined)
           specials = cliffs.concat(secrets);
+
+          console.log("secrets");
+          console.log(secrets);
+
+          usedIds = new Set(specials.map(special => special.id));
+          console.log("usedIds");
+          console.log(usedIds);
 
           let len = specials.length;
           let cliffPrice = (floors['cliff'] != -1) ? floors['cliff'] : highest;
@@ -2033,12 +2033,30 @@
           WriteTraitDetails('special', len, (cliffamt + secretamt), highestBTC, highestUSD);
 
           if (cliffPrice < secretPrice) {
-            cliffs.forEach(rock => { rock.floorType = `cliff`});
-            secrets.forEach(rock => { rock.floor['type'] = `secret`});
+            if (cliffs.length > 0)
+              cliffs.forEach(rock => { rock.floorType = `cliff`});
+            if (secrets.length > 0)
+              secrets.forEach(rock => { rock.floorType = `secret`});
           } else {
-            secrets.forEach(rock => { rock.floor['type'] = `secret`});
-            cliffs.forEach(rock => { rock.floor['type'] = `cliff`});
+            if (secrets.length > 0)
+              secrets.forEach(rock => { rock.floorType = `secret`});
+            if (cliffs.length > 0)
+              cliffs.forEach(rock => { rock.floorType = `cliff`});
           }
+        }
+
+        for (let traitCount = 4; traitCount >= 2; traitCount--) {
+          let numTraitsRocks = myRocks.filter(rock => rock.traitNum == traitCount && !usedIds.has(rock.id));
+          let len = numTraitsRocks.length;
+          let price = floors[traitCount] != -1 ? floors[traitCount] : highest;
+          price = price * priceMod;
+
+          let amt = (len * price);
+          totalbtc += amt;
+          
+          WriteTraitDetails(traitCount.toString(), len, amt, highestBTC, highestUSD);
+
+          numTraitsRocks.forEach(rock => { if (rock.floorType == undefined) { rock.floorType = traitCount; } } );
         }
 
         totalPortfolioValue = totalbtc; //btc

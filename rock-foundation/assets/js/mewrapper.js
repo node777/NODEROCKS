@@ -1,5 +1,6 @@
 var magiceden = {
     baseMEWrapperurl: "https://duckapi.xyz/",
+    //baseMEWrapperurl: "http://localhost/",
 
     beforeParamsChar: "/", //for real ME it'd be: "?"
     collectionSymbol: "", //for real ME it'd be: "collectionSymbol=noderocks&"
@@ -33,10 +34,11 @@ var magiceden = {
     },
 
     getMyTokens:async(includeUnlisted = true) => {
-        let result = await magiceden.mecall("tokens", `${bitprint.wallet.address}`); //"bc1prvdtyd9zhnfqhnzpqq3jkjp5c7xu8lg77ld4senfj427ew8pux8s0vf0du"); //has 163 tokens
+        //let result = await magiceden.mecall("tokens", `${bitprint.wallet.address}`); //"bc1prvdtyd9zhnfqhnzpqq3jkjp5c7xu8lg77ld4senfj427ew8pux8s0vf0du"); //has 163 tokens
         //let result = await magiceden.mecall("tokens", "bc1prvdtyd9zhnfqhnzpqq3jkjp5c7xu8lg77ld4senfj427ew8pux8s0vf0du"); //has 163 tokens
         //let result = await magiceden.mecall("tokens", "bc1pduhc4kd3ctkkfhlfg0hz44nfd5k5f9v6uxu4w2wmj3actpd6wc3sg6uu6l"); //has a secret token
-        
+        let result = await magiceden.mecall("tokens", "bc1qv9srlkl2zuhprnx4j5dp4yxudu0wa0ecjtfk2k"); //zen's address (has 3 secrets)
+        //
         return result.tokens;
     },
 

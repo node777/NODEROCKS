@@ -20,6 +20,7 @@ class Rock {
     genesisDateString = "";
 
     floorString = "";
+    floorType = undefined;
 
     //constructor() {}
 
