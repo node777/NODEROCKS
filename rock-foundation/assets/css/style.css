@@ -324,7 +324,7 @@ body {
 
 .details-popup {
   position:absolute;
-  top:50%;
+  top:60%;
   left:50%;
   width:75%;
   transform: translate(-50%, -50%);

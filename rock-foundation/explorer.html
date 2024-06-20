@@ -1881,6 +1881,30 @@
     </div>
   </div>
 
+  <div class="details-container" id="details-popup" onclick="closeDetails()">
+    <div class="details-popup" onclick="">
+      <div class="details-content-topdiv">
+        <p class="fs_lg px-2 fw-bold text-white bg-black text-left top-0 end-0" style="margin:0px">
+          <span id="details-name"></span><br>
+          <span id="details-inscriptionid" class="details-content-id fs_sm px-2 fw-bold text-white bg-black text-left top-0 end-0"></span>
+        </p>
+      </div>
+      <div class="details-content" onclick="">
+        <div class="details-content-leftdiv">
+          <img class="details-content-img" id="details-image" src="" />
+        </div>
+        <div class="details-content-rightdiv">
+          <div id='details-content-text' class="details-content-text">
+            <br>
+            <table class="fs_md px-2 fw-bold text-white text-center bg-black top-0 end-0" id="details-text">
+            </table>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
@@ -1929,7 +1953,7 @@
       let desktopTemplate = 
       `
           <div class="bg-black rarest_card px-3 py_13 px-sm-0 py-sm-3 px-md-4 col-auto">
-            <img class="w-100 pixelated" src="${rock.image}" alt="${rock.id}" />
+            <img class="w-100 pixelated rock" src="${rock.image}" alt="${rock.id}" onclick="showDetails('${rock.id}')" />
             <p class="fw-bold text-center fs_lg text-white mb-1 pt-2">
               ${rock.name}
             </p>
@@ -1944,7 +1968,7 @@
       `
               <div class="bg-black p-xxl-4 py-3">
                 <div class="px-3">
-                  <img class="w-100 pixelated" src="${rock.image}" alt="${rock.id}" />
+                  <img class="w-100 pixelated rock" src="${rock.image}" alt="${rock.id}" onclick="showDetails('${rock.id}')" />
                   <p class="fw-bold text-center fs_xl text-white mb-1 pt-3">
                     ${rock.name}
                   </p>
@@ -2128,7 +2152,7 @@
                         ${floorPriceHTML}
                       </div>
                     </div>
-                    <img class="w-100 pixelated" src="${rock.image}" alt="${rock.name}" />
+                    <img class="w-100 pixelated rock" src="${rock.image}" alt="${rock.name}" onclick="showDetails('${rock.id}')" />
                   </div>
                   <p class="my-2 fw-bold text-center text-white fs_sm">
                     ${rock.name}
@@ -2284,6 +2308,35 @@
       `;
       return filterTemplate;
     }
+
+    function showDetails(rockid) {
+      let rock = myRocks.find(rok => rok.id == rockid);
+
+      document.getElementById("details-image").setAttribute('src', rock.image);
+      document.getElementById("details-image").onclick = () => {window.location = rock.image};
+      document.getElementById("details-name").textContent = rock.name;
+      document.getElementById("details-inscriptionid").textContent = rock.id;
+
+      let detailsTextHTML = `<tr><td class='details-trait-type'>[Ordinal]</td><td class='details-trait-value'>${rock.ordinalNumber}</td></tr>` +
+                      `<tr><td class='details-trait-type'>[Genesis]</td><td class='details-trait-value'>${rock.genesisDateString}</td></tr>` +
+                      //`<tr><td class='details-trait-type'>[Cursed]</td><td class='details-trait-value'>${(rock.curseType) ? rock.curseType : "no"}</td></tr>` +
+                      `<tr><td class='details-trait-type'>[Listed]</td><td class='details-trait-value'>${(rock.getListedString())}</td></tr>` + 
+                      `<tr><td class='details-trait-type'>[Last Sold]</td><td class='details-trait-value'>${(rock.getLastSaleString())}</td></tr>` + 
+                      `<tr><td class='details-trait-type'>&nbsp;</td><td class='details-trait-value'>&nbsp;</td></tr>` +
+                      rock.traitTableHTML;
+      document.getElementById("details-text").innerHTML = detailsTextHTML;
+
+      var popup = document.getElementById("details-popup");
+      popup.classList.add("popup_open");
+      popup.style.display = "";
+    }
+
+    function closeDetails() {
+      var popup = document.getElementById("details-popup");
+      popup.classList.remove("popup_open");
+      popup.style.display = "none";
+    }
+    closeDetails();
 
 
     let metokens = [];

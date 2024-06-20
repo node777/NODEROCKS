@@ -80,6 +80,7 @@ class Rock {
         this.listed = item.listed;
         this.owner = item.owner;
         this.listedPrice = item.listedPrice;
+        this.lastSalePrice = item.lastSalePrice;
     }
 
     inputMEListingData(item) {
@@ -94,6 +95,12 @@ class Rock {
         if (this.listed == false)
             return "no";
         return this.listedPrice / 100000000 + " btc";
+    }
+
+    getLastSaleString() {
+        if (this.lastSalePrice == undefined || this.lastSalePrice == 0)
+            return "---";
+        return this.lastSalePrice / 100000000 + " btc";
     }
 }
 
