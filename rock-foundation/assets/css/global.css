@@ -31,9 +31,11 @@
 }
 
 .search_btn {
-  padding: 1px 20px;
+  padding: 5px;
+  margin: 10px 10px;
   transition: all 300ms linear;
   border: 1px solid transparent !important;
+  text-wrap:nowrap;
 }
 
 .search_btn:hover {
@@ -333,10 +335,6 @@ body {
 
   .explore_tab_parent {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .search_btn {
-    padding: 1px 18px;
   }
 
   .header_parent {

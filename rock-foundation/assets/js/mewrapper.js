@@ -29,6 +29,8 @@ var magiceden = {
             return undefined;
         }
         let json = await response.json();
+        //console.log(json);
+        console.log('hi: ');
         console.log(json);
         return json;
     },
@@ -43,7 +45,8 @@ var magiceden = {
     },
 
     getTokens:async(ownerAddress) => {
-        return await magiceden.mecall("tokens", `ownerAddress=${ownerAddress}`);
+        let result = await magiceden.mecall("tokens", `${ownerAddress}`);
+        return result.tokens;
     },
 
     getFloors:async(includeUnlisted = true) => {

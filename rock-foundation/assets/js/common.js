@@ -243,9 +243,12 @@ async function connectButtonAsync(providerName) {
     await bitprint.connect(providerName);
 
     if (bitprint.isConnectedHasWallet()) {
-        if (window.location.toString().includes('staking.html')) {
-            window.location = "./staking-dashboard.html";
-        }
+      if (window.location.toString().includes('staking.html')) {
+          window.location = "./staking-dashboard.html";
+      }
+      if (window.location.toString().includes('explorer.html')) {
+          window.location = "./explorer.html";
+      }
     }
 }
 let pageLogElementId = "logger";
