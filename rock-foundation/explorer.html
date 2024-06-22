@@ -253,6 +253,35 @@
           </div>
         </div>
       </div>
+      <div class="d-none d-lg-block">
+        <div class="mb-2 d-flex justify-content-between align-items-center">
+          <div class="col-6">
+            <div class="bg-black py_13">
+              <h3 class="fw-bold fs_lg text-white mb-0 text-center mx-auto">
+                <span class="fw-bold fs_md text-white">Level: </span>
+                <span class="rock-level-current fw-bold fs_lg text-white mb-0 text-center mx-auto">Holder</span>
+                <span class="rock-level-next text_warning fw-bold fs_md mb-0 text-center mx-auto">(22 to Whale)</span>
+              </h3>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="bg-black py_13 mx-1">
+              <h3 class="text-white fs_md fw-bold mb-0 text-center">
+                Staked
+                <span class="staked-rocks-num text_warning fs_lg ps-1 ps-xl-3">420</span>
+              </h3>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="bg-black py_13">
+              <h3 class="text-white fs_md fw-bold mb-0 text-center">
+                Airdrop Eligible
+                <span class="airdrop-eligible text_warning fs_lg ps-1 ps-xl-3">Yes</span>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
       <div
         class="bg-black text-white align-items-center d-flex justify-content-center portfolio_sm_heading gap-sm-3 gap-2 flex-sm-row py-1 py-sm-3 mb-2 d-lg-none mt-2 flex-wrap">
         <h3 class="mb-0 fs_md fw-bold">Portfolio Value</h3>
@@ -274,6 +303,24 @@
           <h3 class="mb-0 py-1 fs_sm d-flex align-items-center flex-sm-row">
             Listed Rocks
             <span class="listed-rocks-num text_warning fs_lg ps-2 ps-sm-3">69</span>
+          </h3>
+        </div>
+        <div class="bg-black text-white align-items-center d-flex justify-content-center portfolio_sm_heading gap-sm-3 gap-2 flex-sm-row py-1 py-sm-3 mb-2 d-lg-none mt-2 flex-wrap">
+        <h3 class="mb-0 fs_md fw-bold">Level: </h3>
+        <h2 class="rock-level-current mb-0 fs_xl fs_18 fw-bold text-wrap">Holder</h2>
+        <h2 class="rock-level-next text_warning mb-0 fs_xl fs_18 fw-bold text-wrap">22 to Whale</h2>
+      </div>
+      <div class="header_parent d-lg-none mb-3">
+        <div class="bg-black d-flex justify-content-center align-items-center text-white fw-bold">
+          <h3 class="mb-0 py-1 fs_sm fw-bold d-flex align-items-center flex-sm-row">
+            Staked
+            <span class="staked-rocks-num text_warning fs_lg ps-2 ps-sm-3">420</span>
+          </h3>
+        </div>
+        <div class="bg-black d-flex justify-content-center align-items-center text-white fw-bold">
+          <h3 class="mb-0 py-1 fs_sm d-flex align-items-center flex-sm-row">
+            Airdrop Eligible
+            <span class="airdrop-eligible text_warning fs_lg ps-2 ps-sm-3">Yes</span>
           </h3>
         </div>
         <div
@@ -1905,6 +1952,13 @@
     </div>
   </div>
 
+  <div class="loader-container" id="loader">
+    <div class="loader-popup">
+      <div class="loader">
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
@@ -2322,6 +2376,7 @@
                       //`<tr><td class='details-trait-type'>[Cursed]</td><td class='details-trait-value'>${(rock.curseType) ? rock.curseType : "no"}</td></tr>` +
                       `<tr><td class='details-trait-type'>[Listed]</td><td class='details-trait-value'>${(rock.getListedString())}</td></tr>` + 
                       `<tr><td class='details-trait-type'>[Last Sold]</td><td class='details-trait-value'>${(rock.getLastSaleString())}</td></tr>` + 
+                      `<tr><td class='details-trait-type'>[Staked]</td><td class='details-trait-value'>${(rock.staked ? 'Yes' : 'No')}</td></tr>` + 
                       `<tr><td class='details-trait-type'>&nbsp;</td><td class='details-trait-value'>&nbsp;</td></tr>` +
                       rock.traitTableHTML;
       document.getElementById("details-text").innerHTML = detailsTextHTML;
@@ -2338,6 +2393,37 @@
     }
     closeDetails();
 
+    let stakedRocks = [];
+    let unstakedRocks = [];
+    async function getStakedRocks() {
+      try {
+        let response = await fetch("https://bitscape.io/api/staked", {
+          method: "POST",
+          body: JSON.stringify({
+            address: bitprint.wallet.address
+          })
+        });
+        let stakedRes = await response.json();
+        console.log(stakedRes);
+        if (!stakedRes.error) {
+          for (rock in stakedRes) {
+            myRock = myRocks.find(rok => rok.id == rock);
+            if (myRock) {
+              if (stakedRes[rock].date_staked) {
+                stakedRocks.push(rock);
+                myRock.staked = true;
+              }
+              else {
+                unstakedRocks.push(rock);
+                myRock.staked = false;
+              }
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
 
     let metokens = [];
     let myRocks = [];
@@ -2376,7 +2462,46 @@
         FilloutTabs();
 
         CreateFilters();
+
+        await getStakedRocks();
+
+        levels = [
+          {num:1, name:'RockHolder'},
+          {num:10, name:'RockStar'},
+          {num:20, name:'RockHard'},
+          {num:50, name:'RockWhale'},
+          {num:100, name:'Rocktopus'},
+          {num:200, name:'RockDegen'},
+        ];
+
+        let currentLevelText = "-";
+        let nextLevelText = "-";
+        for (level in levels) {
+          if (myRocks.length >= levels[level].num) {
+            currentLevelText = levels[level].name;
+          }
+          else {
+            nextLevelText = `(${levels[level].num - myRocks.length} to ${levels[level].name})`;
+            break;
+          }
+        }
+
+        document.querySelectorAll('.rock-level-current').forEach(element => {
+          element.innerHTML = currentLevelText;
+        });
+        document.querySelectorAll('.rock-level-next').forEach(element => {
+          element.innerHTML = nextLevelText;
+        });
+        document.querySelectorAll('.staked-rocks-num').forEach(element => {
+          element.innerHTML = stakedRocks ? stakedRocks.length : "0";
+        });
+        document.querySelectorAll('.airdrop-eligible').forEach(element => {
+          element.innerHTML = (stakedRocks && stakedRocks.length > 0) ? "Yes" : "No";
+        });
+
+
         console.log('loaded');
+        document.getElementById('loader').style.display = "none";
       } 
       else {
         window.location = "./staking.html"
