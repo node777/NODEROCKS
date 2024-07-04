@@ -205,19 +205,16 @@
           <h3 class="text-white py-2 fw-bold fs_lg pe-lg-4 pe-xl-5 ps-xl-5 ps-3 mb-0 d-none d-lg-block text-nowrap">
             NodeRocks Explorer
           </h3>
-          <div class="d-flex bg_secondary justify-content-center max_w_lg_100 m-2">
-            <div class="d-flex justify-content-between w-100 align-items-center">
-              <a class="wallet-address text_warning text-decoration-none px-xl-4 mx-lg-2 py-lg-2 fs_md mb-0 d-none d-md-inline-block mx-auto"
-                href="#">bc1prvdtyd9zhnfqhnzpqq3jkjp5c7xu8lg77ld4senfj427ew8pux8s0vf0du</a>
-              <a class="wallet-address text_warning text-decoration-none mx-auto fs_md mb-0 d-md-none" href="#">bc1prvd...8s0vf0du</a>
-              <div class="d-lg-inline d-none">
-                <button class="clear_button text_secondary_emphasis fs_md fw-bold">
-                  Clear
+          <div class="d-flex bg_secondary justify-content-center m-2" style="width:100%">
+            <div class="d-flex justify-content-between align-items-center" style="width:100%">
+              <input type="text" id="wallet-address" class="wallet-address text_warning fs_sm"
+                value="bc1prvdtyd9zhnfqhnzpqq3jkjp5c7xu8lg77ld4senfj427ew8pux8s0vf0du" />
+              <div class="d-flex justify-content-between ps-4 ps-md-0 d-inline">
+                <button id="search_btn" class="text-white bg_warning border-0 fs_md fw-bold search_btn" onclick="LoadData();">
+                  Search
                 </button>
-              </div>
-              <div class="ps-4 ps-md-0 d-inline">
-                <button class="text-white bg_warning border-0 fs_lg fw-bold d-lg-none search_btn">
-                  Search BTC
+                <button id="search_btn" class="text-white bg_warning border-0 fs_md fw-bold search_btn" onclick="GetMyTokens();">
+                  Mine
                 </button>
               </div>
             </div>
@@ -253,6 +250,83 @@
           </div>
         </div>
       </div>
+      <div class="d-none d-lg-block">
+        <div class="mb-2 d-flex justify-content-between align-items-center">
+          <div class="col-6">
+            <div class="bg-black py_13">
+              <h3 class="fw-bold fs_lg text-white mb-0 text-center mx-auto">
+                <span class="fw-bold fs_md text-white">Level: </span>
+                <span class="rock-level-current fw-bold fs_lg text-white mb-0 text-center mx-auto">Holder</span>
+                <span class="rock-level-next text_warning fw-bold fs_md mb-0 text-center mx-auto">(22 to Whale)</span>
+              </h3>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="bg-black py_13 mx-1">
+              <h3 class="text-white fs_md fw-bold mb-0 text-center">
+                Staked
+                <span class="staked-rocks-num text_warning fs_lg ps-1 ps-xl-3">420</span>
+              </h3>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="bg-black py_13">
+              <h3 class="text-white fs_md fw-bold mb-0 text-center">
+                Airdrop Eligible
+                <span class="airdrop-eligible text_warning fs_lg ps-1 ps-xl-3">Yes</span>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-none d-lg-block">
+        <div class="mb-3 d-flex justify-content-xl-between justify-content-center align-items-center mx-auto">
+          <div class="col-3">
+            <div class="d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center bg-black">
+              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
+                <span>Cliffs & Secrets (<span class="num-special-trait">1</span>)</span>
+              </h3>
+              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1"></h3>
+                <span class="price-btc-special-trait text-white">0.21</span>
+                <span class="price-usd-special-trait text_warning fs_md fw-bold">($42,000)</span>
+              </h3>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center bg-black">
+              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
+                <span>2-traits (<span class="num-2-trait">3</span>)</span>
+              </h3>
+              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1"></h3>
+                <span class="price-btc-2-trait text-white">0.21</span>
+                <span class="price-usd-2-trait text_warning fs_md fw-bold">($42,000)</span>
+              </h3>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center bg-black">
+              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
+                <span>3-traits (<span class="num-3-trait">54</span>)</span>
+              </h3>
+              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1"></h3>
+                <span class="price-btc-3-trait text-white">0.21</span>
+                <span class="price-usd-3-trait text_warning fs_md fw-bold">($42,000)</span>
+              </h3>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center bg-black">
+              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
+                <span>4-traits (<span class="num-4-trait">347</span>)</span>
+              </h3>
+              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1"></h3>
+                <span class="price-btc-4-trait text-white">0.21</span>
+                <span class="price-usd-4-trait text_warning fs_md fw-bold">($42,000)</span>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
       <div
         class="bg-black text-white align-items-center d-flex justify-content-center portfolio_sm_heading gap-sm-3 gap-2 flex-sm-row py-1 py-sm-3 mb-2 d-lg-none mt-2 flex-wrap">
         <h3 class="mb-0 fs_md fw-bold">Portfolio Value</h3>
@@ -276,10 +350,28 @@
             <span class="listed-rocks-num text_warning fs_lg ps-2 ps-sm-3">69</span>
           </h3>
         </div>
+        <div class="bg-black text-white align-items-center d-flex justify-content-center portfolio_sm_heading gap-sm-3 gap-2 flex-sm-row py-1 py-sm-3 mb-2 d-lg-none mt-2 flex-wrap">
+        <h3 class="mb-0 fs_md fw-bold">Level: </h3>
+        <h2 class="rock-level-current mb-0 fs_xl fs_18 fw-bold text-wrap">Holder</h2>
+        <h2 class="rock-level-next text_warning mb-0 fs_xl fs_18 fw-bold text-wrap">22 to Whale</h2>
+      </div>
+      <div class="header_parent d-lg-none mb-3">
+        <div class="bg-black d-flex justify-content-center align-items-center text-white fw-bold">
+          <h3 class="mb-0 py-1 fs_sm fw-bold d-flex align-items-center flex-sm-row">
+            Staked
+            <span class="staked-rocks-num text_warning fs_lg ps-2 ps-sm-3">420</span>
+          </h3>
+        </div>
+        <div class="bg-black d-flex justify-content-center align-items-center text-white fw-bold">
+          <h3 class="mb-0 py-1 fs_sm d-flex align-items-center flex-sm-row">
+            Airdrop Eligible
+            <span class="airdrop-eligible text_warning fs_lg ps-2 ps-sm-3">Yes</span>
+          </h3>
+        </div>
         <div
           class="bg-black d-flex px-1 header_parent flex-wrap py-1 align-items-center gap-sm-1 justify-content-center align-items-center text-white fw-bold gap-1">
           <h3 class="text-white fs_xsm mb-0 gap-sm-1 d-flex align-items-center flex-sm-row">
-            Cliffs & Secrets (<span class="num-special-trait">1</span>)
+            <span>Cliffs & Secrets (<span class="num-special-trait">1</span>)</span>
             <span class="text_secondary_emphasis px-2"> | </span> 
             <span class="price-btc-special-trait">0.21</span>
             <span class="price-usd-special-trait text_warning fs_xsm">($42,000)</span>
@@ -288,7 +380,7 @@
         <div
           class="bg-black d-flex px-1 header_parent flex-wrap py-1 align-items-center gap-sm-1 justify-content-center align-items-center text-white fw-bold">
           <h3 class="text-white fs_xsm mb-0 gap-sm-1 d-flex justify-content-center flex-sm-row align-items-center">
-            2-traits (<span class="num-2-trait">3</span>)
+            <span>2-traits (<span class="num-2-trait">3</span>)</span>
             <span class="text_secondary_emphasis px-2"> | </span> 
             <span class="price-btc-2-trait">0.21</span>
             <span class="price-usd-2-trait text_warning fs_xsm">($42,000)</span>
@@ -297,7 +389,7 @@
         <div
           class="bg-black d-flex px-1 header_parent flex-wrap py-1 align-items-center gap-sm-1 justify-content-center align-items-center text-white fw-bold">
           <h3 class="text-white fs_xsm mb-0 gap-sm-1 d-flex justify-content-center flex-sm-row align-items-center">
-            3-traits (<span class="num-3-trait">34</span>)
+            <span>3-traits (<span class="num-3-trait">34</span>)</span>
             <span class="text_secondary_emphasis px-2"> | </span> 
             <span class="price-btc-3-trait">0.21</span>
             <span class="price-usd-3-trait text_warning fs_xsm">($42,000)</span>
@@ -305,59 +397,14 @@
         </div>
         <div class="bg-black d-flex px-1 header_parent flex-wrap py-1 align-items-center gap-sm-1 justify-content-center align-items-center text-white fw-bold">
           <h3 class="text-white fs_xsm mb-0 gap-sm-1 d-flex justify-content-center flex-sm-row align-items-center">
-            4-traits (<span class="num-4-trait">347</span>)
+            <span>4-traits (<span class="num-4-trait">347</span>)</span>
             <span class="text_secondary_emphasis px-2"> | </span> 
             <span class="price-btc-4-trait">0.21</span>
             <span class="price-usd-4-trait text_warning fs_xsm">($42,000)</span>
           </h3>
         </div>
       </div>
-      <div class="d-none d-lg-block">
-        <div class="mb-3 d-flex justify-content-xl-between justify-content-center align-items-center mx-auto">
-          <div class="col-3">
-            <div class="d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center bg-black">
-              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
-                Cliffs & Secrets (<span class="num-special-trait">1</span>)
-              </h3>
-              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1"></h3>
-                <span class="price-btc-special-trait text-white">0.21</span>
-                <span class="price-usd-special-trait text_warning fs_md fw-bold">($42,000)</span>
-              </h3>
-            </div>
-          </div><div class="col-3">
-            <div class="d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center bg-black">
-              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
-                2-traits (<span class="num-2-trait">3</span>)
-              </h3>
-              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1"></h3>
-                <span class="price-btc-2-trait text-white">0.21</span>
-                <span class="price-usd-2-trait text_warning fs_md fw-bold">($42,000)</span>
-              </h3>
-            </div>
-          </div><div class="col-3">
-            <div class="d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center bg-black">
-              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
-                3-traits (<span class="num-3-trait">54</span>)
-              </h3>
-              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1"></h3>
-                <span class="price-btc-3-trait text-white">0.21</span>
-                <span class="price-usd-3-trait text_warning fs_md fw-bold">($42,000)</span>
-              </h3>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="d-flex py_13 min_h_53 flex-column gap-xl-2 flex-xl-row justify-content-center align-items-center bg-black">
-              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1">
-                4-traits (<span class="num-4-trait">347</span>)
-              </h3>
-              <h3 class="text-white fw-bold fs_md mb-0 d-flex justify-content-center justify-content-xl-center text-center text-xl-start justify-content-center gap-1"></h3>
-                <span class="price-btc-4-trait text-white">0.21</span>
-                <span class="price-usd-4-trait text_warning fs_md fw-bold">($42,000)</span>
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
     <div class="d-lg-none px-lg-3">
       <div class="mx_12">
@@ -1881,6 +1928,37 @@
     </div>
   </div>
 
+  <div class="details-container" id="details-popup" onclick="closeDetails()">
+    <div class="details-popup" onclick="">
+      <div class="details-content-topdiv">
+        <p class="fs_lg px-2 fw-bold text-white bg-black text-left top-0 end-0" style="margin:0px">
+          <span id="details-name"></span><br>
+          <span id="details-inscriptionid" class="details-content-id fs_sm px-2 fw-bold text-white bg-black text-left top-0 end-0"></span>
+        </p>
+      </div>
+      <div class="details-content" onclick="">
+        <div class="details-content-leftdiv">
+          <img class="details-content-img" id="details-image" src="" />
+        </div>
+        <div class="details-content-rightdiv">
+          <div id='details-content-text' class="details-content-text">
+            <br>
+            <table class="fs_md px-2 fw-bold text-white text-center bg-black top-0 end-0" id="details-text">
+            </table>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loader-container" id="loader">
+    <div class="loader-popup">
+      <div class="loader">
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
@@ -1902,10 +1980,10 @@
       document.getElementById("rarest-noderocks-mobile").innerHTML = '';
 
       rares = [];
-      var cliffs = myRocks.filter(rock => rock.Body == "Cliff");
+      var cliffs = myRocks.filter(rock => rock.traitsDirect['Body'] == "Cliff");
       rares = rares.concat(cliffs);
 
-      var secrets = myRocks.filter(rock => rock.Secret != undefined && !rares.find(element => element.id == rock.id));
+      var secrets = myRocks.filter(rock => rock.traitsDirect['Secret'] != undefined && !rares.find(element => element.id == rock.id));
       rares = rares.concat(secrets);
 
       var traitrocks = myRocks.filter(rock => rock.traitNum == 2 && !rares.find(element => element.id == rock.id));
@@ -1929,7 +2007,7 @@
       let desktopTemplate = 
       `
           <div class="bg-black rarest_card px-3 py_13 px-sm-0 py-sm-3 px-md-4 col-auto">
-            <img class="w-100 pixelated" src="${rock.image}" alt="${rock.id}" />
+            <img class="w-100 pixelated rock" src="${rock.image}" alt="${rock.id}" onclick="showDetails('${rock.id}')" />
             <p class="fw-bold text-center fs_lg text-white mb-1 pt-2">
               ${rock.name}
             </p>
@@ -1944,7 +2022,7 @@
       `
               <div class="bg-black p-xxl-4 py-3">
                 <div class="px-3">
-                  <img class="w-100 pixelated" src="${rock.image}" alt="${rock.id}" />
+                  <img class="w-100 pixelated rock" src="${rock.image}" alt="${rock.id}" onclick="showDetails('${rock.id}')" />
                   <p class="fw-bold text-center fs_xl text-white mb-1 pt-3">
                     ${rock.name}
                   </p>
@@ -2001,25 +2079,18 @@
 
 
         let totalbtc = 0;
-        for (let traitCount = 4; traitCount >= 2; traitCount--) {
-          let numTraitsRocks = myRocks.filter(rock => rock.traitNum == traitCount);
-          let len = numTraitsRocks.length;
-          let price = floors[traitCount] != -1 ? floors[traitCount] : highest;
-          price = price * priceMod;
-
-          let amt = (len * price);
-          totalbtc += amt;
-          
-          WriteTraitDetails(traitCount.toString(), len, amt, highestBTC, highestUSD);
-
-          numTraitsRocks.forEach(rock => rock.floorType = traitCount);
-        }
+        let usedIds = 5;
 
         {
           let specials = [];
-          cliffs = myRocks.filter(rock => rock.Body == 'Cliff');
-          secrets = myRocks.filter(rock => rock.Secret != undefined && !cliffs.find(element => element.id == rock.id));
+          cliffs = myRocks.filter(rock => rock.traitsDirect['Body'] == 'Cliff');
+
+          usedIds = new Set(cliffs.map(cliff => cliff.id));
+
+          secrets = myRocks.filter(rock => rock.traitsDirect['Secret'] != undefined)
           specials = cliffs.concat(secrets);
+
+          usedIds = new Set(specials.map(special => special.id));
 
           let len = specials.length;
           let cliffPrice = (floors['cliff'] != -1) ? floors['cliff'] : highest;
@@ -2033,12 +2104,30 @@
           WriteTraitDetails('special', len, (cliffamt + secretamt), highestBTC, highestUSD);
 
           if (cliffPrice < secretPrice) {
-            cliffs.forEach(rock => { rock.floorType = `cliff`});
-            secrets.forEach(rock => { rock.floor['type'] = `secret`});
+            if (cliffs.length > 0)
+              cliffs.forEach(rock => { rock.floorType = `cliff`});
+            if (secrets.length > 0)
+              secrets.forEach(rock => { rock.floorType = `secret`});
           } else {
-            secrets.forEach(rock => { rock.floor['type'] = `secret`});
-            cliffs.forEach(rock => { rock.floor['type'] = `cliff`});
+            if (secrets.length > 0)
+              secrets.forEach(rock => { rock.floorType = `secret`});
+            if (cliffs.length > 0)
+              cliffs.forEach(rock => { rock.floorType = `cliff`});
           }
+        }
+
+        for (let traitCount = 4; traitCount >= 2; traitCount--) {
+          let numTraitsRocks = myRocks.filter(rock => rock.traitNum == traitCount && !usedIds.has(rock.id));
+          let len = numTraitsRocks.length;
+          let price = floors[traitCount] != -1 ? floors[traitCount] : highest;
+          price = price * priceMod;
+
+          let amt = (len * price);
+          totalbtc += amt;
+          
+          WriteTraitDetails(traitCount.toString(), len, amt, highestBTC, highestUSD);
+
+          numTraitsRocks.forEach(rock => { if (rock.floorType == undefined) { rock.floorType = traitCount; } } );
         }
 
         totalPortfolioValue = totalbtc; //btc
@@ -2063,15 +2152,22 @@
     }
 
     function GetRocksHTMLForTab(listed) {
-      let rocks = [];
-      if (listed == undefined)
-        rocks = myRocks;
-      else
-        rocks = myRocks.filter(element => element.listed == listed);
-
       let html = "";
-      for (let rockIndex = 0; rockIndex < rocks.length; rockIndex++) {
-        html += GetRockHTML(rocks[rockIndex], rockIndex);
+      let rocks = [];
+
+      if (myRocks.length == 0) {
+        html = `<div class="no-rocks-container"><div class="no-rocks-div"><span class="no-rocks-span">No Rocks!</span><br>
+        <a class="me-link" href="https://magiceden.io/ordinals/marketplace/noderocks">Buy NodeRocks on MagicEden</a></div></div>`;
+      }
+      else {
+        if (listed == undefined)
+          rocks = myRocks;
+        else
+          rocks = myRocks.filter(element => element.listed == listed);
+
+        for (let rockIndex = 0; rockIndex < rocks.length; rockIndex++) {
+          html += GetRockHTML(rocks[rockIndex], rockIndex);
+        }
       }
 
       let data = {};
@@ -2110,7 +2206,7 @@
                         ${floorPriceHTML}
                       </div>
                     </div>
-                    <img class="w-100 pixelated" src="${rock.image}" alt="${rock.name}" />
+                    <img class="w-100 pixelated rock" src="${rock.image}" alt="${rock.name}" onclick="showDetails('${rock.id}')" />
                   </div>
                   <p class="my-2 fw-bold text-center text-white fs_sm">
                     ${rock.name}
@@ -2151,7 +2247,7 @@
     function ExecuteFilter() {
       for (let rockIndex = 0; rockIndex < myRocks.length; rockIndex++) {
         let isActive = IsRockActiveInFilter(myRocks[rockIndex]);
-        console.log(`Rock ${rockIndex}: ${isActive ? "active" : "hidden"}`);
+        //console.log(`Rock ${rockIndex}: ${isActive ? "active" : "hidden"}`);
         document.querySelectorAll(`.rock-${myRocks[rockIndex].number}`).forEach(element => {
           element.style.display = isActive ? "" : "none";
         });
@@ -2267,6 +2363,170 @@
       return filterTemplate;
     }
 
+    function showDetails(rockid) {
+      let rock = myRocks.find(rok => rok.id == rockid);
+
+      document.getElementById("details-image").setAttribute('src', rock.image);
+      document.getElementById("details-image").onclick = () => {window.location = rock.image};
+      document.getElementById("details-name").textContent = rock.name;
+      document.getElementById("details-inscriptionid").textContent = rock.id;
+
+      let detailsTextHTML = `<tr><td class='details-trait-type'>[Ordinal]</td><td class='details-trait-value'>${rock.ordinalNumber}</td></tr>` +
+                      `<tr><td class='details-trait-type'>[Genesis]</td><td class='details-trait-value'>${rock.genesisDateString}</td></tr>` +
+                      //`<tr><td class='details-trait-type'>[Cursed]</td><td class='details-trait-value'>${(rock.curseType) ? rock.curseType : "no"}</td></tr>` +
+                      `<tr><td class='details-trait-type'>[Listed]</td><td class='details-trait-value'>${(rock.getListedString())}</td></tr>` + 
+                      `<tr><td class='details-trait-type'>[Last Sold]</td><td class='details-trait-value'>${(rock.getLastSaleString())}</td></tr>` + 
+                      `<tr><td class='details-trait-type'>[Staked]</td><td class='details-trait-value'>${(rock.staked ? 'Yes' : 'No')}</td></tr>` + 
+                      `<tr><td class='details-trait-type'>&nbsp;</td><td class='details-trait-value'>&nbsp;</td></tr>` +
+                      rock.traitTableHTML;
+      document.getElementById("details-text").innerHTML = detailsTextHTML;
+
+      var popup = document.getElementById("details-popup");
+      popup.classList.add("popup_open");
+      popup.style.display = "";
+    }
+
+    function closeDetails() {
+      var popup = document.getElementById("details-popup");
+      popup.classList.remove("popup_open");
+      popup.style.display = "none";
+    }
+    closeDetails();
+
+    let stakedRocks = [];
+    let unstakedRocks = [];
+    async function getStakedRocks() {
+      stakedRocks = [];
+      unstakedRocks = [];
+
+      try {
+        let response = await fetch("https://bitscape.io/api/staked", {
+          method: "POST",
+          body: JSON.stringify({
+            address: getInputAddress()
+          })
+        });
+        let stakedRes = await response.json();
+        //console.log(stakedRes);
+        if (!stakedRes.error) {
+          for (rock in stakedRes) {
+            myRock = myRocks.find(rok => rok.id == rock);
+            if (myRock) {
+              if (stakedRes[rock].date_staked) {
+                stakedRocks.push(rock);
+                myRock.staked = true;
+              }
+              else {
+                unstakedRocks.push(rock);
+                myRock.staked = false;
+              }
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    function SetLevelInfo() {
+      levels = [
+        {num:1, name:'RockHolder'},
+        {num:10, name:'RockStar'},
+        {num:20, name:'RockHard'},
+        {num:50, name:'RockWhale'},
+        {num:100, name:'Rocktopus'},
+        {num:200, name:'RockDegen'},
+      ];
+
+      let currentLevelText = "-";
+      let currentLevelAlt = "-";
+      let nextLevelText = "-";
+      let nextLevelAlt = "-";
+      for (level in levels) {
+        if (myRocks.length >= levels[level].num) {
+          currentLevelText = levels[level].name;
+          currentLevelAlt = `Must hold ${levels[level].num} rocks.`;
+        }
+        else {
+          nextLevelText = `(${levels[level].num - myRocks.length} to ${levels[level].name})`;
+          nextLevelAlt = `Must hold ${levels[level].num} rocks.`;
+          break;
+        }
+      }
+
+      document.querySelectorAll('.rock-level-current').forEach(element => {
+        element.innerHTML = currentLevelText;
+      });
+      document.querySelectorAll('.rock-level-next').forEach(element => {
+        element.innerHTML = nextLevelText;
+      });
+      document.querySelectorAll('.staked-rocks-num').forEach(element => {
+        element.innerHTML = stakedRocks ? stakedRocks.length : "0";
+      });
+      document.querySelectorAll('.airdrop-eligible').forEach(element => {
+        element.innerHTML = (stakedRocks && stakedRocks.length > 0) ? "Yes" : "No";
+      });
+    }
+
+    function getInputAddress() {
+        let walletInput = document.getElementById('wallet-address');
+        return walletInput.value;
+    }
+    function setInputAddress(newAddress) {
+        let walletInput = document.getElementById('wallet-address');
+        walletInput.value = newAddress;
+    }
+
+    async function GetMyTokens() {
+      setInputAddress(bitprint.wallet.address);
+      await LoadData();
+    }
+
+    async function LoadData() {
+      document.getElementById('loader').style.display = "";
+
+      myRocks = [];
+      let walletAddress = getInputAddress();
+      
+      metokens = await magiceden.getTokens(walletAddress);
+      for (let index = 0; index < metokens.length; index++) {
+        let rock = new Rock(metokens[index]);
+        myRocks.push(rock);
+      }
+
+      floors = await magiceden.getFloors();
+
+      WriteTraitSummary();
+
+      document.querySelectorAll('.portfolio-value-btc').forEach(element => {
+        element.innerHTML = totalPortfolioValue.toFixed(3);
+      });
+      document.querySelectorAll('.portfolio-value-usd').forEach(element => {
+        element.innerHTML = `($${(bitcoinPrice*totalPortfolioValue).toFixed(2)})`;
+      });
+
+      AddRarestNoderocks();
+
+      FilloutTabs();
+
+      CreateFilters();
+
+      await getStakedRocks();
+
+      SetLevelInfo();
+
+      //console.log('loaded');
+      document.getElementById('loader').style.display = "none";
+    }
+
+    function SetEnterEvent() {
+      document.getElementById('wallet-address').addEventListener("keypress", async function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          await LoadData();
+        }
+      });
+    }
 
     let metokens = [];
     let myRocks = [];
@@ -2275,41 +2535,16 @@
     let secrets = [];
     let totalPortfolioValue = 0;
 
+    SetEnterEvent();
+
     window.onload = async function () {
       await startup();
 
       if (bitprint.isConnectedHasWallet()) {
-        metokens = await magiceden.getMyTokens();
-        for (let index = 0; index < metokens.length; index++) {
-          console.log(metokens[index]);
-          let rock = new Rock(metokens[index]);
-          myRocks.push(rock);
-        }
-
-        floors = await magiceden.getFloors();
-
-        WriteTraitSummary();
-
-        document.querySelectorAll('.wallet-address').forEach(element => {
-          element.innerHTML = bitprint.wallet.address;
-        });
-        document.querySelectorAll('.portfolio-value-btc').forEach(element => {
-          element.innerHTML = totalPortfolioValue.toFixed(3);
-        });
-        document.querySelectorAll('.portfolio-value-usd').forEach(element => {
-          element.innerHTML = `($${(bitcoinPrice*totalPortfolioValue).toFixed(2)})`;
-        });
-
-        AddRarestNoderocks();
-
-        FilloutTabs();
-
-        CreateFilters();
-        console.log('loaded');
-      } 
-      else {
-        window.location = "./staking.html"
+        setInputAddress(bitprint.wallet.address);
       }
+
+      await LoadData();
     }
   </script>
 </body>
