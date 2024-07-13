@@ -213,8 +213,8 @@
                 <button id="search_btn" class="text-white bg_warning border-0 fs_md fw-bold search_btn" onclick="LoadData();">
                   Search
                 </button>
-                <button id="search_btn" class="text-white bg_warning border-0 fs_md fw-bold search_btn" onclick="GetMyTokens();">
-                  Mine
+                <button class="text-white bg_warning border-0 fs_md fw-bold search_btn" onclick="GetMyTokens();">
+                  Wallet
                 </button>
               </div>
             </div>
@@ -1954,7 +1954,9 @@
 
   <div class="loader-container" id="loader">
     <div class="loader-popup">
-      <div class="loader">
+      <div class="loader-position">
+        <div class="loader-spin"></div>
+        <div class="loader-text">Reading ordinal data from blockchain...</div>
       </div>
     </div>
   </div>
@@ -2475,6 +2477,8 @@
     function setInputAddress(newAddress) {
         let walletInput = document.getElementById('wallet-address');
         walletInput.value = newAddress;
+        walletInput.focus();
+        walletInput.select();
     }
 
     async function GetMyTokens() {
