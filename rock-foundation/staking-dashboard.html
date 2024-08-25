@@ -861,6 +861,9 @@
   <script src="./rocklist.js"></script>
   <script src="./assets/js/common.js"></script>
   <script>
+    //let apiurl = "http://localhost";
+    //let apiurl = "https://bitscape.io/api";
+    let apiurl = "https://duckapi.xyz/";
     let userInscriptions = []
     let stakedRocks = []
     let myRocks = []
@@ -980,11 +983,14 @@
     }
     async function getStakedRocks() {
       try {
-        let response = await fetch("https://bitscape.io/api/staked", {
+        let response = await fetch(`${apiurl}/staked`, {
           method: "POST",
           body: JSON.stringify({
-            address: bitprint.wallet.address
-          })
+            walletAddress: bitprint.wallet.address
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
         });
         let stakedRes = await response.json();
         console.log(stakedRes);
@@ -999,38 +1005,38 @@
     function displayStakedRocks() { 
       let numberStaked = 0
       let numberUnstaked = 0
-      for (rock in stakedRocks) {
-        console.log(rock)
-        if (!myRocks.includes(rock)) {
-          console.log('myrocks did not contain ' + rock);
-          let finduser = userInscriptions.find(element => element.id == rock)
+      for (rock of stakedRocks) {
+        console.log(rock.id)
+        if (!myRocks.includes(rock.id)) {
+          console.log('myrocks did not contain ' + rock.id);
+          let finduser = userInscriptions.find(element => element.id == rock.id)
           if (!finduser) {
-            console.log('userInscriptions did not contain ' + rock);
+            console.log('userInscriptions did not contain ' + rock.id);
           }
           else {
             console.log('userInscriptions did contain ' + finduser);
-            userInscriptions.push({'id':rock}); //try and throw the missing one in and reload? lol
+            userInscriptions.push({'id':rock.id}); //try and throw the missing one in and reload? lol
             loadRocks(666);
           }
         }
-        if(!document.getElementById(`staked-rock-${rock}`) || !document.getElementById(`unstaked-rock-${rock}`)){}else{
-          if (stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked > stakedRocks[rock].date_unstaked) {
+        if(!document.getElementById(`staked-rock-${rock.id}`) || !document.getElementById(`unstaked-rock-${rock.id}`)){}else{
+          if (!stakedRocks.find(token => token.id == rock.id)?.staked) {
             numberUnstaked += 1;
-            document.getElementById(`staked-rock-${rock}`).style = "display:none !important;"
-            document.getElementById(`unstaked-rock-${rock}`).style = "display:initial"
+            document.getElementById(`staked-rock-${rock.id}`).style = "display:none !important;"
+            document.getElementById(`unstaked-rock-${rock.id}`).style = "display:initial"
 
-            document.getElementById(`staked-tag-${rock}`).style = "display:none"
-            document.getElementById(`stake-button-${rock}`).style = "display:initial;"
-            document.getElementById(`unstake-button-${rock}`).style = "display:none"
+            document.getElementById(`staked-tag-${rock.id}`).style = "display:none"
+            document.getElementById(`stake-button-${rock.id}`).style = "display:initial;"
+            document.getElementById(`unstake-button-${rock.id}`).style = "display:none"
 
           } else {
             numberStaked += 1;
-            document.getElementById(`staked-rock-${rock}`).style = "display:initial"
-            document.getElementById(`unstaked-rock-${rock}`).style = "display:none !important;"
+            document.getElementById(`staked-rock-${rock.id}`).style = "display:initial"
+            document.getElementById(`unstaked-rock-${rock.id}`).style = "display:none !important;"
 
-            document.getElementById(`staked-tag-${rock}`).style = "display:initial"
-            document.getElementById(`stake-button-${rock}`).style = "display:none;"
-            document.getElementById(`unstake-button-${rock}`).style = "display:initial"
+            document.getElementById(`staked-tag-${rock.id}`).style = "display:initial"
+            document.getElementById(`stake-button-${rock.id}`).style = "display:none;"
+            document.getElementById(`unstake-button-${rock.id}`).style = "display:initial"
           }
         }
         
@@ -1053,22 +1059,25 @@
     }
     async function stakeRock(id, unstake) {
       try {
-        let sig = await bitprint.sign(`
-        ${unstake ? "Unstaking" : "Staking"} NODEROCK: 
-        ${id}
-        `)
-        let rBody = {
-          address: bitprint.wallet.address,
-          inscriptions: [
-            id
-          ]
+        let jsonMessage = {
+          OP: `${unstake ? "Unstaking" : "Staking"} NODEROCK: ${id}`,
+          stake: !unstake,
+          walletAddress: bitprint.wallet.address,
+          inscriptionIds: [id]
         }
-        if (unstake) { rBody.unstake = unstake }
-        let response = await fetch("https://bitscape.io/api/stake", {
+        let textMessage = JSON.stringify(jsonMessage);
+
+        let sig = await bitprint.sign(textMessage);
+
+        let response = await fetch(`${apiurl}/stake`, {
           // let response = await fetch("http://localhost:8080/api/stake", {
           method: "POST",
-          body: JSON.stringify(rBody)
+          body: JSON.stringify({message: textMessage, signature: sig}),
+          headers: {
+            'Content-Type': 'application/json'
+          }
         });
+
         let stakedRes = await response.json();
         console.log(stakedRes);
         if (stakedRes.message) {
@@ -1102,28 +1111,32 @@
     async function stakeAllRocks(unstake) {
       try {
         let ids = [];
-        for (rock in stakedRocks) {
-          if (unstake && !stakedRocks[rock].date_unstaked) {
-            ids.push(rock);
+        for (rock of stakedRocks) {
+          if (unstake && rock.staked) {
+            ids.push(rock.id);
           }
-          else if (unstake == false && stakedRocks[rock].date_unstaked) {
-            ids.push(rock);
+          else if (unstake == false && !rock.staked) {
+            ids.push(rock.id);
           }
         }
 
-        let sig = await bitprint.sign(`
-        ${unstake ? "Unstaking" : "Staking"} NODEROCK: 
-        ${ids}
-        `)
-        let rBody = {
-          address: bitprint.wallet.address,
-          inscriptions: ids
+        let jsonMessage = {
+          OP: `${unstake ? "Unstaking" : "Staking"} NODEROCKs: ${ids}`,
+          stake: !unstake,
+          walletAddress: bitprint.wallet.address,
+          inscriptionIds: ids
         }
-        if (unstake) { rBody.unstake = unstake }
-        let response = await fetch("https://bitscape.io/api/stake", {
+        let textMessage = JSON.stringify(jsonMessage);
+
+        let sig = await bitprint.sign(textMessage);
+        
+        let response = await fetch(`${apiurl}/stake`, {
           // let response = await fetch("http://localhost:8080/api/stake", {
           method: "POST",
-          body: JSON.stringify(rBody)
+          body: JSON.stringify({message: textMessage, signature: sig}),
+          headers: {
+            'Content-Type': 'application/json'
+          }
         });
         let stakedRes = await response.json();
         console.log(stakedRes);
