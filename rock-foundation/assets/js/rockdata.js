@@ -24,10 +24,10 @@ class Rock {
 
     //constructor() {}
 
-    constructor(data) {
+    constructor(data, cursed_data) {
         if (data) {
             if (data.listed != undefined)
-                this.inputMEMetadata(data);
+                this.inputMEMetadata(data, cursed_data);
             else
                 this.inputMetadata(data);
         }
@@ -38,11 +38,12 @@ class Rock {
         this.name = data['meta']['name'];
         this.number = this.name.replace("#", "");
         this.image = `./rocks/${this.id}.png`
+        this.mutantImage = `./mutants/${this.name}.png`
 
         this.inputTraitData(data);
     }
 
-    inputTraitData(data) {
+    inputTraitData(data, cursed_data) {
         for (let index = 0; index < data['meta']['attributes'].length; index++) {
             if (data['meta']['attributes'][index]['trait_type'] == 'Traits')
                 continue;
@@ -53,6 +54,17 @@ class Rock {
             this.traitString += `<span title='${attribute["trait_type"]}'>${attribute['value']}</span><br>`;
             this.traitTableHTML += `<tr><td class='details-trait-type'>[${attribute['trait_type']}]</td><td class='details-trait-value'>${attribute['value']}</td></tr>`;
         }
+
+        this.mutantTraitTableHTML = "";
+        if (cursed_data) {
+            for (let index = 0; index < cursed_data['meta']['attributes'].length; index++) {
+                if (cursed_data['meta']['attributes'][index]['trait_type'] == 'Traits')
+                    continue;
+                let attribute = cursed_data['meta']['attributes'][index];
+                this.mutantTraitTableHTML += `<tr><td class='details-trait-type'>[${attribute['trait_type']}]</td><td class='details-trait-value'>${attribute['value']}</td></tr>`;
+            }
+        }
+
         this.traitNum = this.traits.length;
         this.traitString = this.traitString.substring(0, this.traitString.length - 4);
     }
@@ -64,23 +76,30 @@ class Rock {
         this.ordinalNumber = item.number;
     }
 
-    inputMEMetadata(item) {
+    inputMEMetadata(item, cursed_item) {
         this.id = item['id'];
         this.name = item['displayName']
         this.number = this.name.replace("#", "");
         this.image = `./rocks/${this.id}.png`
+        this.mutantImage = cursed_item['meta']['high_res_img_url'];
+
+        this.meNoderockLink = 'https://magiceden.io/ordinals/item-details/' + item['id'];
+        this.meMutantLink = 'https://magiceden.io/ordinals/item-details/' + item['id'].slice(0, -1) + '1';
 
         this.genesisTimestamp = Date.parse(item.genesisTransactionBlockTime);
         this.genesisDateString = new Date(this.genesisTimestamp).toLocaleDateString();
         this.curseType = item.curse_type;
         this.ordinalNumber = item.inscriptionNumber;
+        this.cursedOrdinalNumber = cursed_item.inscriptionNumber;
 
-        this.inputTraitData(item);
+        this.inputTraitData(item, cursed_item);
 
-        this.listed = item.listed;
+        this.listed = item.listed || cursed_item.listed;
         this.owner = item.owner;
-        this.listedPrice = item.listedPrice;
-        this.lastSalePrice = item.lastSalePrice;
+        this.listedPrice = item.listedPrice > cursed_item.listedPrice ? item.listedPrice : cursed_item.listedPrice;
+        this.lastSalePrice = item.lastSalePrice > cursed_item.lastSalePrice ? item.lastSalePrice : cursed_item.lastSalePrice;
+
+        this.staked = item.staked;
     }
 
     inputMEListingData(item) {

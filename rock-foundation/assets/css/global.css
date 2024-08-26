@@ -430,7 +430,7 @@ body {
 .leaderboard_item .info{
   flex:4;
 }
-.leaderboard_item .rock-image{
+.leaderboard_item .leaderboard-rock-image{
   flex:1;
 }
 .leaderboard_address{
@@ -449,4 +449,62 @@ body {
 }
 .pixelated {
   image-rendering: pixelated;
+}
+
+/*.w-100 {
+  width: 100px;
+}*/
+
+/* slider stuff */
+
+
+.rock-comparison-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.rock-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.rock-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+.rock-placeholder {
+  z-index: -10;
+}
+
+.rock-left {
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+.rock-right {
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+
+.rock-slider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  background-color: #000;
+  z-index: 10;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.z-high {
+  z-index: 12;
 }

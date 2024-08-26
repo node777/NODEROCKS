@@ -44,8 +44,8 @@ var magiceden = {
         return result.tokens;
     },
 
-    getTokens:async(ownerAddress) => {
-        let result = await magiceden.mecall("tokens", `${ownerAddress}`);
+    getTokens:async(ownerAddress, collectionSymbol) => {
+        let result = await magiceden.mecall(`tokens?ownerAddress=${ownerAddress}&collectionSymbol=${collectionSymbol}`);
         return result.tokens;
     },
 

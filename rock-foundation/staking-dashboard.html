@@ -276,7 +276,7 @@
             <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4">
               <div class="position-relative">
                 <img class="w-100" src="./assets/images/png/staked-img2.png" alt="stake-card-img2" />
-                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0">
+                <p class="z-high position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0 z-high">
                   STAKED
                 </p>
               </div>
@@ -859,8 +859,15 @@
   <script src="./assets/js/aes.js"></script>
   <script src="./bitprint.js"></script>
   <script src="./rocklist.js"></script>
+  <script src="./assets/js/rocks.js"></script>
+  <script src="./assets/js/rockdata.js"></script>
   <script src="./assets/js/common.js"></script>
+  <script src="./assets/js/mewrapper.js"></script>
   <script>
+    //let apiurl = "http://localhost";
+    //let apiurl = "https://bitscape.io/api";
+    let apiurl = "https://duckapi.xyz";
+    let bitscapeapi = "https://bitscape.io/api";
     let userInscriptions = []
     let stakedRocks = []
     let myRocks = []
@@ -868,72 +875,81 @@
     let rStaked = ""
     let rUnstaked = ""
 
-    async function loadRocks(offset, type) {
-      if (offset == 0) {
-        myRocks = []
-        userInscriptions = []
-        stakedRocks = []
-        r = ""
-        rStaked = ""
-        rUnstaked = ""
+    function getRockImageHTML(rock) {
+      return `
+            <div class="rock-comparison-container" onclick="showDetails('${rock.id}')">
+              <div class="rock-wrapper">
+                <img class="rock pixelated rock-placeholder" src="./assets/images/png/TransparentSpacer.png" alt="${rock.name}" />
+                <img class="rock-left rock-image w-100 pixelated rock" src="${rock.image}" alt="${rock.id}" />
+                <img class="rock-right rock-image w-100 pixelated rock" src="${rock.mutantImage}" alt="${rock.id}" />
+              </div>
+              <div class="rock-slider"></div>
+            </div>
+      `;
+    }
+
+    async function getRocks() {
+      metokens = [];
+
+      let walletAddress = bitprint.wallet.address;
+      
+      metokens["noderocks"] = await magiceden.getTokens(walletAddress, "noderocks");
+      metokens["cursed_rocks"] = await magiceden.getTokens(walletAddress, "cursed_rocks");
+      for (let index = 0; index < metokens["noderocks"].length; index++) {
+        let cid = metokens["noderocks"][index]['id'].slice(0, -1) + '1';
+        let curseddata = metokens["cursed_rocks"].find(cursed => cursed['id'] == cid);
+        if (!curseddata)
+          console.log("failed");
+
+        let rock = new Rock(metokens["noderocks"][index], curseddata);
+        myRocks.push(rock);
       }
 
-      let limit = 60
-      let inscriptionRes = await fetch(`https://api.hiro.so/ordinals/v1/inscriptions?address=${bitprint.wallet.address}&offset=${offset || 0}&limit=${limit}`)
-      inscriptionRes = await inscriptionRes.json()
-      userInscriptions = [...userInscriptions, ...inscriptionRes.results]
-      console.log(inscriptionRes)
-      for (rock in userInscriptions) {
-        if (rockList.includes(userInscriptions[rock].id)) {
-          if (myRocks.find(element => element == userInscriptions[rock].id)) {
-            continue;
-          }
-
-          myRocks.push(userInscriptions[rock].id)
+      for (let rock of myRocks) {
           /* html */
           r += `
-            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="rock-${userInscriptions[rock].id}">
+            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="rock-${rock.id}">
               <div class="position-relative">
-                <img class="w-100 rock" src="./rocks/${userInscriptions[rock].id}.png" alt="stake-card-img" />
-                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0" id="staked-tag-${userInscriptions[rock].id}" style="display:none">
+                ${getRockImageHTML(rock)}
+                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0 z-high" id="staked-tag-${rock.id}" style="display:none">
                     STAKED
                 </p>
               </div>
-              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}')" id="stake-button-${userInscriptions[rock].id}">
+              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${rock.id}')" id="stake-button-${rock.id}">
                 Stake
               </button>
-              <button style="display:none" class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}', 1)" id="unstake-button-${userInscriptions[rock].id}">
+              <button style="display:none" class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${rock.id}', 1)" id="unstake-button-${rock.id}">
                 Unstake
               </button>
-              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('https://bitscape.io/inscription/${userInscriptions[rock].id}', '_blank')">
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('./explorer.html?details=${rock.id}', '_blank')">
                 View On Explorer
               </button>
             </div>
           `
           /* html */
           rUnstaked += `
-            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="unstaked-rock-${userInscriptions[rock].id}">
+            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="unstaked-rock-${rock.id}">
               <div class="position-relative">
-                <img class="w-100 rock" src="./rocks/${userInscriptions[rock].id}.png" alt="stake-card-img" />
+                ${getRockImageHTML(rock)}
               </div>
-              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}')">
+              <button class="stake_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${rock.id}')">
                 Stake
               </button>
-              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('https://bitscape.io/inscription/${userInscriptions[rock].id}', '_blank')">
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="window.open('./explorer.html?details=${rock.id}', '_blank')">
                 View On Explorer
               </button>
             </div>
           `
           /* html */
           rStaked += `
-            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="staked-rock-${userInscriptions[rock].id}" style="display:none !important">
+            <div class="stake_card text-center d-flex flex-column align-itemcoe gap-2 p-4" id="staked-rock-${rock.id}" style="display:none !important">
               <div class="position-relative">
-                <img class="w-100 rock" src="./rocks/${userInscriptions[rock].id}.png" alt="stake-card-img" />
-                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0">
+                ${getRockImageHTML(rock)}
+                <p class="position-absolute fs_custom_md px-2 fw-bold text-white bg-black text-center top-0 end-0 z-high">
                     STAKED
                 </p>
               </div>
-              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${userInscriptions[rock].id}', 1)">
+              <button class="update_btn fs_xsm fw-bold fs_custom_md" onclick="stakeRock('${rock.id}', 1)">
                 Unstake
               </button>
               <button class="update_btn fs_xsm fw-bold fs_custom_md">
@@ -942,13 +958,8 @@
             </div>
           `
         }
-      }
-      // console.log(offset+limit)
-      if (inscriptionRes.total > (offset + limit)) {
-        await loadRocks((offset + limit-1), type);
-      } else {
-
-        if (myRocks.length == 0) {
+      
+      if (myRocks.length == 0) {
           /*html*/
           r = `
           <section class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
@@ -972,69 +983,46 @@
           `
         }
 
-        document.getElementById("portfolio").innerHTML = r
-        document.getElementById("staked-portfolio").innerHTML = rStaked
-        document.getElementById("unstaked-portfolio").innerHTML = rUnstaked
-        await getStakedRocks();
-      }
+        document.getElementById("portfolio").innerHTML = r;
+        document.getElementById("staked-portfolio").innerHTML = rStaked;
+        document.getElementById("unstaked-portfolio").innerHTML = rUnstaked;
+
+        displayStakedRocks();
+
+        SetupSliders();
     }
-    async function getStakedRocks() {
-      try {
-        let response = await fetch("https://bitscape.io/api/staked", {
-          method: "POST",
-          body: JSON.stringify({
-            address: bitprint.wallet.address
-          })
-        });
-        let stakedRes = await response.json();
-        console.log(stakedRes);
-        if (!stakedRes.error) {
-          stakedRocks = stakedRes
-          displayStakedRocks()
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
+
     function displayStakedRocks() { 
       let numberStaked = 0
       let numberUnstaked = 0
-      for (rock in stakedRocks) {
-        console.log(rock)
-        if (!myRocks.includes(rock)) {
-          console.log('myrocks did not contain ' + rock);
-          let finduser = userInscriptions.find(element => element.id == rock)
-          if (!finduser) {
-            console.log('userInscriptions did not contain ' + rock);
-          }
-          else {
-            console.log('userInscriptions did contain ' + finduser);
-            userInscriptions.push({'id':rock}); //try and throw the missing one in and reload? lol
-            loadRocks(666);
-          }
-        }
-        if(!document.getElementById(`staked-rock-${rock}`) || !document.getElementById(`unstaked-rock-${rock}`)){}else{
-          if (stakedRocks[rock].date_unstaked || stakedRocks[rock].date_unstaked > stakedRocks[rock].date_unstaked) {
-            numberUnstaked += 1;
-            document.getElementById(`staked-rock-${rock}`).style = "display:none !important;"
-            document.getElementById(`unstaked-rock-${rock}`).style = "display:initial"
+      for (rock of myRocks) {
+        console.log(rock.id)
 
-            document.getElementById(`staked-tag-${rock}`).style = "display:none"
-            document.getElementById(`stake-button-${rock}`).style = "display:initial;"
-            document.getElementById(`unstake-button-${rock}`).style = "display:none"
+        if(!document.getElementById(`staked-rock-${rock.id}`) || !document.getElementById(`unstaked-rock-${rock.id}`)) {
+          console.log('panic at the disco');
+        }
+        else {
+          if (!rock.staked) {
+            numberUnstaked += 1;
+            document.getElementById(`staked-rock-${rock.id}`).style = "display:none !important;"
+            document.getElementById(`unstaked-rock-${rock.id}`).style = "display:initial"
+
+            document.getElementById(`staked-tag-${rock.id}`).style = "display:none"
+            document.getElementById(`stake-button-${rock.id}`).style = "display:initial;"
+            document.getElementById(`unstake-button-${rock.id}`).style = "display:none"
 
           } else {
             numberStaked += 1;
-            document.getElementById(`staked-rock-${rock}`).style = "display:initial"
-            document.getElementById(`unstaked-rock-${rock}`).style = "display:none !important;"
+            document.getElementById(`staked-rock-${rock.id}`).style = "display:initial"
+            document.getElementById(`unstaked-rock-${rock.id}`).style = "display:none !important;"
 
-            document.getElementById(`staked-tag-${rock}`).style = "display:initial"
-            document.getElementById(`stake-button-${rock}`).style = "display:none;"
-            document.getElementById(`unstake-button-${rock}`).style = "display:initial"
+            document.getElementById(`staked-tag-${rock.id}`).style = "display:initial"
+            document.getElementById(`stake-button-${rock.id}`).style = "display:none;"
+            document.getElementById(`unstake-button-${rock.id}`).style = "display:initial"
           }
         }
-        
       }
+
       document.getElementById("my-staking").innerHTML = `<span class="text_warning">${numberStaked}</span>/${myRocks.length}`
       document.getElementById("allocation-power").innerHTML = `<span class="text_warning">${(numberStaked / myRocks.length).toFixed(4) * 100}</span>%`
     
@@ -1051,47 +1039,72 @@
         unstakeAllButtons[i].toggleAttribute('disabled', (numberStaked == 0));
       }
     }
+
     async function stakeRock(id, unstake) {
-      try {
-        let sig = await bitprint.sign(`
-        ${unstake ? "Unstaking" : "Staking"} NODEROCK: 
-        ${id}
-        `)
-        let rBody = {
-          address: bitprint.wallet.address,
-          inscriptions: [
-            id
-          ]
+      await stakeRocks([id], unstake);
+    }
+    async function stakeAllRocks(unstake) {
+      let ids = [];
+        for (rock of stakedRocks) {
+          if (unstake && rock.staked) {
+            ids.push(rock.id);
+          }
+          else if (unstake == false && !rock.staked) {
+            ids.push(rock.id);
+          }
         }
-        if (unstake) { rBody.unstake = unstake }
-        let response = await fetch("https://bitscape.io/api/stake", {
+        await stakeRocks(ids, unstake);
+    }
+    async function stakeRocks(ids, unstake) {
+      try {
+        let jsonMessage = {
+          OP: `${unstake ? "Unstaking" : "Staking"} NODEROCK${ids.length > 1 ? 's' : ''}: ${ids}`,
+          stake: !unstake,
+          walletAddress: bitprint.wallet.address,
+          inscriptionIds: ids
+        }
+        let textMessage = JSON.stringify(jsonMessage);
+
+        let sig = await bitprint.sign(textMessage);
+
+        let response = await fetch(`${apiurl}/stake`, {
           // let response = await fetch("http://localhost:8080/api/stake", {
           method: "POST",
-          body: JSON.stringify(rBody)
+          body: JSON.stringify({message: textMessage, signature: sig}),
+          headers: {
+            'Content-Type': 'application/json'
+          }
         });
+
         let stakedRes = await response.json();
         console.log(stakedRes);
+
+
+        //old staking:
+        let oldStaking = {
+          address: bitprint.wallet.address,
+          inscriptions: ids
+        };
+        if (unstake) { oldStaking.unstake = unstake }
+        response = await fetch(`${bitscapeapi}/stake`, {
+          method: "POST",
+          body: JSON.stringify(oldStaking)
+        });
+        let oldStakingRes = await response.json();
+        console.log(oldStakingRes);
+
+        
         if (stakedRes.message) {
-          // function open_popup() {
-          //   document.getElementById("connect_wallet_popup").style.display = "block";
-          //   document.getElementsByTagName("body")[0].style.overflow = "hidden";
-          // }
-          // document.getElementById(`staked-tag-${id}`).style = "display:initial"
-          // stakedRocks[id]=unstake?{date_unstaked:Date.now()}:{date_staked:Date.now()}
-          // displayStakedRocks()
-          getStakedRocks()
+          getRocks()
           alert(stakedRes.message)
         } else if (stakedRes.error) {
           alert("Error: " + stakedRes.error)
-
         } else {
           alert("Could not stake: Error code 42069")
-
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-
     }
     async function stakeAll() {
       await stakeAllRocks(false);
@@ -1099,62 +1112,12 @@
     async function unstakeAll() {
       await stakeAllRocks(true);
     }
-    async function stakeAllRocks(unstake) {
-      try {
-        let ids = [];
-        for (rock in stakedRocks) {
-          if (unstake && !stakedRocks[rock].date_unstaked) {
-            ids.push(rock);
-          }
-          else if (unstake == false && stakedRocks[rock].date_unstaked) {
-            ids.push(rock);
-          }
-        }
-
-        let sig = await bitprint.sign(`
-        ${unstake ? "Unstaking" : "Staking"} NODEROCK: 
-        ${ids}
-        `)
-        let rBody = {
-          address: bitprint.wallet.address,
-          inscriptions: ids
-        }
-        if (unstake) { rBody.unstake = unstake }
-        let response = await fetch("https://bitscape.io/api/stake", {
-          // let response = await fetch("http://localhost:8080/api/stake", {
-          method: "POST",
-          body: JSON.stringify(rBody)
-        });
-        let stakedRes = await response.json();
-        console.log(stakedRes);
-        if (stakedRes.message) {
-          // function open_popup() {
-          //   document.getElementById("connect_wallet_popup").style.display = "block";
-          //   document.getElementsByTagName("body")[0].style.overflow = "hidden";
-          // }
-          // document.getElementById(`staked-tag-${id}`).style = "display:initial"
-          // stakedRocks[id]=unstake?{date_unstaked:Date.now()}:{date_staked:Date.now()}
-          // displayStakedRocks()
-          getStakedRocks()
-          alert(stakedRes.message)
-        } else if (stakedRes.error) {
-          alert("Error: " + stakedRes.error)
-
-        } else {
-          alert("Could not stake: Error code 42069")
-
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-
-    }
 
     window.onload = async function () {
       await startup();
 
       if (bitprint.isConnectedHasWallet()) {
-        await loadRocks(0);
+        await getRocks();
       } 
       else {
         window.location = "./staking.html"

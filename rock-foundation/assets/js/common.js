@@ -337,3 +337,45 @@ function addWalletConnect() {
       document.getElementById('connect-xverse').onclick = async() => {await connectButtonAsync('xverse')};
       document.getElementById('connect-leather').onclick = async() => {await connectButtonAsync('leather')};
     }
+
+    
+    function SetupSliders() {
+      const containers = document.querySelectorAll('.rock-comparison-container');
+
+      containers.forEach(container => {
+          const handleMove = (clientX, container) => {
+              let rect = container.getBoundingClientRect();
+              let offsetX = clientX - rect.left;
+
+              let min = 5;
+              let max = rect.width - 5;
+              // Prevent the slider from going out of bounds
+              if (offsetX < min) offsetX = 0;
+              if (offsetX > max) offsetX = rect.width;
+
+              // Apply the same offsetX to all containers
+              containers.forEach(otherContainer => {
+                  const slider = otherContainer.querySelector('.rock-slider');
+                  const imageLeft = otherContainer.querySelector('.rock-left');
+                  const imageRight = otherContainer.querySelector('.rock-right');
+
+                  // Smoothly adjust the slider position
+                  slider.style.left = `${offsetX}px`;
+
+                  // Smoothly adjust the clip-path for images
+                  imageLeft.style.clipPath = `polygon(0 0, ${offsetX}px 0, ${offsetX}px 100%, 0 100%)`;
+                  imageRight.style.clipPath = `polygon(${offsetX}px 0, 100% 0, 100% 100%, ${offsetX}px 100%)`;
+              });
+          };
+
+          container.onmousemove = (e) => {
+              handleMove(e.clientX, container);
+          };
+
+          container.ontouchmove = (e) => {
+              e.preventDefault(); // Prevent scrolling while sliding
+              const touch = e.touches[0];
+              handleMove(touch.clientX, container);
+          };
+      });
+  }

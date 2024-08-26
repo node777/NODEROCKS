@@ -1938,14 +1938,30 @@
       </div>
       <div class="details-content" onclick="">
         <div class="details-content-leftdiv">
-          <img class="details-content-img" id="details-image" src="" />
+          
+          <div class="rock-comparison-container" onclick="showDetails('${rock.id}')">
+            <div class="rock-wrapper">
+              <img class="pixelated rock-placeholder details-content-img" src="./assets/images/png/TransparentSpacer.png" />
+              <img class="rock-left rock-image details-content-img" id="details-image" src="" />
+              <img class="rock-right rock-image details-content-img" id="details-image-mutant" src="" />
+            </div>
+            <div class="rock-slider"></div>
+          </div>
         </div>
         <div class="details-content-rightdiv">
           <div id='details-content-text' class="details-content-text">
-            <br>
-            <table class="fs_md px-2 fw-bold text-white text-center bg-black top-0 end-0" id="details-text">
-            </table>
-            <br>
+            <table class="fs_md px-2 fw-bold text-white text-center bg-black top-0 end-0 tabletable" id="details-text">
+            </table><br>
+            <div class="details-content-traits">
+              <div style="min-width: 150px; padding:10px">
+                <a id="details-noderock-link" class="text_warning" href="">Node Rock</a><br>
+                <table class="fs_md px-2 fw-bold text-white text-center bg-black top-0 end-0 tabletable" id="normal-trait-text"></table>
+              </div><br>
+              <div style="min-width: 150px; padding:10px;">
+                <a id="details-mutant-link" class="text_warning" href="">Mutant Rock</a><br>
+                <table class="fs_md px-2 fw-bold text-white text-center bg-black top-0 end-0 tabletable" id="cursed-trait-text"></table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2009,7 +2025,14 @@
       let desktopTemplate = 
       `
           <div class="bg-black rarest_card px-3 py_13 px-sm-0 py-sm-3 px-md-4 col-auto">
-            <img class="w-100 pixelated rock" src="${rock.image}" alt="${rock.id}" onclick="showDetails('${rock.id}')" />
+            <div class="rock-comparison-container" onclick="showDetails('${rock.id}')">
+              <div class="rock-wrapper">
+                <img class="rock pixelated rock-placeholder" src="./assets/images/png/TransparentSpacer.png" alt="${rock.name}" />
+                <img class="rock-left rock-image w-100 pixelated rock" src="${rock.image}" alt="${rock.id}" />
+                <img class="rock-right rock-image w-100 pixelated rock" src="${rock.mutantImage}" alt="${rock.id}" />
+              </div>
+              <div class="rock-slider"></div>
+            </div>
             <p class="fw-bold text-center fs_lg text-white mb-1 pt-2">
               ${rock.name}
             </p>
@@ -2024,7 +2047,14 @@
       `
               <div class="bg-black p-xxl-4 py-3">
                 <div class="px-3">
-                  <img class="w-100 pixelated rock" src="${rock.image}" alt="${rock.id}" onclick="showDetails('${rock.id}')" />
+                  <div class="rock-comparison-container" onclick="showDetails('${rock.id}')">
+                    <div class="rock-wrapper">
+                      <img class="rock pixelated rock-placeholder" src="./assets/images/png/TransparentSpacer.png" alt="${rock.name}" />
+                      <img class="rock-left rock-image w-100 pixelated rock" src="${rock.image}" alt="${rock.id}" />
+                      <img class="rock-right rock-image w-100 pixelated rock" src="${rock.mutantImage}" alt="${rock.id}" />
+                    </div>
+                    <div class="rock-slider"></div>
+                  </div>
                   <p class="fw-bold text-center fs_xl text-white mb-1 pt-3">
                     ${rock.name}
                   </p>
@@ -2202,13 +2232,20 @@
       let rockTemplate = `
                 <div class="bg-black p-3 p-sm-4 rock-${rock.number}">
                   <div class="position-relative">
-                    <div class="position-absolute end-0 mt_2 me_3">
+                    <div class="position-absolute end-0 mt_2 me_3 z-high">
                       <div class="d-flex flex-column bg_secondary">
                         ${listedPriceHTML}
                         ${floorPriceHTML}
                       </div>
                     </div>
-                    <img class="w-100 pixelated rock" src="${rock.image}" alt="${rock.name}" onclick="showDetails('${rock.id}')" />
+                    <div class="rock-comparison-container" onclick="showDetails('${rock.id}')">
+                      <div class="rock-wrapper">
+                        <img class="rock pixelated rock-placeholder" src="./assets/images/png/TransparentSpacer.png" alt="${rock.name}" />
+                        <img class="rock rock-left rock-image pixelated" src="${rock.image}" alt="${rock.name}" />
+                        <img class="rock rock-right rock-image pixelated" src="${rock.mutantImage}" alt="${rock.name}" />
+                      </div>
+                      <div class="rock-slider"></div>
+                    </div>
                   </div>
                   <p class="my-2 fw-bold text-center text-white fs_sm">
                     ${rock.name}
@@ -2370,18 +2407,26 @@
 
       document.getElementById("details-image").setAttribute('src', rock.image);
       document.getElementById("details-image").onclick = () => {window.location = rock.image};
+
+      document.getElementById("details-image-mutant").setAttribute('src', rock.mutantImage);
+      document.getElementById("details-image-mutant").onclick = () => {window.location = rock.mutantImage};
+
       document.getElementById("details-name").textContent = rock.name;
       document.getElementById("details-inscriptionid").textContent = rock.id;
 
-      let detailsTextHTML = `<tr><td class='details-trait-type'>[Ordinal]</td><td class='details-trait-value'>${rock.ordinalNumber}</td></tr>` +
+      let detailsTextHTML = `<tr><td class='details-trait-type'>[Ordinal]</td><td class='details-trait-value'>${rock.ordinalNumber} / ${rock.cursedOrdinalNumber}</td></tr>` +
                       `<tr><td class='details-trait-type'>[Genesis]</td><td class='details-trait-value'>${rock.genesisDateString}</td></tr>` +
-                      //`<tr><td class='details-trait-type'>[Cursed]</td><td class='details-trait-value'>${(rock.curseType) ? rock.curseType : "no"}</td></tr>` +
                       `<tr><td class='details-trait-type'>[Listed]</td><td class='details-trait-value'>${(rock.getListedString())}</td></tr>` + 
                       `<tr><td class='details-trait-type'>[Last Sold]</td><td class='details-trait-value'>${(rock.getLastSaleString())}</td></tr>` + 
-                      `<tr><td class='details-trait-type'>[Staked]</td><td class='details-trait-value'>${(rock.staked ? 'Yes' : 'No')}</td></tr>` + 
-                      `<tr><td class='details-trait-type'>&nbsp;</td><td class='details-trait-value'>&nbsp;</td></tr>` +
-                      rock.traitTableHTML;
+                      `<tr><td class='details-trait-type'>[Staked]</td><td class='details-trait-value'>${(rock.staked ? 'Yes' : 'No')}</td></tr>`
+                      ;
+
       document.getElementById("details-text").innerHTML = detailsTextHTML;
+      document.getElementById("normal-trait-text").innerHTML = rock.traitTableHTML;
+      document.getElementById("cursed-trait-text").innerHTML = rock.mutantTraitTableHTML;
+      
+      document.getElementById("details-noderock-link").href = rock.meNoderockLink;
+      document.getElementById("details-mutant-link").href = rock.meMutantLink;
 
       var popup = document.getElementById("details-popup");
       popup.classList.add("popup_open");
@@ -2394,41 +2439,6 @@
       popup.style.display = "none";
     }
     closeDetails();
-
-    let stakedRocks = [];
-    let unstakedRocks = [];
-    async function getStakedRocks() {
-      stakedRocks = [];
-      unstakedRocks = [];
-
-      try {
-        let response = await fetch("https://bitscape.io/api/staked", {
-          method: "POST",
-          body: JSON.stringify({
-            address: getInputAddress()
-          })
-        });
-        let stakedRes = await response.json();
-        //console.log(stakedRes);
-        if (!stakedRes.error) {
-          for (rock in stakedRes) {
-            myRock = myRocks.find(rok => rok.id == rock);
-            if (myRock) {
-              if (stakedRes[rock].date_staked) {
-                stakedRocks.push(rock);
-                myRock.staked = true;
-              }
-              else {
-                unstakedRocks.push(rock);
-                myRock.staked = false;
-              }
-            }
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
 
     function SetLevelInfo() {
       levels = [
@@ -2455,6 +2465,8 @@
           break;
         }
       }
+
+      stakedRocks = myRocks.filter(rock => rock.staked);
 
       document.querySelectorAll('.rock-level-current').forEach(element => {
         element.innerHTML = currentLevelText;
@@ -2492,9 +2504,15 @@
       myRocks = [];
       let walletAddress = getInputAddress();
       
-      metokens = await magiceden.getTokens(walletAddress);
-      for (let index = 0; index < metokens.length; index++) {
-        let rock = new Rock(metokens[index]);
+      metokens["noderocks"] = await magiceden.getTokens(walletAddress, "noderocks");
+      metokens["cursed_rocks"] = await magiceden.getTokens(walletAddress, "cursed_rocks");
+      for (let index = 0; index < metokens["noderocks"].length; index++) {
+        let cid = metokens["noderocks"][index]['id'].slice(0, -1) + '1';
+        let curseddata = metokens["cursed_rocks"].find(cursed => cursed['id'] == cid);
+        if (!curseddata)
+          console.log("failed");
+
+        let rock = new Rock(metokens["noderocks"][index], curseddata);
         myRocks.push(rock);
       }
 
@@ -2515,9 +2533,9 @@
 
       CreateFilters();
 
-      await getStakedRocks();
-
       SetLevelInfo();
+
+      SetupSliders();
 
       //console.log('loaded');
       document.getElementById('loader').style.display = "none";
@@ -2531,6 +2549,18 @@
         }
       });
     }
+
+    function CheckForDetailsDirect() {
+      const url = new URL(window.location.href);
+      const params = new URLSearchParams(url.search);
+      const inscriptionId = params.get('details');
+
+      if (inscriptionId) {
+        showDetails(inscriptionId);
+      }
+    }
+
+
 
     let metokens = [];
     let myRocks = [];
@@ -2549,6 +2579,8 @@
       }
 
       await LoadData();
+
+      CheckForDetailsDirect();
     }
   </script>
 </body>
