@@ -1045,7 +1045,7 @@
     }
     async function stakeAllRocks(unstake) {
       let ids = [];
-        for (rock of stakedRocks) {
+        for (rock of myRocks) {
           if (unstake && rock.staked) {
             ids.push(rock.id);
           }
