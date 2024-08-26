@@ -2440,41 +2440,6 @@
     }
     closeDetails();
 
-    let stakedRocks = [];
-    let unstakedRocks = [];
-    async function getStakedRocks() {
-      stakedRocks = [];
-      unstakedRocks = [];
-
-      try {
-        let response = await fetch("https://bitscape.io/api/staked", {
-          method: "POST",
-          body: JSON.stringify({
-            address: getInputAddress()
-          })
-        });
-        let stakedRes = await response.json();
-        //console.log(stakedRes);
-        if (!stakedRes.error) {
-          for (rock in stakedRes) {
-            myRock = myRocks.find(rok => rok.id == rock);
-            if (myRock) {
-              if (stakedRes[rock].date_staked) {
-                stakedRocks.push(rock);
-                myRock.staked = true;
-              }
-              else {
-                unstakedRocks.push(rock);
-                myRock.staked = false;
-              }
-            }
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-
     function SetLevelInfo() {
       levels = [
         {num:1, name:'RockHolder'},
@@ -2500,6 +2465,8 @@
           break;
         }
       }
+
+      stakedRocks = myRocks.filter(rock => rock.staked);
 
       document.querySelectorAll('.rock-level-current').forEach(element => {
         element.innerHTML = currentLevelText;
@@ -2566,8 +2533,6 @@
 
       CreateFilters();
 
-      await getStakedRocks();
-
       SetLevelInfo();
 
       SetupSliders();
@@ -2585,47 +2550,15 @@
       });
     }
 
-    //todo: need to actually call this somewhere
-    function SetupSliders() {
-    const containers = document.querySelectorAll('.rock-comparison-container');
+    function CheckForDetailsDirect() {
+      const url = new URL(window.location.href);
+      const params = new URLSearchParams(url.search);
+      const inscriptionId = params.get('details');
 
-    containers.forEach(container => {
-        const handleMove = (clientX, container) => {
-            let rect = container.getBoundingClientRect();
-            let offsetX = clientX - rect.left;
-
-            let min = 5;
-            let max = rect.width - 5;
-            // Prevent the slider from going out of bounds
-            if (offsetX < min) offsetX = 0;
-            if (offsetX > max) offsetX = rect.width;
-
-            // Apply the same offsetX to all containers
-            containers.forEach(otherContainer => {
-                const slider = otherContainer.querySelector('.rock-slider');
-                const imageLeft = otherContainer.querySelector('.rock-left');
-                const imageRight = otherContainer.querySelector('.rock-right');
-
-                // Smoothly adjust the slider position
-                slider.style.left = `${offsetX}px`;
-
-                // Smoothly adjust the clip-path for images
-                imageLeft.style.clipPath = `polygon(0 0, ${offsetX}px 0, ${offsetX}px 100%, 0 100%)`;
-                imageRight.style.clipPath = `polygon(${offsetX}px 0, 100% 0, 100% 100%, ${offsetX}px 100%)`;
-            });
-        };
-
-        container.onmousemove = (e) => {
-            handleMove(e.clientX, container);
-        };
-
-        container.ontouchmove = (e) => {
-            e.preventDefault(); // Prevent scrolling while sliding
-            const touch = e.touches[0];
-            handleMove(touch.clientX, container);
-        };
-    });
-}
+      if (inscriptionId) {
+        showDetails(inscriptionId);
+      }
+    }
 
 
 
@@ -2646,6 +2579,8 @@
       }
 
       await LoadData();
+
+      CheckForDetailsDirect();
     }
   </script>
 </body>

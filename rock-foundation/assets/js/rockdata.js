@@ -98,6 +98,8 @@ class Rock {
         this.owner = item.owner;
         this.listedPrice = item.listedPrice > cursed_item.listedPrice ? item.listedPrice : cursed_item.listedPrice;
         this.lastSalePrice = item.lastSalePrice > cursed_item.lastSalePrice ? item.lastSalePrice : cursed_item.lastSalePrice;
+
+        this.staked = item.staked;
     }
 
     inputMEListingData(item) {

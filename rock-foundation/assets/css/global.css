@@ -430,7 +430,7 @@ body {
 .leaderboard_item .info{
   flex:4;
 }
-.leaderboard_item .rock-image{
+.leaderboard_item .leaderboard-rock-image{
   flex:1;
 }
 .leaderboard_address{
