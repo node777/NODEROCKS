@@ -310,36 +310,36 @@ body {
 }
 
 .details-container {
-  position:absolute;
-  top:0%;
-  left:0%;
-  bottom:0%;
-  right:0%;
-  color: white; background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: white;
+  background: transparent;
   z-index: 1000;
-  
+  display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden; /* Prevents the container itself from overflowing */
 }
 
 .details-popup {
-  position:absolute;
-  top:60%;
-  left:50%;
-  width:75%;
-  transform: translate(-50%, -50%);
-  color: white; background: #666666; opacity: 1;
-  z-index: 1000;
-  
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(33, 33, 33, 0.95); /* Optional for visibility */
+  position: relative;
+  max-width: 90%;
+  max-height: 70vh; /* Restrict height to viewport size */
+  width: 75%;
+  background-color: rgba(33, 33, 33, 0.95);
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional for some styling */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Make the popup scrollable */
+  transform: translate(0%, 17%);
 }
 
 .details-content {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .details-content-topdiv {
@@ -347,37 +347,60 @@ body {
   margin-bottom: 20px;
 }
 
+.details-content-traits {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 .details-content-leftdiv {
-  width: 40%; /* 60% width of the container */    
-  height: 100%;
+  min-width: 200px; /* Adjust this value based on your layout needs */
+  width: 30%; /* 60% width of the container */    
+  background-color: rgb(0, 0, 0, 0.95); /* Optional for visibility */ 
 }
 .details-content-rightdiv {
-  width: 60%; /* 60% width of the container */   
+  min-width: 200px; /* Adjust this value based on your layout needs */
+  width: 70%; /* 60% width of the container */   
   background-color: rgb(0, 0, 0, 0.95); /* Optional for visibility */ 
+}
+@media (max-width: 768px) {
+  .details-content {
+    flex-direction: column;
+  }
+
+  .details-content-leftdiv,
+  .details-content-rightdiv {
+    width: 100%;
+  }
 }
 
 .details-content-img {
-  width: 100%; /* 60% width of the container */    
-  height: 100%; /* 60% width of the container */    
+  width: 100%;
+  height: auto;
   image-rendering: pixelated;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .details-content-id {
-  text-wrap:wrap;
   word-wrap: break-word;
   word-break: break-all;
+  font-style: italic;
 }
 
 .details-content-text {
-  display: flex;
   justify-content: center;
   align-items: center;
-  padding:10px
+  padding: 10px;
+  margin: 10px;
+}
+
+.tabletable {
+  width: 100%;
+  margin: 5px;
 }
 
 .details-text {
-  text-wrap: wrap;
   word-wrap: break-word;
   word-break: break-all;
   text-align: left;

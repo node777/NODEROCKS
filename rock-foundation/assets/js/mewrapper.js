@@ -1,6 +1,6 @@
 var magiceden = {
-    baseMEWrapperurl: "https://duckapi.xyz/",
-    //baseMEWrapperurl: "http://localhost/",
+    //baseMEWrapperurl: "https://duckapi.xyz/",
+    baseMEWrapperurl: "http://localhost/",
 
     beforeParamsChar: "/", //for real ME it'd be: "?"
     collectionSymbol: "", //for real ME it'd be: "collectionSymbol=noderocks&"
@@ -44,8 +44,8 @@ var magiceden = {
         return result.tokens;
     },
 
-    getTokens:async(ownerAddress) => {
-        let result = await magiceden.mecall("tokens", `${ownerAddress}`);
+    getTokens:async(ownerAddress, collectionSymbol) => {
+        let result = await magiceden.mecall(`tokens?ownerAddress=${ownerAddress}&collectionSymbol=${collectionSymbol}`);
         return result.tokens;
     },
 
