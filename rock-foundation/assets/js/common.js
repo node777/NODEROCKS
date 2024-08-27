@@ -137,16 +137,21 @@ async function loadTickers(prefix = "") {
   }
 
 function updateCountdown() {
+    const specificDate = new Date(Date.UTC(2024, 7, 27, 21, 0, 0, 0));
+
     // Get the current time in UTC
     const now = new Date();
     const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
 
-    // Calculate the time until 48 hours later (midnight UTC, two days later)
-    const nextUTC48Hour = new Date(utcNow);
-    nextUTC48Hour.setUTCDate(utcNow.getUTCDate() + 2); // Move to two days ahead
-    nextUTC48Hour.setUTCHours(0, 0, 0, 0); // Set to midnight
+    if (now > specificDate) {
+      const nextUTC48Hour = new Date(utcNow);
+      nextUTC48Hour.setUTCDate(utcNow.getUTCDate() + 2); // Move to two days ahead
+      nextUTC48Hour.setUTCHours(0, 0, 0, 0); // Set to midnight
 
-    const diff = nextUTC48Hour - utcNow; // Difference in milliseconds
+      specificDate = nextUTC48Hour;
+    }
+
+    const diff = specificDate - now; // Difference in milliseconds
 
     // Convert difference to hours, minutes, and seconds
     let hours = Math.floor(diff / (1000 * 60 * 60));
