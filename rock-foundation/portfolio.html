@@ -411,7 +411,7 @@
 
     async function getStakedRocks() {
       try {
-        let response = await fetch("https://bitscape.io/api/staked", {
+        let response = await fetch("https://duckapi.xyz/staked", {
           method: "POST",
           body: JSON.stringify({
             address: bitprint.wallet.address
@@ -469,7 +469,7 @@
           ]
         }
         if (unstake) { rBody.unstake = unstake }
-        let response = await fetch("https://bitscape.io/api/stake", {
+        let response = await fetch("https://duckapi.xyz/stake", {
           // let response = await fetch("http://localhost:8080/api/stake", {
           method: "POST",
           body: JSON.stringify(rBody)

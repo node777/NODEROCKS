@@ -1084,18 +1084,23 @@
         console.log(stakedRes);
 
 
-        //old staking:
-        let oldStaking = {
-          address: bitprint.wallet.address,
-          inscriptions: ids
-        };
-        if (unstake) { oldStaking.unstake = unstake }
-        response = await fetch(`${bitscapeapi}/stake`, {
-          method: "POST",
-          body: JSON.stringify(oldStaking)
-        });
-        let oldStakingRes = await response.json();
-        console.log(oldStakingRes);
+        //old staking: its down, so proly shouldn't even do this anymore.
+        //update: not doing this anymore.
+        /*
+        try
+        {
+          let oldStaking = {
+            address: bitprint.wallet.address,
+            inscriptions: ids
+          };
+          if (unstake) { oldStaking.unstake = unstake }
+          response = await fetch(`${bitscapeapi}/stake`, {
+            method: "POST",
+            body: JSON.stringify(oldStaking)
+          });
+          let oldStakingRes = await response.json();
+          console.log(oldStakingRes);
+        } catch {}*/
 
         
         if (stakedRes.message) {
